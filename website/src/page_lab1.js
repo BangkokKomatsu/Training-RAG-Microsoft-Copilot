@@ -54,6 +54,13 @@ function build() {
   ], { width: 760 });
   const mock6 = M.m365Chrome({ bodyHeight: chat6.endY + 30, sidebarActive: 'HR Helper', body: chat6.svg });
 
+  // ---- Mockup 7: IT department example ----
+  const chat7 = M.chatMessages([
+    { from: 'user', text: 'ลืมรหัสผ่าน Login เข้าระบบ ต้อง Reset ยังไง?' },
+    { from: 'agent', text: 'ไปที่ portal.company.com/reset → กรอกอีเมลบริษัท → กด Reset Link ที่ส่งไปในอีเมล ใช้เวลาไม่เกิน 5 นาทีครับ หากยังเข้าไม่ได้ ติดต่อ IT Helpdesk ต่อ 2222' },
+  ], { width: 760 });
+  const mock7 = M.m365Chrome({ bodyHeight: chat7.endY + 30, sidebarActive: 'IT Helpdesk Bot', body: chat7.svg });
+
   const bodyHtml = `
     <p>ใน Lab นี้คุณจะสร้าง AI Agent ตัวแรกโดยใช้ <strong>Microsoft 365 Agent Builder</strong> — เครื่องมือสร้าง Agent ที่ง่ายที่สุด ไม่ต้องตั้งค่าอะไรซับซ้อน เหมาะสำหรับเริ่มต้นและทำ Prototype อย่างรวดเร็ว</p>
 
@@ -71,9 +78,14 @@ function build() {
       ])}
     `)}
 
+    ${box('tip', 'Grounding คืออะไร?', `
+      <p><strong>Grounding</strong> คือการ "ยึด" คำตอบของ Agent ไว้กับ Knowledge Source ที่กำหนด แทนที่จะปล่อยให้ Agent ตอบจากความรู้ทั่วไปของ AI เอง — เป็นหัวใจของ RAG ที่ทำให้คำตอบแม่นยำและลด Hallucination (การเดาคำตอบมั่ว) ทุก Lab ในคอร์สนี้จะเน้นเรื่อง Grounding เป็นหลัก</p>
+    `)}
+
     <h2 id="step1">ขั้นตอนที่ 1–2: เปิด M365 Copilot และเริ่มสร้าง Agent</h2>
     ${step(1, 'เปิด Microsoft 365 Copilot Chat', `
       <p>เปิด Browser ไปที่ <code>https://m365.cloud.microsoft/chat</code> แล้ว Login ด้วย Account ที่ได้รับ รอหน้า Chat โหลดให้เสร็จ</p>
+      ${box('warn', '', '<p>⚠️ URL ต้องเป็น <code>m365.cloud.microsoft/chat</code> เท่านั้น — URL ที่คล้ายกันอย่าง <code>copilot.cloud.microsoft</code> เป็นคนละหน้าและจะไม่มีเมนู "New agent" ให้ใช้</p>')}
       ${mockup(mock1, 'หน้าจอ Microsoft 365 Copilot Chat หลัง Login สำเร็จ')}
     `)}
     ${step(2, 'เปิด Agent Builder', `
@@ -85,7 +97,7 @@ function build() {
     ${step(3, 'ใส่คำอธิบาย Agent (Description)', `
       <p>พิมพ์คำอธิบายลงในช่อง Describe เช่น ต้องการ Agent สไตล์ครู ที่ตอบคำถามเรื่อง Copilot โดยอ้างอิงจากเอกสาร Microsoft เท่านั้น</p>
       ${mockup(mock3, 'พิมพ์ Description แล้วส่ง — AI จะช่วยตั้งชื่อและ Tone ให้อัตโนมัติ')}
-      ${box('tip', '', '<p>ยิ่งอธิบายละเอียดเท่าไหร่ Agent ยิ่งดีเท่านั้น — ใส่ชื่อ Agent, Tone (เป็นทางการ/เป็นกันเอง) และวัตถุประสงค์ให้ครบในคำอธิบายเดียว</p>')}
+      ${box('tip', '', '<p>ยิ่งอธิบายละเอียดเท่าไหร่ Agent ยิ่งดีเท่านั้น — ใส่ให้ครบ 4 อย่างในคำอธิบายเดียว: (1) <strong>ชื่อ Agent</strong> ที่ต้องการ (2) <strong>Tone</strong> เช่น เป็นทางการ/เป็นกันเอง (3) <strong>ต้องทำอะไรเมื่อถูกถามนอกเรื่อง</strong> เช่น ปฏิเสธสุภาพและแนะกลับเข้าเรื่อง (4) <strong>วัตถุประสงค์</strong> ของ Agent — ก่อนกด Create ให้ตรวจ Starter prompts ที่ระบบสร้างให้ในแท็บ Configure ด้วย ปรับแก้ให้ตรงคำถามที่ผู้ใช้จะถามบ่อยได้เลย</p>')}
     `)}
     ${step(4, 'เพิ่ม Knowledge Source', `
       <p>ไปที่แท็บ <strong>Configure → Knowledge</strong> แล้วใส่ URL เว็บไซต์ที่ต้องการให้ Agent อ้างอิง เช่น เว็บ Documentation ขององค์กร</p>
@@ -113,6 +125,18 @@ function build() {
     </ul>
 
     <h2 id="challenge">🎯 ลองประยุกต์ใช้กับงานคุณ</h2>
+    ${box('note', 'ไอเดีย Agent ตามแผนกงาน — เลือกที่ตรงกับคุณเป็นจุดเริ่มต้น', `
+      ${conceptTable(['แผนก', 'ตัวอย่าง Agent ที่สร้างได้'], [
+        ['Sales Engineer', 'ตอบสเปกสินค้า ราคา โปรโมชั่น จากแคตตาล็อกและใบเสนอราคา'],
+        ['Engineer', 'ตอบคู่มือซ่อมบำรุง สเปกเครื่องจักร ขั้นตอนขอใบอนุญาตทำงาน (Work Permit)'],
+        ['HR', 'ตอบนโยบายบริษัท สวัสดิการ วันลา จากคู่มือพนักงาน'],
+        ['Warehouse', 'ตอบขั้นตอนความปลอดภัย การจัดเก็บสินค้า อุปกรณ์ PPE ที่ต้องใช้ในแต่ละโซน'],
+        ['IT', 'ตอบ FAQ การใช้งานระบบภายใน ขั้นตอนขอสิทธิ์เข้าถึง (Access Request)'],
+        ['Programmer', 'ตอบ Coding Standard, API Documentation, ขั้นตอน Deploy ของทีม'],
+        ['Logistic', 'ตอบตารางเวลาขนส่ง นโยบายการจัดส่ง วิธีติดตามสถานะสินค้า'],
+      ])}
+      ${mockup(mock7, 'ตัวอย่าง: IT Helpdesk Bot ตอบคำถาม Reset Password ด้วยขั้นตอนเดียวกับ Lab นี้ทุกประการ')}
+    `)}
     <ul>
       <li>แผนกของคุณอยากได้ Agent ตอบคำถามเรื่องอะไร?</li>
       <li>มีเว็บไซต์หรือ Documentation ภายในที่ใช้เป็น Knowledge Source ได้ไหม?</li>

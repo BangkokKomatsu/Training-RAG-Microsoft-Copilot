@@ -58,6 +58,13 @@ function build() {
   const m6body = `${chat6.svg}`;
   const mock6 = M.studioChrome({ activeTab: 'Overview', agentName: 'HR Policy Bot', body: m6body, bodyHeight: chat6.endY + 30 });
 
+  // ---- Mockup 7: Warehouse department example ----
+  const chat7 = M.chatMessages([
+    { from: 'user', text: 'เข้าโซนคลังสินค้าต้องใส่ PPE อะไรบ้าง?' },
+    { from: 'agent', text: 'ต้องสวมหมวกนิรภัย รองเท้านิรภัยหัวเหล็ก และเสื้อสะท้อนแสง (บังคับเมื่อมีรถ Forklift วิ่งผ่าน) [อ้างอิง: Factory_Safety_Policy.pdf]' },
+  ], { width: 700 });
+  const mock7 = M.studioChrome({ activeTab: 'Overview', agentName: 'Warehouse Safety Bot', body: chat7.svg, bodyHeight: chat7.endY + 30 });
+
   const bodyHtml = `
     <p>Lab นี้พาคุณสร้าง RAG Agent ตัวจริงใน <strong>Copilot Studio</strong> — เครื่องมือหลักที่ใช้ตลอดคอร์สนี้ พร้อมเชื่อมต่อ Knowledge จากไฟล์และเว็บไซต์</p>
 
@@ -84,6 +91,7 @@ function build() {
     ${step(2, 'สร้าง Agent ใหม่', `
       <p>กด <strong>"Create blank agent"</strong> → ใส่ชื่อ Agent เช่น "HR Policy Bot" → กด Create → รอ Agent ถูก Provision</p>
       ${mockup(mock2, 'หน้า Overview ของ Agent ที่สร้างใหม่ พร้อม Instructions เริ่มต้น')}
+      ${box('tip', '', '<p>ตรวจสอบ Model ที่เลือกไว้ในแท็บ Overview (ค่า Default มักเป็นรุ่นล่าสุด เช่น Claude Sonnet) — Model ที่แรงกว่าจะช่วยให้ Agent เข้าใจ Instructions ที่ซับซ้อนและสรุปคำตอบจาก Knowledge ได้แม่นยำกว่า โดยเฉพาะเมื่อ Knowledge มีหลายไฟล์</p>')}
     `)}
 
     <h2 id="step3">ขั้นตอนที่ 3–4: เพิ่ม Knowledge จากไฟล์</h2>
@@ -91,10 +99,12 @@ function build() {
       <p>ไปที่แท็บ <strong>Knowledge → + Add knowledge → Upload files</strong> → เลือกไฟล์ที่เตรียมมา → กด Add</p>
       ${mockup(mock3, 'ไฟล์กำลังถูก Index — สถานะ Processing')}
       ${box('warn', '', '<p>⏰ อย่า Navigate ออกจากหน้านี้ขณะรอ! ระบบกำลัง Index ไฟล์ ใช้เวลา 2–5 นาที</p>')}
+      ${box('note', '', '<p>ไฟล์ที่ Upload ได้: PDF, Word (.docx), PowerPoint (.pptx), Excel (.xlsx), และไฟล์ Text — ขนาดไม่เกินไฟล์ละ 512 MB ดูตัวอย่างไฟล์และไอเดียการออกแบบ Knowledge สำหรับสอนได้ที่ <code>course-materials/sample-files-for-participants/</code></p>')}
     `)}
     ${step(4, 'รอ Status เป็น "Ready"', `
       <p>เมื่อ Index เสร็จ Status จะเปลี่ยนเป็น <strong>Ready</strong> — ตอนนี้ Agent พร้อมค้นข้อมูลจากไฟล์นี้แล้ว</p>
       ${mockup(mock4, 'Knowledge Source สถานะ Ready พร้อมใช้งาน')}
+      ${box('tip', '', '<p>คลิกเข้าไปที่ไฟล์แล้วตั้งค่าเป็น <strong>"Official"</strong> ได้ ถ้าเป็นเอกสารที่เชื่อถือได้ที่สุด — Agent จะให้น้ำหนักกับแหล่งข้อมูลนี้มากกว่าแหล่งอื่นเมื่อคำตอบขัดแย้งกัน</p>')}
     `)}
 
     <h2 id="step5">ขั้นตอนที่ 5–6: เพิ่ม Website และทดสอบ</h2>
@@ -102,10 +112,12 @@ function build() {
       <p>Knowledge → + Add knowledge → <strong>Public websites</strong> → ใส่ URL เช่น เว็บ Intranet หรือ FAQ ขององค์กร → Add to agent</p>
       ${mockup(mock5, 'Knowledge หลายแหล่งพร้อมใช้งานพร้อมกัน (ไฟล์ + เว็บ)')}
     `)}
-    ${step(6, 'ปิด Web Search แล้วทดสอบ', `
-      <p>Overview → Web Search → Disabled → Save จากนั้นทดสอบถามคำถามใน Test Pane และสังเกต References ใต้คำตอบ</p>
+    ${step(6, 'ปิด Web Search และปิด Ungrounded Responses แล้วทดสอบ', `
+      <p>Overview → Web Search → Disabled → Save เพื่อไม่ให้ Agent เผลอตอบจากอินเทอร์เน็ตแทนที่จะตอบจาก Knowledge ที่เตรียมมา</p>
+      <p>จากนั้นไปที่ปุ่ม <strong>Settings (มุมขวาบน) → Generative AI</strong> → เลื่อนหาหัวข้อ Knowledge → ปิด Toggle <strong>"Allow ungrounded responses"</strong> → Save</p>
       ${mockup(mock6, 'Agent ตอบพร้อมอ้างอิงชื่อไฟล์ต้นทาง')}
       ${box('tip', '', '<p>ดูที่ "Referenced sources" ใต้คำตอบ — ถ้ามีชื่อเอกสาร/URL แสดงว่า Agent ดึงข้อมูลจาก Knowledge จริง ไม่ได้เดาเอง</p>')}
+      ${box('warn', '', '<p>การปิดทั้ง Web Search และ Allow ungrounded responses พร้อมกันคือคอมโบมาตรฐานที่ Microsoft แนะนำเพื่อลด Hallucination ให้มากที่สุด — ตั้งค่านี้ไว้ตั้งแต่ต้น เพราะ Lab 4 (Fallback Topic) จะใช้การตั้งค่านี้เป็นเงื่อนไขสำคัญ</p>')}
     `)}
 
     ${box('success', '', '<p>คุณมี RAG Agent ที่เชื่อมต่อ Knowledge ได้หลายแหล่งแล้ว! ขั้นตอนต่อไปคือทำให้ Agent ตอบได้ฉลาดและตรงประเด็นยิ่งขึ้นด้วย Prompt Engineering</p>')}
@@ -118,6 +130,7 @@ function build() {
     </ul>
 
     <h2 id="challenge">🎯 ลองประยุกต์ใช้กับงานคุณ</h2>
+    ${mockup(mock7, 'ตัวอย่าง: Warehouse Safety Bot ตอบคำถามความปลอดภัยจากไฟล์ Factory_Safety_Policy.pdf (ดูตัวอย่างไฟล์เต็มได้ที่ course-materials/sample-files-for-participants/)')}
     <ul>
       <li>ลองอัปโหลดเอกสารของแผนกตัวเอง 1 ไฟล์ แล้วถามคำถามที่มักถูกถามบ่อย</li>
       <li>ถ้ามี SharePoint Site ลองกลับมาเพิ่มเป็น Knowledge Source หลังจบคอร์ส</li>

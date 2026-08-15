@@ -51,6 +51,17 @@ function build() {
     ${M.calloutBanner(24, 130, 700, '🎉', 'Pass Rate เพิ่มขึ้น 20% หลังเพิ่มเอกสาร WFH Policy', {})}`;
   const mock5 = M.studioChrome({ activeTab: 'Evaluation', agentName: 'HR Policy Bot', body: m5body, bodyHeight: 210, showTest: false });
 
+  // ---- Mockup 6: Engineer department example (Work Permit Bot eval) ----
+  const rows6 = [
+    ['1', 'Hot Work Permit มีอายุกี่ชั่วโมง?', { text: '✅ Pass', color: M.COL.green, bold: true }],
+    ['2', 'ใครเป็นผู้มีอำนาจอนุมัติใบอนุญาตทำงาน?', { text: '✅ Pass', color: M.COL.green, bold: true }],
+    ['3', 'งาน Confined Space ต้องตรวจวัดอากาศบ่อยแค่ไหน?', { text: '✅ Pass', color: M.COL.green, bold: true }],
+    ['4', 'Line Break Permit ต้องมีใครร่วมลงนามเพิ่มเติม?', { text: '❌ Fail', color: M.COL.red, bold: true }],
+  ];
+  const table6 = M.resultsTable(['#', 'คำถาม', 'ผลลัพธ์'], rows6, { x: 24, y: 60, width: 700 });
+  const m6body = `${M.calloutBanner(24, 16, 700, '📈', 'Pass Rate: 3/4 (75%)', { bg: M.COL.blueBg, color: M.COL.navy })}${table6}`;
+  const mock6 = M.studioChrome({ activeTab: 'Evaluation', agentName: 'Work Permit Bot', body: m6body, bodyHeight: 320, showTest: false });
+
   const bodyHtml = `
     <p>Agent ตอบได้และตอบดีแล้ว แต่จะรู้ได้อย่างไรว่า <strong>"ดีพอ"</strong>? Lab นี้สอนวัดคุณภาพ RAG Agent ด้วย Test Set และวนปรับปรุงอย่างเป็นระบบ</p>
 
@@ -78,23 +89,35 @@ function build() {
     ${step(2, 'สร้าง Test Set แบบ Auto-Generate', `
       <p>+ New evaluation → <strong>Generate 10 questions</strong> → ตั้งชื่อ → Method: General Quality → Save</p>
       ${mockup(mock2, 'ฟอร์มสร้าง Test Set อัตโนมัติจาก Knowledge')}
+      ${box('note', 'Test Set สร้างได้ 4 วิธี (Lab นี้ลองวิธีที่ 1)', `
+        ${conceptTable(['วิธี', 'เหมาะกับ'], [
+          ['1. Auto-Generate', 'ให้ AI สร้างคำถามจาก Knowledge อัตโนมัติ — เริ่มต้นได้เร็วที่สุด ใช้ใน Lab นี้'],
+          ['2. Import จาก CSV', 'เตรียมคำถาม+คำตอบที่คาดหวังไว้ล่วงหน้า สูงสุด 100 ข้อ/ไฟล์ — เหมาะกับ Test Set ขนาดใหญ่ หรือชุดคำถามที่ "ต้องตอบผิด" เช่น คำถามอันตราย (Adversarial Test)'],
+          ['3. Capture จาก Test Pane', 'พิมพ์คุยกับ Agent ใน Test Pane ตามปกติ แล้วกด Evaluate เพื่อบันทึกบทสนทนานั้นเป็น Test Case ทันที — ได้ Expected Response จากคำตอบจริงของ Agent'],
+          ['4. พิมพ์เอง (Manual)', 'ใส่คำถามที่ทีมงานรู้ว่าสำคัญที่สุดทีละข้อ — ใช้เสริม Test Set ที่มีอยู่'],
+        ])}
+        <p style="margin-top:8px;font-size:12.5px;color:${M.COL.gray500}">Test Set รันได้ทีละชุด (สูงสุด 100 คำถาม/ชุด) ผลลัพธ์เก็บไว้ให้ดูย้อนหลังได้ 89 วัน</p>
+      `)}
     `)}
 
     <h2 id="step3">ขั้นตอนที่ 3–4: Run และวิเคราะห์ผล</h2>
     ${step(3, 'กด Evaluate และดูผลลัพธ์', `
       <p>รอ 3–5 นาที ระบบจะถามคำถามทั้ง 10 ข้อกับ Agent แล้วให้คะแนน Pass/Fail อัตโนมัติ</p>
       ${mockup(mock3, 'ผลการ Evaluate — Pass Rate 70%')}
+      ${box('note', '', '<p><strong>Test Method</strong> คือวิธีตัดสิน Pass/Fail — "General Quality" ที่ใช้ใน Lab นี้ให้ AI ประเมินความถูกต้องโดยรวม เหมาะกับคำถามปลายเปิด นอกจากนี้ยังมี Exact/Keyword match (ตรวจคำตรงตัว), Similarity/Compare meaning (ตรวจความหมายใกล้เคียง), Capability use (ตรวจว่าเรียกใช้ Tool/Topic ที่ถูกต้องหรือไม่) และ Custom — เลือกใช้ตามลักษณะคำถามแต่ละชุด</p>')}
     `)}
     ${step(4, 'วิเคราะห์คำถามที่ Fail', `
       <p>กดเข้าไปดูรายละเอียดคำถามที่ Fail เปรียบเทียบ Expected กับ Actual Response เพื่อหาสาเหตุ</p>
       ${mockup(mock4, 'รายละเอียดคำถามที่ Fail พร้อมสาเหตุ')}
       ${box('tip', '', '<p>สาเหตุที่ Fail มักมาจาก 2 เรื่อง: (1) Knowledge ไม่มีข้อมูลนี้ → เพิ่มเอกสาร (2) Instructions ไม่ชัดเจน → ปรับ Instructions</p>')}
+      ${box('tip', '', '<p>เปิด <strong>Activity map</strong> ในรายละเอียดคำถามที่ Fail เพื่อดูเส้นทางการทำงานทีละขั้นของ Agent — เห็นได้ว่า Agent ใช้ Knowledge Source ไหน เรียก Tool อะไร หรือเข้า Topic ไหนก่อนจะตอบ ช่วยระบุจุดที่ผิดพลาดได้เร็วกว่าอ่านแค่คำตอบสุดท้าย</p>')}
     `)}
 
     <h2 id="step5">ขั้นตอนที่ 5: ปรับปรุงและวัดผลซ้ำ</h2>
     ${step(5, 'แก้ไขและ Evaluate อีกครั้ง', `
       <p>เพิ่มเอกสารหรือปรับ Instructions ตามที่วิเคราะห์ได้ แล้วรัน Evaluate ด้วย Test Set เดิมอีกครั้งเพื่อเปรียบเทียบ</p>
       ${mockup(mock5, 'Pass Rate เพิ่มขึ้นหลังปรับปรุง Agent')}
+      ${box('tip', '', '<p>ใช้ตัวเลือก <strong>"Compare with"</strong> เพื่อเทียบผลการรัน 2 ครั้ง — ลูกศรสีเขียวคือคำถามที่เพิ่งผ่านหลังแก้ไข ลูกศรสีแดงคือคำถามที่เคยผ่านแต่กลับมาล้มเหลว (Regression) ฟีเจอร์นี้ช่วยยืนยันว่าการแก้ไขไม่ได้ไปทำให้จุดอื่นแย่ลงโดยไม่ตั้งใจ</p>')}
     `)}
 
     ${box('success', '', '<p>คุณมีกระบวนการวัดและปรับปรุงคุณภาพ RAG Agent อย่างเป็นระบบแล้ว! เป้าหมายไม่ใช่ 100% แต่คือ Pass Rate ที่เพิ่มขึ้นทุกรอบ</p>')}
@@ -107,6 +130,7 @@ function build() {
     </ul>
 
     <h2 id="challenge">🎯 ลองประยุกต์ใช้กับงานคุณ</h2>
+    ${mockup(mock6, 'ตัวอย่าง: Work Permit Bot ของทีม Engineer — Fail ข้อ 4 บอกว่า Knowledge ยังไม่มีรายละเอียดเรื่อง Line Break Permit ต้องเพิ่มเอกสาร')}
     <ul>
       <li>ตั้งเป้า Pass Rate ของ Agent แผนกคุณไว้ที่เท่าไหร่?</li>
       <li>ลองเพิ่มคำถามที่ผู้ใช้จริงมักถามเข้าไปใน Test Set ด้วยตัวเอง</li>

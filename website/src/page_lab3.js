@@ -18,7 +18,7 @@ function build() {
   const careText = 'You are an HR assistant for Contoso. Answer ONLY from the provided HR policy documents. If not found, say "ขออภัย ข้อมูลนี้ไม่อยู่ใน Policy กรุณาติดต่อ HR โดยตรง". Always answer in Thai with max 3 bullet points.';
   const m3body = `${M.text(24, 30, 'Instructions', { fontSize: 14, weight: 700, fill: M.COL.navy })}
     ${M.textArea(24, 42, 700, 100, '', careText, {})}
-    ${M.badge(24, 156, '✅ GOOD — มี Context + Action + Result ครบ', M.COL.green, M.COL.greenBg)}`;
+    ${M.badge(24, 156, '✅ GOOD — มี Context + Ask + Rules ครบ', M.COL.green, M.COL.greenBg)}`;
   const mock3 = M.studioChrome({ activeTab: 'Overview', agentName: 'HR Policy Bot', body: m3body, bodyHeight: 210 });
 
   // ---- Mockup 4: good answer ----
@@ -35,6 +35,13 @@ function build() {
   ], { width: 660 });
   const mock5 = M.studioChrome({ activeTab: 'Overview', agentName: 'HR Policy Bot', body: chat5.svg, bodyHeight: chat5.endY + 30 });
 
+  // ---- Mockup 6: Programmer department example (CARE for Code Review Bot) ----
+  const careText6 = 'You are a senior developer assistant for the internal team (Context). Review the code snippet the user pastes against our Coding Standard doc, and list violations with line references (Ask). Never rewrite the whole file — only point out issues; keep each point to 1 line; if the standard doc doesn\'t cover something, say so instead of guessing (Rules). Example: "Line 12: ตัวแปรตั้งชื่อไม่สื่อความหมาย ควรใช้ camelCase" (Examples).';
+  const m6body = `${M.text(24, 30, 'Instructions', { fontSize: 14, weight: 700, fill: M.COL.navy })}
+    ${M.textArea(24, 42, 700, 110, '', careText6, {})}
+    ${M.badge(24, 166, '✅ Code Review Bot — CARE ครบทั้ง 4 องค์ประกอบ', M.COL.green, M.COL.greenBg)}`;
+  const mock6 = M.studioChrome({ activeTab: 'Overview', agentName: 'Code Review Bot', body: m6body, bodyHeight: 220 });
+
   const bodyHtml = `
     <p>Agent จาก Lab 2 ตอบได้แล้ว แต่ยัง "ฉลาด" ไม่พอ — Lab นี้สอนวิธีเขียน <strong>Instructions</strong> ให้ Agent ตอบตรงประเด็น มี Tone ที่เหมาะสม และรู้ขอบเขตของตัวเอง</p>
 
@@ -47,11 +54,12 @@ function build() {
 
     ${box('note', 'CARE Framework', `
       ${conceptTable(['องค์ประกอบ', 'ใส่อะไร'], [
-        ['C — Context', 'Agent คือใคร ทำงานให้ใคร มีบทบาทอะไร'],
-        ['A — Action', 'ต้องทำอะไร ตอบอย่างไร ใช้ภาษาไหน รูปแบบไหน'],
-        ['R — Result', 'ผลลัพธ์ที่ต้องการ เช่น Fallback message เมื่อไม่รู้คำตอบ'],
-        ['E — Example', 'ตัวอย่างคำถาม-คำตอบที่ดี เพื่อเป็น Reference ให้ AI'],
+        ['C — Context', 'Agent คือใคร ทำงานให้ใคร อยู่ในสถานการณ์แบบไหน'],
+        ['A — Ask', 'สิ่งที่ต้องการให้ Agent ทำอย่างชัดเจน เช่น "ตอบคำถามจาก Knowledge เท่านั้น"'],
+        ['R — Rules', 'กฎ/ข้อจำกัดที่ต้องทำตาม เช่น ภาษาที่ใช้ รูปแบบคำตอบ Fallback message เมื่อไม่รู้คำตอบ'],
+        ['E — Examples', 'ตัวอย่างคำถาม-คำตอบที่ดี เพื่อเป็น Reference ให้ AI'],
       ])}
+      <p style="margin-top:10px;font-size:12.5px;color:${M.COL.gray500}">อ้างอิงจาก <strong>CAREful Prompts</strong> โดย Nielsen Norman Group (nngroup.com/articles/careful-prompts) — Framework เดียวกับที่ใช้ใน Microsoft Copilot Studio Labs ต้นฉบับ</p>
     `)}
 
     <h2 id="step1">ขั้นตอนที่ 1–2: ดูปัญหาของ Instructions แบบ BAD</h2>
@@ -66,8 +74,8 @@ function build() {
 
     <h2 id="step3">ขั้นตอนที่ 3–4: แก้ไขด้วย CARE Framework</h2>
     ${step(3, 'เขียน Instructions ใหม่ด้วย CARE', `
-      <p>ลบ Instructions เดิม แล้วเขียนใหม่ให้ครบทั้ง 4 องค์ประกอบ: Context, Action, Result, Example</p>
-      ${mockup(mock3, 'Instructions แบบ GOOD — ครบ Context + Action + Result')}
+      <p>ลบ Instructions เดิม แล้วเขียนใหม่ให้ครบทั้ง 4 องค์ประกอบ: Context, Ask, Rules, Examples</p>
+      ${mockup(mock3, 'Instructions แบบ GOOD — ครบ Context + Ask + Rules')}
       ${box('tip', '', '<p>เขียน Fallback message ให้ชัดเจนเสมอ เช่น "ถ้าไม่พบข้อมูล ให้บอกว่า..." เพื่อป้องกัน Agent เดาคำตอบ (Hallucinate)</p>')}
     `)}
     ${step(4, 'Save และทดสอบคำถามเดิม', `
@@ -91,6 +99,7 @@ function build() {
     </ul>
 
     <h2 id="challenge">🎯 ลองประยุกต์ใช้กับงานคุณ</h2>
+    ${mockup(mock6, 'ตัวอย่าง: Code Review Bot สำหรับทีม Programmer — เขียน Instructions ด้วย CARE เหมือนกันแค่เปลี่ยนเนื้อหา')}
     <ul>
       <li>ลองเขียน Instructions ด้วย CARE Framework สำหรับ Use Case ของแผนกตัวเอง</li>
       <li>ทดสอบว่า Agent ปฏิเสธคำถามเรื่องการเมืองหรือเรื่องส่วนตัวได้ไหม</li>

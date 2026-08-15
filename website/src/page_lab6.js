@@ -46,6 +46,13 @@ function build() {
   ], { width: 640 });
   const mock5 = M.teamsChrome({ body: chat5.svg, bodyHeight: chat5.endY + 40 });
 
+  // ---- Mockup 6: Sales Engineer department example ----
+  const chat6 = M.chatMessages([
+    { from: 'user', text: 'ยอดขายรถ Forklift ใหม่ของสาขากรุงเทพเดือนมกราคม 2568 เท่าไหร่?' },
+    { from: 'agent', text: 'ยอดขายรถ Forklift ใหม่ สาขากรุงเทพ เดือน ม.ค. 2568 อยู่ที่ 1,397,000 บาท (2 คัน) [อ้างอิง: Sales_Data_Raw.xlsx]' },
+  ], { width: 640 });
+  const mock6 = M.teamsChrome({ body: chat6.svg, bodyHeight: chat6.endY + 40 });
+
   const bodyHtml = `
     <p>Lab สุดท้าย! นำ Agent ที่สร้างมาทั้งวันไป Deploy ให้ทีมงานใช้งานได้จริงผ่าน <strong>Microsoft Teams</strong></p>
 
@@ -64,6 +71,8 @@ function build() {
     ${step(2, 'ไปที่ Channels', `
       <p>กด <strong>Channels</strong> ในแถบนำทาง → เลือก "Microsoft 365 and Microsoft Teams"</p>
       ${mockup(mock2, 'ตัวเลือก Channels ที่ Deploy ได้')}
+      ${box('tip', '', '<p>ก่อน Deploy ให้เปิดแท็บใหม่แล้ว Login เข้า Teams (Web) ไว้ล่วงหน้า — ป้องกันไม่ให้ขั้นตอน Login มาขัดจังหวะตอนที่กำลังทดสอบ Agent ใน Teams ช่วงท้าย Lab</p>')}
+      ${box('note', '', '<p>นอกจาก Teams แล้ว Copilot Studio ยังรองรับ Channel อื่นอีกมาก เช่น Web app แบบฝังในเว็บ, Native app (iOS/Android), Email, Facebook, WhatsApp, Line — เลือก Deploy ไปที่ Channel ที่ผู้ใช้งานจริงอยู่แล้ว ไม่ใช่บังคับให้ผู้ใช้มาเรียนรู้เครื่องมือใหม่</p>')}
     `)}
 
     <h2 id="step3">ขั้นตอนที่ 3–4: เปิดใช้งานใน Teams</h2>
@@ -81,6 +90,11 @@ function build() {
     ${step(5, 'พิมพ์คำถามทดสอบใน Teams', `
       <p>ลองพิมพ์คำถามใน Teams Chat กับ Agent เปรียบเทียบ User Experience กับ Test Panel ใน Copilot Studio</p>
       ${mockup(mock5, 'Agent ตอบคำถามใน Microsoft Teams จริง')}
+      ${mockup(mock6, 'ตัวอย่าง: Sales Data Bot ของทีม Sales Engineer ใน Teams — ตอบยอดขายเจาะจงจุดเดียวได้ถูกต้อง (ลองคำถามรวมยอดข้ามเดือน/สาขาดูด้วย จะเห็นข้อจำกัดของ RAG ตามที่คุยกันใน Lab 5)')}
+    `)}
+
+    ${box('warn', 'ก่อนใช้งานจริงในองค์กร (Production)', `
+      <p>Lab นี้ Deploy แบบง่ายสุดสำหรับการเรียนรู้ ก่อนปล่อยให้ทั้งองค์กรใช้จริง ควรกลับมาตรวจสอบเพิ่มเติม: ตั้งค่า Authentication ให้เหมาะกับความละเอียดอ่อนของข้อมูล, จำกัด Domain ที่อนุญาตให้ฝัง Agent (สำหรับ Web channel), และทดสอบ Agent บนทุก Channel ที่ Deploy จริง เพราะ Feature บาง UI อาจแสดงผลต่างกันระหว่าง Test Pane กับ Teams</p>
     `)}
 
     ${box('success', '', '<p>🎉 ยินดีด้วย! Agent ของคุณพร้อมให้ทีมใช้งานจริงผ่าน Microsoft Teams แล้ว — คุณสร้าง RAG Agent ตั้งแต่ต้นจนถึง Production ได้ภายในวันเดียว!</p>')}
