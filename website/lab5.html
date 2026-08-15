@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 5: Evaluation — RAG Course</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav class="topnav"><div class="topnav-inner">
+  <div class="topnav-brand"><span>🤖</span> Build Your Own RAG Agent<span class="dot"> · Copilot Studio</span></div>
+  <div class="topnav-links"><a href="index.html">🏠 หน้าแรก</a><a href="lab1.html">Lab 1</a><a href="lab2.html">Lab 2</a><a href="lab3.html">Lab 3</a><a href="lab4.html">Lab 4</a><a href="lab5.html" class="active">Lab 5</a><a href="lab6.html">Lab 6</a></div>
+</div></nav>
+<header class="hero"><div class="hero-inner">
+    <span class="hero-eyebrow">LAB 5 · ⏱ 30 นาที · Level 200</span>
+    <h1>📊 Evaluation — วัดคุณภาพ RAG</h1>
+    <p class="lead">สร้าง Test Set วัด Pass Rate และปรับปรุง Agent อย่างเป็นระบบด้วย RAG Improvement Loop</p>
+    <div class="hero-meta"><span class="hero-pill">⏱ 30 นาที</span><span class="hero-pill">🎓 Level 200</span><span class="hero-pill">📈 Test Set + Pass Rate</span></div>
+  </div></header>
+<div class="page-wrap"><nav class="toc"><div class="toc-title">ในหน้านี้</div>
+    <a href="#loop">RAG Improvement Loop</a><a href="#step1">1–2. สร้าง Test Set</a><a href="#step3">3–4. Run + วิเคราะห์</a><a href="#step5">5. ปรับปรุงซ้ำ</a><a href="#mistakes">ข้อผิดพลาดที่พบบ่อย</a><a href="#challenge">ลองประยุกต์ใช้</a>
+  </nav><div class="content">
+    <p>Agent ตอบได้และตอบดีแล้ว แต่จะรู้ได้อย่างไรว่า <strong>"ดีพอ"</strong>? Lab นี้สอนวัดคุณภาพ RAG Agent ด้วย Test Set และวนปรับปรุงอย่างเป็นระบบ</p>
+
+    <table class="meta-table"><tbody>
+    <tr><th>Level</th><td><span class="badge badge-orange">200</span></td></tr><tr><th>Persona</th><td>Maker ที่ต้องการรับรองคุณภาพก่อน Deploy</td></tr><tr><th>ระยะเวลา</th><td>30 นาที</td></tr><tr><th>เป้าหมาย</th><td>สร้าง Test Set วัด Pass Rate และปรับปรุง Agent จนคะแนนดีขึ้น</td></tr>
+  </tbody></table>
+
+    <h2 id="loop">🔄 RAG Improvement Loop</h2>
+    <p>แนวคิดหลักของ Lab นี้คือวงจร 4 ขั้นตอนที่ทำซ้ำได้เรื่อยๆ:</p>
+    <table class="concept-table">
+    <thead><tr><th>ขั้นตอน</th><th>ทำอะไร</th></tr></thead>
+    <tbody><tr><td class="term">1. Build</td><td>สร้าง Agent + Knowledge</td></tr><tr><td class="term">2. Test</td><td>ถามคำถามด้วยตนเอง</td></tr><tr><td class="term">3. Evaluate</td><td>รัน Test Set ดู Pass Rate</td></tr><tr><td class="term">4. Improve</td><td>ปรับ Knowledge หรือ Instructions แล้ววนกลับไป Test ใหม่</td></tr></tbody>
+  </table>
+
+    <h2 id="step1">ขั้นตอนที่ 1–2: สร้าง Test Set</h2>
+    <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body"><h4>เปิด Evaluation Tab</h4>
+      <p>ไปที่แท็บ <strong>Evaluation</strong> ในแถบนำทางด้านบนของ Agent</p>
+      <div class="mockup"><svg viewBox="0 0 1000 324" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
+    <rect width="1000" height="324" fill="#F4F6F9"/>
+    <rect width="1000" height="54" fill="#FFFFFF"/>
+    <rect width="1000" height="54" fill="none" stroke="#E8EBF0" stroke-width="1"/>
+    <circle cx="24" cy="27" r="11" fill="#2E75B6"/>
+    <text x="24" y="31" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">CS</text>
+    <text x="44" y="24" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="700" fill="#1A1A1A" text-anchor="start" style="">HR Policy Bot</text>
+    <text x="44" y="39" font-family="Segoe UI, Tahoma, sans-serif" font-size="9.5" font-weight="400" fill="#767676" text-anchor="start" style="">Copilot Studio</text>
+    <g>
+      <text x="208.9" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Overview</text>
+      
+    </g><g>
+      <text x="276.75" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Knowledge</text>
+      
+    </g><g>
+      <text x="335.45000000000005" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Tools</text>
+      
+    </g><g>
+      <text x="385.00000000000006" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Agents</text>
+      
+    </g><g>
+      <text x="437.6000000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Topics</text>
+      
+    </g><g>
+      <text x="496.30000000000007" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Activity</text>
+      
+    </g><g><rect x="530.2" y="13" width="74" height="28" rx="6" ry="6" fill="#EEF4FB" stroke="none" stroke-width="1"/>
+      <text x="567.2" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="700" fill="#1F3864" text-anchor="middle" style="">Evaluation</text>
+      <rect x="530.2" y="51" width="74" height="3" fill="#2E75B6"/>
+    </g><g>
+      <text x="641.1500000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Analytics</text>
+      
+    </g><g>
+      <text x="709" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Channels</text>
+      
+    </g>
+    <g><rect x="818" y="14" width="76" height="26" rx="6" ry="6" fill="#2E75B6" stroke="none" stroke-width="1.3"/><text x="856" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">Publish</text></g>
+    
+    <g transform="translate(0, 54)">
+    <text x="360" y="110" font-family="Segoe UI, Tahoma, sans-serif" font-size="40" font-weight="400" fill="#1A1A1A" text-anchor="middle" style="">📊</text>
+    <text x="360" y="155" font-family="Segoe UI, Tahoma, sans-serif" font-size="15" font-weight="700" fill="#1F3864" text-anchor="middle" style="">ยังไม่มี Test Set</text>
+    <text x="360" y="176" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="400" fill="#767676" text-anchor="middle" style="">สร้าง Test Set เพื่อวัดคุณภาพคำตอบของ Agent</text>
+    <g><rect x="290" y="200" width="140" height="34" rx="6" ry="6" fill="#2E75B6" stroke="none" stroke-width="1.3"/><text x="360" y="221.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">+ New evaluation</text></g>
+  </g>
+  </svg></div><div class="mockup-caption">หน้า Evaluation ก่อนสร้าง Test Set</div>
+    </div>
+  </div>
+    <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body"><h4>สร้าง Test Set แบบ Auto-Generate</h4>
+      <p>+ New evaluation → <strong>Generate 10 questions</strong> → ตั้งชื่อ → Method: General Quality → Save</p>
+      <div class="mockup"><svg viewBox="0 0 1000 324" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
+    <rect width="1000" height="324" fill="#F4F6F9"/>
+    <rect width="1000" height="54" fill="#FFFFFF"/>
+    <rect width="1000" height="54" fill="none" stroke="#E8EBF0" stroke-width="1"/>
+    <circle cx="24" cy="27" r="11" fill="#2E75B6"/>
+    <text x="24" y="31" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">CS</text>
+    <text x="44" y="24" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="700" fill="#1A1A1A" text-anchor="start" style="">HR Policy Bot</text>
+    <text x="44" y="39" font-family="Segoe UI, Tahoma, sans-serif" font-size="9.5" font-weight="400" fill="#767676" text-anchor="start" style="">Copilot Studio</text>
+    <g>
+      <text x="208.9" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Overview</text>
+      
+    </g><g>
+      <text x="276.75" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Knowledge</text>
+      
+    </g><g>
+      <text x="335.45000000000005" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Tools</text>
+      
+    </g><g>
+      <text x="385.00000000000006" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Agents</text>
+      
+    </g><g>
+      <text x="437.6000000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Topics</text>
+      
+    </g><g>
+      <text x="496.30000000000007" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Activity</text>
+      
+    </g><g><rect x="530.2" y="13" width="74" height="28" rx="6" ry="6" fill="#EEF4FB" stroke="none" stroke-width="1"/>
+      <text x="567.2" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="700" fill="#1F3864" text-anchor="middle" style="">Evaluation</text>
+      <rect x="530.2" y="51" width="74" height="3" fill="#2E75B6"/>
+    </g><g>
+      <text x="641.1500000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Analytics</text>
+      
+    </g><g>
+      <text x="709" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Channels</text>
+      
+    </g>
+    <g><rect x="818" y="14" width="76" height="26" rx="6" ry="6" fill="#2E75B6" stroke="none" stroke-width="1.3"/><text x="856" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">Publish</text></g>
+    
+    <g transform="translate(0, 54)">
+    <rect x="150" y="20" width="420" height="220" rx="10" ry="10" fill="#FFFFFF" stroke="#D6D9E0" stroke-width="1.5"/>
+    <text x="180" y="52" font-family="Segoe UI, Tahoma, sans-serif" font-size="14.5" font-weight="700" fill="#1F3864" text-anchor="start" style="">สร้าง Test Set ใหม่</text>
+    <text x="180" y="64" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="600" fill="#767676" text-anchor="start" style="">ชื่อ Test Set</text><rect x="180" y="70" width="360" height="36" rx="6" ry="6" fill="#FFFFFF" stroke="#D6D9E0" stroke-width="1"/><text x="192" y="92" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">HR Bot Test v1</text>
+    <rect x="180" y="128" width="20" height="20" rx="4" ry="4" fill="#2E75B6" stroke="#2E75B6" stroke-width="1.5"/><path d="M 184 138 L 188.5 143 L 196 133" stroke="#FFFFFF" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="210" y="143" font-family="Segoe UI, Tahoma, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start" style="">Generate 10 questions</text><text x="210" y="160" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#767676" text-anchor="start" style="">สร้างคำถามอัตโนมัติจาก Knowledge</text>
+    <text x="180" y="178" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#444444" text-anchor="start" style="">Method: General Quality</text>
+    <g><rect x="430" y="205" width="110" height="32" rx="6" ry="6" fill="#2E75B6" stroke="none" stroke-width="1.3"/><text x="485" y="225.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">Save</text></g>
+  </g>
+  </svg></div><div class="mockup-caption">ฟอร์มสร้าง Test Set อัตโนมัติจาก Knowledge</div>
+    </div>
+  </div>
+
+    <h2 id="step3">ขั้นตอนที่ 3–4: Run และวิเคราะห์ผล</h2>
+    <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body"><h4>กด Evaluate และดูผลลัพธ์</h4>
+      <p>รอ 3–5 นาที ระบบจะถามคำถามทั้ง 10 ข้อกับ Agent แล้วให้คะแนน Pass/Fail อัตโนมัติ</p>
+      <div class="mockup"><svg viewBox="0 0 1000 434" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
+    <rect width="1000" height="434" fill="#F4F6F9"/>
+    <rect width="1000" height="54" fill="#FFFFFF"/>
+    <rect width="1000" height="54" fill="none" stroke="#E8EBF0" stroke-width="1"/>
+    <circle cx="24" cy="27" r="11" fill="#2E75B6"/>
+    <text x="24" y="31" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">CS</text>
+    <text x="44" y="24" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="700" fill="#1A1A1A" text-anchor="start" style="">HR Policy Bot</text>
+    <text x="44" y="39" font-family="Segoe UI, Tahoma, sans-serif" font-size="9.5" font-weight="400" fill="#767676" text-anchor="start" style="">Copilot Studio</text>
+    <g>
+      <text x="208.9" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Overview</text>
+      
+    </g><g>
+      <text x="276.75" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Knowledge</text>
+      
+    </g><g>
+      <text x="335.45000000000005" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Tools</text>
+      
+    </g><g>
+      <text x="385.00000000000006" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Agents</text>
+      
+    </g><g>
+      <text x="437.6000000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Topics</text>
+      
+    </g><g>
+      <text x="496.30000000000007" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Activity</text>
+      
+    </g><g><rect x="530.2" y="13" width="74" height="28" rx="6" ry="6" fill="#EEF4FB" stroke="none" stroke-width="1"/>
+      <text x="567.2" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="700" fill="#1F3864" text-anchor="middle" style="">Evaluation</text>
+      <rect x="530.2" y="51" width="74" height="3" fill="#2E75B6"/>
+    </g><g>
+      <text x="641.1500000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Analytics</text>
+      
+    </g><g>
+      <text x="709" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Channels</text>
+      
+    </g>
+    <g><rect x="818" y="14" width="76" height="26" rx="6" ry="6" fill="#2E75B6" stroke="none" stroke-width="1.3"/><text x="856" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">Publish</text></g>
+    
+    <g transform="translate(0, 54)"><rect x="24" y="16" width="700" height="44" rx="8" ry="8" fill="#EEF4FB" stroke="none" stroke-width="1"/>
+    <text x="40" y="44" font-size="16">📈</text>
+    <text x="68" y="43" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="700" fill="#1F3864" text-anchor="start" style="">Pass Rate: 7/10 (70%)</text><rect x="24" y="60" width="700" height="34" rx="6" ry="6" fill="#1F3864" stroke="none" stroke-width="1"/><text x="36" y="81" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="start" style="">#</text><text x="269.33333333333337" y="81" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="start" style="">คำถาม</text><text x="502.6666666666667" y="81" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="start" style="">ผลลัพธ์</text><rect x="24" y="94" width="700" height="34" rx="0" ry="0" fill="#FFFFFF" stroke="none" stroke-width="1"/><text x="36" y="115" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">1</text><text x="269.33333333333337" y="115" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">นโยบายการลาป่วย?</text><text x="502.6666666666667" y="115" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="700" fill="#107C10" text-anchor="start" style="">✅ Pass</text><rect x="24" y="128" width="700" height="34" rx="0" ry="0" fill="#F4F6F9" stroke="none" stroke-width="1"/><text x="36" y="149" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">2</text><text x="269.33333333333337" y="149" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">ค่าใช้จ่ายเดินทางเบิกยังไง?</text><text x="502.6666666666667" y="149" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="700" fill="#107C10" text-anchor="start" style="">✅ Pass</text><rect x="24" y="162" width="700" height="34" rx="0" ry="0" fill="#FFFFFF" stroke="none" stroke-width="1"/><text x="36" y="183" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">3</text><text x="269.33333333333337" y="183" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">สวัสดิการประกันสุขภาพ?</text><text x="502.6666666666667" y="183" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="700" fill="#107C10" text-anchor="start" style="">✅ Pass</text><rect x="24" y="196" width="700" height="34" rx="0" ry="0" fill="#F4F6F9" stroke="none" stroke-width="1"/><text x="36" y="217" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">4</text><text x="269.33333333333337" y="217" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">นโยบาย WFH ต่างประเทศ?</text><text x="502.6666666666667" y="217" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="700" fill="#C00000" text-anchor="start" style="">❌ Fail</text><rect x="24" y="230" width="700" height="34" rx="0" ry="0" fill="#FFFFFF" stroke="none" stroke-width="1"/><text x="36" y="251" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">5</text><text x="269.33333333333337" y="251" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">โบนัสประจำปีคำนวณยังไง?</text><text x="502.6666666666667" y="251" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="700" fill="#C00000" text-anchor="start" style="">❌ Fail</text><rect x="24" y="60" width="700" height="204" fill="none" stroke="#E8EBF0" stroke-width="1"/></g>
+  </svg></div><div class="mockup-caption">ผลการ Evaluate — Pass Rate 70%</div>
+    </div>
+  </div>
+    <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body"><h4>วิเคราะห์คำถามที่ Fail</h4>
+      <p>กดเข้าไปดูรายละเอียดคำถามที่ Fail เปรียบเทียบ Expected กับ Actual Response เพื่อหาสาเหตุ</p>
+      <div class="mockup"><svg viewBox="0 0 1000 254" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
+    <rect width="1000" height="254" fill="#F4F6F9"/>
+    <rect width="1000" height="54" fill="#FFFFFF"/>
+    <rect width="1000" height="54" fill="none" stroke="#E8EBF0" stroke-width="1"/>
+    <circle cx="24" cy="27" r="11" fill="#2E75B6"/>
+    <text x="24" y="31" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">CS</text>
+    <text x="44" y="24" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="700" fill="#1A1A1A" text-anchor="start" style="">HR Policy Bot</text>
+    <text x="44" y="39" font-family="Segoe UI, Tahoma, sans-serif" font-size="9.5" font-weight="400" fill="#767676" text-anchor="start" style="">Copilot Studio</text>
+    <g>
+      <text x="208.9" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Overview</text>
+      
+    </g><g>
+      <text x="276.75" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Knowledge</text>
+      
+    </g><g>
+      <text x="335.45000000000005" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Tools</text>
+      
+    </g><g>
+      <text x="385.00000000000006" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Agents</text>
+      
+    </g><g>
+      <text x="437.6000000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Topics</text>
+      
+    </g><g>
+      <text x="496.30000000000007" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Activity</text>
+      
+    </g><g><rect x="530.2" y="13" width="74" height="28" rx="6" ry="6" fill="#EEF4FB" stroke="none" stroke-width="1"/>
+      <text x="567.2" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="700" fill="#1F3864" text-anchor="middle" style="">Evaluation</text>
+      <rect x="530.2" y="51" width="74" height="3" fill="#2E75B6"/>
+    </g><g>
+      <text x="641.1500000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Analytics</text>
+      
+    </g><g>
+      <text x="709" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Channels</text>
+      
+    </g>
+    <g><rect x="818" y="14" width="76" height="26" rx="6" ry="6" fill="#2E75B6" stroke="none" stroke-width="1.3"/><text x="856" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">Publish</text></g>
+    
+    <g transform="translate(0, 54)">
+    <text x="24" y="30" font-family="Segoe UI, Tahoma, sans-serif" font-size="13.5" font-weight="700" fill="#1F3864" text-anchor="start" style="">คำถามที่ 4: นโยบาย WFH ต่างประเทศ?</text>
+    <rect x="24" y="44" width="700" height="130" rx="8" ry="8" fill="#FFEBEE" stroke="none" stroke-width="1"/>
+    <text x="40" y="68" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="700" fill="#C00000" text-anchor="start" style="">Expected:</text>
+    <text x="40" y="86" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">ควรอธิบายเงื่อนไข WFH ต่างประเทศจากเอกสาร</text>
+    <text x="40" y="112" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="700" fill="#C00000" text-anchor="start" style="">Actual:</text>
+    <text x="40" y="130" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">ขออภัย ไม่พบข้อมูลนี้ในเอกสาร Policy</text>
+    <text x="40" y="156" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="700" fill="#C55A11" text-anchor="start" style="">🔍 สาเหตุ: Knowledge ไม่มีเอกสารเรื่องนี้ → ต้องเพิ่มเอกสาร</text>
+  </g>
+  </svg></div><div class="mockup-caption">รายละเอียดคำถามที่ Fail พร้อมสาเหตุ</div>
+      <div class="box box-tip">
+    <div class="box-title">💡 Tip</div>
+    <p>สาเหตุที่ Fail มักมาจาก 2 เรื่อง: (1) Knowledge ไม่มีข้อมูลนี้ → เพิ่มเอกสาร (2) Instructions ไม่ชัดเจน → ปรับ Instructions</p>
+  </div>
+    </div>
+  </div>
+
+    <h2 id="step5">ขั้นตอนที่ 5: ปรับปรุงและวัดผลซ้ำ</h2>
+    <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-body"><h4>แก้ไขและ Evaluate อีกครั้ง</h4>
+      <p>เพิ่มเอกสารหรือปรับ Instructions ตามที่วิเคราะห์ได้ แล้วรัน Evaluate ด้วย Test Set เดิมอีกครั้งเพื่อเปรียบเทียบ</p>
+      <div class="mockup"><svg viewBox="0 0 1000 264" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
+    <rect width="1000" height="264" fill="#F4F6F9"/>
+    <rect width="1000" height="54" fill="#FFFFFF"/>
+    <rect width="1000" height="54" fill="none" stroke="#E8EBF0" stroke-width="1"/>
+    <circle cx="24" cy="27" r="11" fill="#2E75B6"/>
+    <text x="24" y="31" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">CS</text>
+    <text x="44" y="24" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="700" fill="#1A1A1A" text-anchor="start" style="">HR Policy Bot</text>
+    <text x="44" y="39" font-family="Segoe UI, Tahoma, sans-serif" font-size="9.5" font-weight="400" fill="#767676" text-anchor="start" style="">Copilot Studio</text>
+    <g>
+      <text x="208.9" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Overview</text>
+      
+    </g><g>
+      <text x="276.75" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Knowledge</text>
+      
+    </g><g>
+      <text x="335.45000000000005" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Tools</text>
+      
+    </g><g>
+      <text x="385.00000000000006" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Agents</text>
+      
+    </g><g>
+      <text x="437.6000000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Topics</text>
+      
+    </g><g>
+      <text x="496.30000000000007" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Activity</text>
+      
+    </g><g><rect x="530.2" y="13" width="74" height="28" rx="6" ry="6" fill="#EEF4FB" stroke="none" stroke-width="1"/>
+      <text x="567.2" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="700" fill="#1F3864" text-anchor="middle" style="">Evaluation</text>
+      <rect x="530.2" y="51" width="74" height="3" fill="#2E75B6"/>
+    </g><g>
+      <text x="641.1500000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Analytics</text>
+      
+    </g><g>
+      <text x="709" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Channels</text>
+      
+    </g>
+    <g><rect x="818" y="14" width="76" height="26" rx="6" ry="6" fill="#2E75B6" stroke="none" stroke-width="1.3"/><text x="856" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">Publish</text></g>
+    
+    <g transform="translate(0, 54)"><text x="24" y="12" font-family="Segoe UI, Tahoma, sans-serif" font-size="13.5" font-weight="700" fill="#1F3864" text-anchor="start" style="">เปรียบเทียบ Pass Rate</text><text x="24" y="51" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#444444" text-anchor="start" style="">ก่อนปรับปรุง</text><rect x="109" y="30" width="610" height="34" rx="6" ry="6" fill="#F4F6F9" stroke="none" stroke-width="1"/><rect x="109" y="30" width="427" height="34" rx="6" ry="6" fill="#767676" stroke="none" stroke-width="1"/><text x="546" y="51" font-family="Segoe UI, Tahoma, sans-serif" font-size="13" font-weight="700" fill="#767676" text-anchor="start" style="">70%</text><text x="24" y="103" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#444444" text-anchor="start" style="">หลังปรับปรุง</text><rect x="109" y="82" width="610" height="34" rx="6" ry="6" fill="#F4F6F9" stroke="none" stroke-width="1"/><rect x="109" y="82" width="549" height="34" rx="6" ry="6" fill="#107C10" stroke="none" stroke-width="1"/><text x="668" y="103" font-family="Segoe UI, Tahoma, sans-serif" font-size="13" font-weight="700" fill="#107C10" text-anchor="start" style="">90%</text>
+    <rect x="24" y="130" width="700" height="44" rx="8" ry="8" fill="#E8F5E9" stroke="none" stroke-width="1"/>
+    <text x="40" y="158" font-size="16">🎉</text>
+    <text x="68" y="157" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="700" fill="#107C10" text-anchor="start" style="">Pass Rate เพิ่มขึ้น 20% หลังเพิ่มเอกสาร WFH Policy</text></g>
+  </svg></div><div class="mockup-caption">Pass Rate เพิ่มขึ้นหลังปรับปรุง Agent</div>
+    </div>
+  </div>
+
+    <div class="box box-success">
+    <div class="box-title">🎉 สำเร็จแล้ว!</div>
+    <p>คุณมีกระบวนการวัดและปรับปรุงคุณภาพ RAG Agent อย่างเป็นระบบแล้ว! เป้าหมายไม่ใช่ 100% แต่คือ Pass Rate ที่เพิ่มขึ้นทุกรอบ</p>
+  </div>
+
+    <h2 id="mistakes">⚠️ ข้อผิดพลาดที่พบบ่อย</h2>
+    <ul>
+      <li>รัน Evaluation ก่อน Knowledge จะ Ready → ผลลัพธ์ไม่แม่นยำ</li>
+      <li>คาดหวัง 100% Pass Rate ตั้งแต่รอบแรก → ในทางปฏิบัติต้องทำซ้ำหลายรอบ</li>
+      <li>ไม่บันทึกว่าปรับอะไรไปในแต่ละรอบ → เปรียบเทียบผลไม่ได้ว่าอะไรช่วยจริง</li>
+    </ul>
+
+    <h2 id="challenge">🎯 ลองประยุกต์ใช้กับงานคุณ</h2>
+    <ul>
+      <li>ตั้งเป้า Pass Rate ของ Agent แผนกคุณไว้ที่เท่าไหร่?</li>
+      <li>ลองเพิ่มคำถามที่ผู้ใช้จริงมักถามเข้าไปใน Test Set ด้วยตัวเอง</li>
+    </ul>
+  <div class="footer-nav">
+    <a href="lab4.html"><div class="dir">← ก่อนหน้า</div><div class="lbl">Lab 4: Custom Topics</div></a>
+    <a href="lab6.html" class="next"><div class="dir">ถัดไป →</div><div class="lbl">Lab 6: Deploy to Teams</div></a>
+  </div></div></div>
+<footer class="site-footer">
+  Build Your Own RAG Agent with Microsoft Copilot Studio &nbsp;|&nbsp; คู่มือสอนภายในองค์กร ฉบับภาษาไทย &nbsp;|&nbsp; อ้างอิงจาก <a href="https://microsoft.github.io/mcs-labs/" target="_blank">Microsoft Copilot Agents Labs</a>
+</footer>
+</body>
+</html>
