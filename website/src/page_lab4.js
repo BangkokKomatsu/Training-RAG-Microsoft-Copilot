@@ -1,4 +1,4 @@
-const { M, step, mockup, box, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
+const { M, step, mockup, box, promptBox, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
 
 function build() {
   // ---- Mockup 1: Topics list ----
@@ -90,7 +90,9 @@ function build() {
     ${step(1, 'ดู Topics ที่มีอยู่', `
       <p>ไปที่แท็บ <strong>Topics</strong> → กด <strong>+ Add a topic → From blank</strong> → ตั้งชื่อ "Fallback"</p>
       ${mockup(mock1, 'รายการ Topics ของ Agent')}
-      ${box('tip', '', '<p>อีกวิธีที่เร็วกว่าคือ <strong>"Add from description with Copilot"</strong> — พิมพ์อธิบาย Topic ที่ต้องการเป็นประโยคเดียว แล้วให้ AI สร้าง Trigger และ Node ต่างๆ ให้อัตโนมัติ เหมาะกับ Topic ที่มีโครงสร้างซับซ้อน เช่น เก็บข้อมูลหลายฟิลด์ — Lab นี้เลือกสร้างจาก Blank เพื่อให้เห็นการทำงานของแต่ละ Node ชัดเจนขึ้น</p>')}
+      ${box('tip', '', '<p>อีกวิธีที่เร็วกว่าคือ <strong>"Add from description with Copilot"</strong> — พิมพ์อธิบาย Topic ที่ต้องการเป็นประโยคเดียว แล้วให้ AI สร้าง Trigger และ Node ต่างๆ ให้อัตโนมัติ เหมาะกับ Topic ที่มีโครงสร้างซับซ้อน เช่น เก็บข้อมูลหลายฟิลด์ — Lab นี้เลือกสร้างจาก Blank เพื่อให้เห็นการทำงานของแต่ละ Node ชัดเจนขึ้น ถ้าอยากลองวิธีนี้ ใช้ตัวอย่างคำอธิบายด้านล่างวางในช่อง Describe ได้เลย</p>')}
+      ${promptBox('ตัวอย่างคำอธิบาย Topic "Fallback" — สำหรับ Add from description with Copilot', 'สร้าง Topic ชื่อ Fallback ที่เริ่มทำงานเมื่อ Agent หาคำตอบจาก Knowledge ไม่เจอ (Trigger: All other conditions met) ให้ตอบข้อความขอโทษอย่างสุภาพว่าไม่พบข้อมูลในเอกสาร แล้วถามผู้ใช้ว่าต้องการให้ทีมงานติดต่อกลับหรือไม่ ถ้าต้องการ ให้ไปต่อที่ Topic ชื่อ Escalation')}
+      ${promptBox('ตัวอย่างคำอธิบาย Topic "Escalation" — สำหรับ Add from description with Copilot', 'สร้าง Topic ชื่อ Escalation ที่เก็บชื่อ อีเมล และรายละเอียดปัญหาจากผู้ใช้ทีละคำถาม จากนั้นแสดงข้อความขอบคุณและแจ้งว่าทีมงานจะติดต่อกลับภายใน 1 วันทำการ')}
     `)}
     ${step(2, 'ตั้ง Trigger เป็น Fallback', `
       <p>เปลี่ยน Trigger จาก "The agent chooses" เป็น <strong>"All other conditions met"</strong> — Topic นี้จะทำงานเมื่อ Agent หาคำตอบจาก Knowledge ไม่เจอ</p>
@@ -116,6 +118,8 @@ function build() {
     ${step(6, 'ทดสอบคำถามนอกขอบเขต', `
       <p>ถามคำถามที่ไม่มีใน Knowledge → Agent ควร Fallback → เสนอ Escalation → เก็บชื่อและอีเมล</p>
       ${mockup(mock6, 'Flow เต็ม: Fallback → เสนอ Escalation → เก็บข้อมูลติดต่อ')}
+      ${mockup(mock7, 'ตัวอย่างแบบเดียวกัน แต่คนละแผนก: Logistic Tracking Bot — Fallback เมื่อหาเลขพัสดุไม่เจอ แล้ว Escalate ไปทีม Logistic แทนทีม HR')}
+      ${promptBox('ตัวอย่างคำอธิบาย Topic "Fallback" สำหรับ Logistic — Copy ไปปรับใช้ได้', 'สร้าง Topic ชื่อ Fallback ที่เริ่มทำงานเมื่อ Agent หาเลขพัสดุหรือข้อมูลการจัดส่งไม่เจอ (Trigger: All other conditions met) ให้ตอบข้อความขอโทษอย่างสุภาพว่าไม่พบข้อมูลในระบบที่เชื่อมต่อไว้ แล้วถามผู้ใช้ว่าต้องการให้ทีม Logistic ติดต่อกลับหรือไม่ ถ้าต้องการ ให้ไปต่อที่ Topic ชื่อ Escalation ที่เก็บเบอร์โทรและเลขที่ Order')}
     `)}
 
     ${box('success', '', '<p>Agent ของคุณตอนนี้ไม่ Hallucinate เมื่อไม่รู้คำตอบ และมี Escalation Path ที่ชัดเจนให้ผู้ใช้เสมอ!</p>')}
@@ -128,7 +132,6 @@ function build() {
     </ul>
 
     <h2 id="challenge">🎯 ลองประยุกต์ใช้กับงานคุณ</h2>
-    ${mockup(mock7, 'ตัวอย่าง: Logistic Tracking Bot — Fallback เมื่อหาเลขพัสดุไม่เจอ แล้ว Escalate ไปทีม Logistic แทนทีม HR')}
     <ul>
       <li>ลองสร้าง Greeting Topic ต้อนรับผู้ใช้เมื่อเริ่ม Conversation</li>
       <li>คิดว่า Escalation ของแผนกคุณควรส่งต่อไปที่ใคร (อีเมล/ทีม)?</li>

@@ -105,7 +105,21 @@
   </svg></div><div class="mockup-caption">รายการ Topics ของ Agent</div>
       <div class="box box-tip">
     <div class="box-title">💡 Tip</div>
-    <p>อีกวิธีที่เร็วกว่าคือ <strong>"Add from description with Copilot"</strong> — พิมพ์อธิบาย Topic ที่ต้องการเป็นประโยคเดียว แล้วให้ AI สร้าง Trigger และ Node ต่างๆ ให้อัตโนมัติ เหมาะกับ Topic ที่มีโครงสร้างซับซ้อน เช่น เก็บข้อมูลหลายฟิลด์ — Lab นี้เลือกสร้างจาก Blank เพื่อให้เห็นการทำงานของแต่ละ Node ชัดเจนขึ้น</p>
+    <p>อีกวิธีที่เร็วกว่าคือ <strong>"Add from description with Copilot"</strong> — พิมพ์อธิบาย Topic ที่ต้องการเป็นประโยคเดียว แล้วให้ AI สร้าง Trigger และ Node ต่างๆ ให้อัตโนมัติ เหมาะกับ Topic ที่มีโครงสร้างซับซ้อน เช่น เก็บข้อมูลหลายฟิลด์ — Lab นี้เลือกสร้างจาก Blank เพื่อให้เห็นการทำงานของแต่ละ Node ชัดเจนขึ้น ถ้าอยากลองวิธีนี้ ใช้ตัวอย่างคำอธิบายด้านล่างวางในช่อง Describe ได้เลย</p>
+  </div>
+      <div class="prompt-box">
+    <div class="prompt-box-header">
+      <span class="prompt-box-label">📋 ตัวอย่างคำอธิบาย Topic "Fallback" — สำหรับ Add from description with Copilot</span>
+      <button class="prompt-copy-btn" onclick="copyPromptBox(this)">คัดลอก</button>
+    </div>
+    <pre class="prompt-box-text">สร้าง Topic ชื่อ Fallback ที่เริ่มทำงานเมื่อ Agent หาคำตอบจาก Knowledge ไม่เจอ (Trigger: All other conditions met) ให้ตอบข้อความขอโทษอย่างสุภาพว่าไม่พบข้อมูลในเอกสาร แล้วถามผู้ใช้ว่าต้องการให้ทีมงานติดต่อกลับหรือไม่ ถ้าต้องการ ให้ไปต่อที่ Topic ชื่อ Escalation</pre>
+  </div>
+      <div class="prompt-box">
+    <div class="prompt-box-header">
+      <span class="prompt-box-label">📋 ตัวอย่างคำอธิบาย Topic "Escalation" — สำหรับ Add from description with Copilot</span>
+      <button class="prompt-copy-btn" onclick="copyPromptBox(this)">คัดลอก</button>
+    </div>
+    <pre class="prompt-box-text">สร้าง Topic ชื่อ Escalation ที่เก็บชื่อ อีเมล และรายละเอียดปัญหาจากผู้ใช้ทีละคำถาม จากนั้นแสดงข้อความขอบคุณและแจ้งว่าทีมงานจะติดต่อกลับภายใน 1 วันทำการ</pre>
   </div>
     </div>
   </div>
@@ -345,23 +359,7 @@
     <g><rect x="904" y="14" width="76" height="26" rx="6" ry="6" fill="#1F3864" stroke="none" stroke-width="1.3"/><text x="942" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">▶ Test</text></g>
     <g transform="translate(0, 54)"><rect x="226" y="20" width="410" height="40" rx="10" ry="10" fill="#2E75B6" stroke="none" stroke-width="1"/><text x="240" y="42" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#FFFFFF" text-anchor="start" style="">บริษัทมีนโยบายเรื่อง Work From Home ต่างประเทศไหม?</text><rect x="24" y="76" width="463.2" height="58" rx="10" ry="10" fill="#F4F6F9" stroke="none" stroke-width="1"/><text x="38" y="98" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">ขออภัยครับ ไม่พบข้อมูลนี้ในเอกสาร Policy ต้องการให้ทีม HR</text><text x="38" y="116" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">ติดต่อกลับไหมครับ?</text><rect x="522.4" y="150" width="113.6" height="40" rx="10" ry="10" fill="#2E75B6" stroke="none" stroke-width="1"/><text x="536.4" y="172" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#FFFFFF" text-anchor="start" style="">ต้องการครับ</text><rect x="24" y="206" width="280.79999999999995" height="40" rx="10" ry="10" fill="#F4F6F9" stroke="none" stroke-width="1"/><text x="38" y="228" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">รบกวนขอชื่อและอีเมลของคุณด้วยครับ</text></g>
   </svg></div><div class="mockup-caption">Flow เต็ม: Fallback → เสนอ Escalation → เก็บข้อมูลติดต่อ</div>
-    </div>
-  </div>
-
-    <div class="box box-success">
-    <div class="box-title">🎉 สำเร็จแล้ว!</div>
-    <p>Agent ของคุณตอนนี้ไม่ Hallucinate เมื่อไม่รู้คำตอบ และมี Escalation Path ที่ชัดเจนให้ผู้ใช้เสมอ!</p>
-  </div>
-
-    <h2 id="mistakes">⚠️ ข้อผิดพลาดที่พบบ่อย</h2>
-    <ul>
-      <li>ลืมตั้ง Trigger เป็น "All other conditions met" → Fallback Topic ไม่ทำงาน</li>
-      <li>Allow ungrounded responses ยังเปิดอยู่ → Agent เดาคำตอบแทนที่จะ Fallback</li>
-      <li>ไม่ทดสอบ End-to-End Flow → พลาดจุดที่ Escalation Topic เชื่อมผิด</li>
-    </ul>
-
-    <h2 id="challenge">🎯 ลองประยุกต์ใช้กับงานคุณ</h2>
-    <div class="mockup"><svg viewBox="0 0 1000 364" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
+      <div class="mockup"><svg viewBox="0 0 1000 364" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
     <rect width="1000" height="364" fill="#F4F6F9"/>
     <rect width="1000" height="54" fill="#FFFFFF"/>
     <rect width="1000" height="54" fill="none" stroke="#E8EBF0" stroke-width="1"/>
@@ -400,7 +398,30 @@
     <g><rect x="818" y="14" width="76" height="26" rx="6" ry="6" fill="#2E75B6" stroke="none" stroke-width="1.3"/><text x="856" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">Publish</text></g>
     <g><rect x="904" y="14" width="76" height="26" rx="6" ry="6" fill="#1F3864" stroke="none" stroke-width="1.3"/><text x="942" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">▶ Test</text></g>
     <g transform="translate(0, 54)"><rect x="324.8" y="20" width="311.2" height="40" rx="10" ry="10" fill="#2E75B6" stroke="none" stroke-width="1"/><text x="338.8" y="42" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#FFFFFF" text-anchor="start" style="">พัสดุเลขที่ TH88291 ตอนนี้ถึงไหนแล้ว?</text><rect x="24" y="76" width="440.4" height="58" rx="10" ry="10" fill="#F4F6F9" stroke="none" stroke-width="1"/><text x="38" y="98" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">ขออภัยครับ ไม่พบข้อมูลเลขพัสดุนี้ในระบบที่เชื่อมต่อไว้</text><text x="38" y="116" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">ต้องการให้ทีม Logistic ติดต่อกลับไหมครับ?</text><rect x="522.4" y="150" width="113.6" height="40" rx="10" ry="10" fill="#2E75B6" stroke="none" stroke-width="1"/><text x="536.4" y="172" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#FFFFFF" text-anchor="start" style="">ต้องการครับ</text><rect x="24" y="206" width="326.4" height="58" rx="10" ry="10" fill="#F4F6F9" stroke="none" stroke-width="1"/><text x="38" y="228" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">รบกวนขอเบอร์โทรและเลขที่ Order ด้วยครับ</text><text x="38" y="246" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">ทีมงานจะติดต่อกลับภายใน 1 ชั่วโมง</text></g>
-  </svg></div><div class="mockup-caption">ตัวอย่าง: Logistic Tracking Bot — Fallback เมื่อหาเลขพัสดุไม่เจอ แล้ว Escalate ไปทีม Logistic แทนทีม HR</div>
+  </svg></div><div class="mockup-caption">ตัวอย่างแบบเดียวกัน แต่คนละแผนก: Logistic Tracking Bot — Fallback เมื่อหาเลขพัสดุไม่เจอ แล้ว Escalate ไปทีม Logistic แทนทีม HR</div>
+      <div class="prompt-box">
+    <div class="prompt-box-header">
+      <span class="prompt-box-label">📋 ตัวอย่างคำอธิบาย Topic "Fallback" สำหรับ Logistic — Copy ไปปรับใช้ได้</span>
+      <button class="prompt-copy-btn" onclick="copyPromptBox(this)">คัดลอก</button>
+    </div>
+    <pre class="prompt-box-text">สร้าง Topic ชื่อ Fallback ที่เริ่มทำงานเมื่อ Agent หาเลขพัสดุหรือข้อมูลการจัดส่งไม่เจอ (Trigger: All other conditions met) ให้ตอบข้อความขอโทษอย่างสุภาพว่าไม่พบข้อมูลในระบบที่เชื่อมต่อไว้ แล้วถามผู้ใช้ว่าต้องการให้ทีม Logistic ติดต่อกลับหรือไม่ ถ้าต้องการ ให้ไปต่อที่ Topic ชื่อ Escalation ที่เก็บเบอร์โทรและเลขที่ Order</pre>
+  </div>
+    </div>
+  </div>
+
+    <div class="box box-success">
+    <div class="box-title">🎉 สำเร็จแล้ว!</div>
+    <p>Agent ของคุณตอนนี้ไม่ Hallucinate เมื่อไม่รู้คำตอบ และมี Escalation Path ที่ชัดเจนให้ผู้ใช้เสมอ!</p>
+  </div>
+
+    <h2 id="mistakes">⚠️ ข้อผิดพลาดที่พบบ่อย</h2>
+    <ul>
+      <li>ลืมตั้ง Trigger เป็น "All other conditions met" → Fallback Topic ไม่ทำงาน</li>
+      <li>Allow ungrounded responses ยังเปิดอยู่ → Agent เดาคำตอบแทนที่จะ Fallback</li>
+      <li>ไม่ทดสอบ End-to-End Flow → พลาดจุดที่ Escalation Topic เชื่อมผิด</li>
+    </ul>
+
+    <h2 id="challenge">🎯 ลองประยุกต์ใช้กับงานคุณ</h2>
     <ul>
       <li>ลองสร้าง Greeting Topic ต้อนรับผู้ใช้เมื่อเริ่ม Conversation</li>
       <li>คิดว่า Escalation ของแผนกคุณควรส่งต่อไปที่ใคร (อีเมล/ทีม)?</li>
@@ -412,5 +433,36 @@
 <footer class="site-footer">
   Build Your Own RAG Agent with Microsoft Copilot Studio &nbsp;|&nbsp; คู่มือสอนภายในองค์กร ฉบับภาษาไทย &nbsp;|&nbsp; อ้างอิงจาก <a href="https://microsoft.github.io/mcs-labs/" target="_blank">Microsoft Copilot Agents Labs</a>
 </footer>
+<script>
+function copyPromptBox(btn) {
+  var pre = btn.closest('.prompt-box').querySelector('.prompt-box-text');
+  var text = pre.innerText;
+  function done() {
+    var original = btn.textContent;
+    btn.textContent = '✓ คัดลอกแล้ว';
+    btn.classList.add('copied');
+    setTimeout(function () {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1500);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopyPrompt(text, done); });
+  } else {
+    fallbackCopyPrompt(text, done);
+  }
+}
+function fallbackCopyPrompt(text, cb) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(ta);
+  if (cb) cb();
+}
+</script>
 </body>
 </html>

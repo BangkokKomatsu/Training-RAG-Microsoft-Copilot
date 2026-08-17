@@ -1,4 +1,4 @@
-const { M, step, mockup, box, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
+const { M, step, mockup, box, promptBox, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
 
 function build() {
   // ---- Mockup 1: Publish confirmation ----
@@ -91,6 +91,7 @@ function build() {
       <p>ลองพิมพ์คำถามใน Teams Chat กับ Agent เปรียบเทียบ User Experience กับ Test Panel ใน Copilot Studio</p>
       ${mockup(mock5, 'Agent ตอบคำถามใน Microsoft Teams จริง')}
       ${mockup(mock6, 'ตัวอย่าง: Sales Data Bot ของทีม Sales Engineer ใน Teams — ตอบยอดขายเจาะจงจุดเดียวได้ถูกต้อง (ลองคำถามรวมยอดข้ามเดือน/สาขาดูด้วย จะเห็นข้อจำกัดของ RAG ตามที่คุยกันใน Lab 5)')}
+      ${promptBox('ตัวอย่างข้อความทดสอบใน Teams — Copy ไปวางถามได้เลย', 'ยอดขายรถ Forklift ใหม่ของสาขากรุงเทพเดือนมกราคม 2568 เท่าไหร่?')}
     `)}
 
     ${box('warn', 'ก่อนใช้งานจริงในองค์กร (Production)', `

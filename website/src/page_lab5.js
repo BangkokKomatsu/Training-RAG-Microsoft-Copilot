@@ -1,4 +1,4 @@
-const { M, step, mockup, box, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
+const { M, step, mockup, box, promptBox, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
 
 function build() {
   // ---- Mockup 1: Evaluation tab empty ----
@@ -98,6 +98,7 @@ function build() {
         ])}
         <p style="margin-top:8px;font-size:12.5px;color:${M.COL.gray500}">Test Set รันได้ทีละชุด (สูงสุด 100 คำถาม/ชุด) ผลลัพธ์เก็บไว้ให้ดูย้อนหลังได้ 89 วัน</p>
       `)}
+      ${promptBox('ตัวอย่างคำถามทดสอบ (Manual Entry) — Copy ไปวางทีละบรรทัดได้เลย', 'Hot Work Permit มีอายุกี่ชั่วโมง?\nถ้าใบอนุญาตหมดอายุแต่งานยังไม่เสร็จต้องทำอย่างไร?\nใครเป็นผู้มีอำนาจอนุมัติใบอนุญาตทำงาน?\nงาน Confined Space ต้องตรวจวัดอากาศบ่อยแค่ไหน?\nLine Break Permit ต้องมีใครร่วมลงนามเพิ่มเติม?')}
     `)}
 
     <h2 id="step3">ขั้นตอนที่ 3–4: Run และวิเคราะห์ผล</h2>
@@ -105,6 +106,7 @@ function build() {
       <p>รอ 3–5 นาที ระบบจะถามคำถามทั้ง 10 ข้อกับ Agent แล้วให้คะแนน Pass/Fail อัตโนมัติ</p>
       ${mockup(mock3, 'ผลการ Evaluate — Pass Rate 70%')}
       ${box('note', '', '<p><strong>Test Method</strong> คือวิธีตัดสิน Pass/Fail — "General Quality" ที่ใช้ใน Lab นี้ให้ AI ประเมินความถูกต้องโดยรวม เหมาะกับคำถามปลายเปิด นอกจากนี้ยังมี Exact/Keyword match (ตรวจคำตรงตัว), Similarity/Compare meaning (ตรวจความหมายใกล้เคียง), Capability use (ตรวจว่าเรียกใช้ Tool/Topic ที่ถูกต้องหรือไม่) และ Custom — เลือกใช้ตามลักษณะคำถามแต่ละชุด</p>')}
+      ${mockup(mock6, 'ตัวอย่างแบบเดียวกัน แต่คนละแผนก: ผล Evaluate ของ Work Permit Bot ทีม Engineer — Fail ข้อ 4 บอกว่า Knowledge ยังไม่มีรายละเอียดเรื่อง Line Break Permit ต้องเพิ่มเอกสาร')}
     `)}
     ${step(4, 'วิเคราะห์คำถามที่ Fail', `
       <p>กดเข้าไปดูรายละเอียดคำถามที่ Fail เปรียบเทียบ Expected กับ Actual Response เพื่อหาสาเหตุ</p>
@@ -130,7 +132,6 @@ function build() {
     </ul>
 
     <h2 id="challenge">🎯 ลองประยุกต์ใช้กับงานคุณ</h2>
-    ${mockup(mock6, 'ตัวอย่าง: Work Permit Bot ของทีม Engineer — Fail ข้อ 4 บอกว่า Knowledge ยังไม่มีรายละเอียดเรื่อง Line Break Permit ต้องเพิ่มเอกสาร')}
     <ul>
       <li>ตั้งเป้า Pass Rate ของ Agent แผนกคุณไว้ที่เท่าไหร่?</li>
       <li>ลองเพิ่มคำถามที่ผู้ใช้จริงมักถามเข้าไปใน Test Set ด้วยตัวเอง</li>

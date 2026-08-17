@@ -230,6 +230,52 @@ code {
 .box-success .box-title { color: var(--green); }
 .box p:last-child { margin-bottom: 0; }
 
+/* ---------- Prompt box (copy-paste-able prompt examples) ---------- */
+.prompt-box {
+  background: #0F1B2D;
+  border-radius: var(--radius);
+  margin: 1.2rem 0;
+  overflow: hidden;
+  border: 1px solid #1F3864;
+}
+.prompt-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .8rem;
+  padding: .55rem .9rem;
+  background: #16243B;
+}
+.prompt-box-label {
+  color: #9FC1F5;
+  font-size: .82rem;
+  font-weight: 700;
+}
+.prompt-copy-btn {
+  flex: 0 0 auto;
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: .35rem .85rem;
+  font-size: .8rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+.prompt-copy-btn:hover { background: #2564A0; }
+.prompt-copy-btn.copied { background: var(--green); }
+.prompt-box-text {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  color: #E8EEF7;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: .86rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 /* ---------- Step blocks ---------- */
 .step {
   display: flex;
@@ -436,4 +482,7 @@ code {
 @media print {
   .topnav, .toc, .footer-nav, .site-footer { display: none; }
   .page-wrap { grid-template-columns: 1fr; }
+  .prompt-copy-btn { display: none; }
+  .prompt-box, .prompt-box-text { background: #F7F9FC; color: var(--gray-900); border-color: #CCCCCC; }
+  .prompt-box-header { background: #EEF2F8; }
 }

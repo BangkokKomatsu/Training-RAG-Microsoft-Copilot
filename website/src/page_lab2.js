@@ -1,4 +1,4 @@
-const { M, step, mockup, box, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
+const { M, step, mockup, box, promptBox, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
 
 function build() {
   // ---- Mockup 1: Copilot Studio create-agent empty state ----
@@ -91,7 +91,9 @@ function build() {
     ${step(2, 'สร้าง Agent ใหม่', `
       <p>กด <strong>"Create blank agent"</strong> → ใส่ชื่อ Agent เช่น "HR Policy Bot" → กด Create → รอ Agent ถูก Provision</p>
       ${mockup(mock2, 'หน้า Overview ของ Agent ที่สร้างใหม่ พร้อม Instructions เริ่มต้น')}
+      ${promptBox('ตัวอย่าง Instructions เบื้องต้น — Copy ไปวางในช่อง Instructions ได้เลย', 'คุณคือ HR Assistant ของบริษัท ตอบคำถามพนักงานเกี่ยวกับนโยบายบริษัทจากเอกสารที่แนบไว้เท่านั้น ห้ามตอบจากความรู้ทั่วไป\n\nถ้าไม่พบข้อมูลในเอกสาร ให้บอกตามตรงว่าไม่พบข้อมูล และแนะนำให้ติดต่อ HR โดยตรง\n\nตอบเป็นภาษาไทยเสมอ')}
       ${box('tip', '', '<p>ตรวจสอบ Model ที่เลือกไว้ในแท็บ Overview (ค่า Default มักเป็นรุ่นล่าสุด เช่น Claude Sonnet) — Model ที่แรงกว่าจะช่วยให้ Agent เข้าใจ Instructions ที่ซับซ้อนและสรุปคำตอบจาก Knowledge ได้แม่นยำกว่า โดยเฉพาะเมื่อ Knowledge มีหลายไฟล์</p>')}
+      ${box('note', '', '<p>Instructions นี้เป็นแบบพื้นฐานพอใช้งานได้ — ใน Lab 3 จะปรับให้ดีขึ้นด้วย CARE Framework แบบเป็นระบบ</p>')}
     `)}
 
     <h2 id="step3">ขั้นตอนที่ 3–4: เพิ่ม Knowledge จากไฟล์</h2>
@@ -118,6 +120,8 @@ function build() {
       ${mockup(mock6, 'Agent ตอบพร้อมอ้างอิงชื่อไฟล์ต้นทาง')}
       ${box('tip', '', '<p>ดูที่ "Referenced sources" ใต้คำตอบ — ถ้ามีชื่อเอกสาร/URL แสดงว่า Agent ดึงข้อมูลจาก Knowledge จริง ไม่ได้เดาเอง</p>')}
       ${box('warn', '', '<p>การปิดทั้ง Web Search และ Allow ungrounded responses พร้อมกันคือคอมโบมาตรฐานที่ Microsoft แนะนำเพื่อลด Hallucination ให้มากที่สุด — ตั้งค่านี้ไว้ตั้งแต่ต้น เพราะ Lab 4 (Fallback Topic) จะใช้การตั้งค่านี้เป็นเงื่อนไขสำคัญ</p>')}
+      ${mockup(mock7, 'ตัวอย่างแบบเดียวกัน แต่คนละแผนก: Warehouse Safety Bot ตอบคำถามความปลอดภัยพร้อมอ้างอิงจากไฟล์ Factory_Safety_Policy.pdf (ดูตัวอย่างไฟล์เต็มได้ที่ course-materials/sample-files-for-participants/)')}
+      ${promptBox('ตัวอย่าง Instructions สำหรับ Warehouse — Copy ไปปรับใช้ได้', 'คุณคือ Warehouse Safety Assistant ของบริษัท ตอบคำถามพนักงานคลังสินค้าเกี่ยวกับความปลอดภัยและอุปกรณ์ PPE จากเอกสารที่แนบไว้เท่านั้น ห้ามตอบจากความรู้ทั่วไป\n\nถ้าไม่พบข้อมูลในเอกสาร ให้บอกตามตรงว่าไม่พบข้อมูล และแนะนำให้ติดต่อฝ่ายความปลอดภัยโดยตรง\n\nตอบเป็นภาษาไทยเสมอ')}
     `)}
 
     ${box('success', '', '<p>คุณมี RAG Agent ที่เชื่อมต่อ Knowledge ได้หลายแหล่งแล้ว! ขั้นตอนต่อไปคือทำให้ Agent ตอบได้ฉลาดและตรงประเด็นยิ่งขึ้นด้วย Prompt Engineering</p>')}
@@ -130,7 +134,6 @@ function build() {
     </ul>
 
     <h2 id="challenge">🎯 ลองประยุกต์ใช้กับงานคุณ</h2>
-    ${mockup(mock7, 'ตัวอย่าง: Warehouse Safety Bot ตอบคำถามความปลอดภัยจากไฟล์ Factory_Safety_Policy.pdf (ดูตัวอย่างไฟล์เต็มได้ที่ course-materials/sample-files-for-participants/)')}
     <ul>
       <li>ลองอัปโหลดเอกสารของแผนกตัวเอง 1 ไฟล์ แล้วถามคำถามที่มักถูกถามบ่อย</li>
       <li>ถ้ามี SharePoint Site ลองกลับมาเพิ่มเป็น Knowledge Source หลังจบคอร์ส</li>

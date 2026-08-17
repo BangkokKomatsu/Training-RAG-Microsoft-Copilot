@@ -62,6 +62,23 @@ function conceptTable(headers, rows) {
   </table>`;
 }
 
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function promptBox(label, text) {
+  return `<div class="prompt-box">
+    <div class="prompt-box-header">
+      <span class="prompt-box-label">📋 ${label}</span>
+      <button class="prompt-copy-btn" onclick="copyPromptBox(this)">คัดลอก</button>
+    </div>
+    <pre class="prompt-box-text">${escapeHtml(text)}</pre>
+  </div>`;
+}
+
 function toc(items) {
   return `<nav class="toc"><div class="toc-title">ในหน้านี้</div>
     ${items.map(it => `<a href="#${it.id}"${it.sub ? ' class="sub"' : ''}>${it.label}</a>`).join('')}
@@ -112,6 +129,37 @@ ${mainHtml}
 <footer class="site-footer">
   Build Your Own RAG Agent with Microsoft Copilot Studio &nbsp;|&nbsp; คู่มือสอนภายในองค์กร ฉบับภาษาไทย &nbsp;|&nbsp; อ้างอิงจาก <a href="https://microsoft.github.io/mcs-labs/" target="_blank">Microsoft Copilot Agents Labs</a>
 </footer>
+<script>
+function copyPromptBox(btn) {
+  var pre = btn.closest('.prompt-box').querySelector('.prompt-box-text');
+  var text = pre.innerText;
+  function done() {
+    var original = btn.textContent;
+    btn.textContent = '✓ คัดลอกแล้ว';
+    btn.classList.add('copied');
+    setTimeout(function () {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1500);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopyPrompt(text, done); });
+  } else {
+    fallbackCopyPrompt(text, done);
+  }
+}
+function fallbackCopyPrompt(text, cb) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(ta);
+  if (cb) cb();
+}
+</script>
 </body>
 </html>`;
 }
@@ -122,5 +170,5 @@ function writePage(filename, html) {
 }
 
 module.exports = {
-  M, NAV, LABS_META, step, mockup, box, metaTable, conceptTable, toc, pageShell, writePage,
+  M, NAV, LABS_META, step, mockup, box, promptBox, metaTable, conceptTable, toc, pageShell, writePage,
 };

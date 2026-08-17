@@ -1,4 +1,4 @@
-const { M, step, mockup, box, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
+const { M, step, mockup, box, promptBox, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
 
 function build() {
   // ---- Mockup 1: BAD instructions ----
@@ -41,6 +41,7 @@ function build() {
     ${M.textArea(24, 42, 700, 110, '', careText6, {})}
     ${M.badge(24, 166, '✅ Code Review Bot — CARE ครบทั้ง 4 องค์ประกอบ', M.COL.green, M.COL.greenBg)}`;
   const mock6 = M.studioChrome({ activeTab: 'Overview', agentName: 'Code Review Bot', body: m6body, bodyHeight: 220 });
+  const careText6Clean = 'You are a senior developer assistant for the internal team. Review the code snippet the user pastes against our Coding Standard doc, and list violations with line references.\n\nNever rewrite the whole file — only point out issues. Keep each point to 1 line. If the standard doc doesn\'t cover something, say so instead of guessing.\n\nExample: "Line 12: ตัวแปรตั้งชื่อไม่สื่อความหมาย ควรใช้ camelCase"';
 
   const bodyHtml = `
     <p>Agent จาก Lab 2 ตอบได้แล้ว แต่ยัง "ฉลาด" ไม่พอ — Lab นี้สอนวิธีเขียน <strong>Instructions</strong> ให้ Agent ตอบตรงประเด็น มี Tone ที่เหมาะสม และรู้ขอบเขตของตัวเอง</p>
@@ -76,7 +77,10 @@ function build() {
     ${step(3, 'เขียน Instructions ใหม่ด้วย CARE', `
       <p>ลบ Instructions เดิม แล้วเขียนใหม่ให้ครบทั้ง 4 องค์ประกอบ: Context, Ask, Rules, Examples</p>
       ${mockup(mock3, 'Instructions แบบ GOOD — ครบ Context + Ask + Rules')}
+      ${promptBox('ตัวอย่าง Instructions (CARE) — Copy ไปวางแทน Instructions เดิมได้เลย', careText)}
       ${box('tip', '', '<p>เขียน Fallback message ให้ชัดเจนเสมอ เช่น "ถ้าไม่พบข้อมูล ให้บอกว่า..." เพื่อป้องกัน Agent เดาคำตอบ (Hallucinate)</p>')}
+      ${mockup(mock6, 'ตัวอย่างแบบเดียวกัน แต่คนละแผนก: Code Review Bot สำหรับทีม Programmer — เขียน Instructions ด้วย CARE เหมือนกันแค่เปลี่ยนเนื้อหา')}
+      ${promptBox('ตัวอย่าง Instructions สำหรับ Programmer — Copy ไปปรับใช้ได้', careText6Clean)}
     `)}
     ${step(4, 'Save และทดสอบคำถามเดิม', `
       <p>Save แล้วถามคำถามเดิมอีกครั้ง เปรียบเทียบกับคำตอบก่อนหน้า</p>
@@ -99,7 +103,6 @@ function build() {
     </ul>
 
     <h2 id="challenge">🎯 ลองประยุกต์ใช้กับงานคุณ</h2>
-    ${mockup(mock6, 'ตัวอย่าง: Code Review Bot สำหรับทีม Programmer — เขียน Instructions ด้วย CARE เหมือนกันแค่เปลี่ยนเนื้อหา')}
     <ul>
       <li>ลองเขียน Instructions ด้วย CARE Framework สำหรับ Use Case ของแผนกตัวเอง</li>
       <li>ทดสอบว่า Agent ปฏิเสธคำถามเรื่องการเมืองหรือเรื่องส่วนตัวได้ไหม</li>

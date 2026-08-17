@@ -1,4 +1,4 @@
-const { M, step, mockup, box, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
+const { M, step, mockup, box, promptBox, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
 
 function build() {
   // ---- Mockup 1: Empty M365 Copilot chat ----
@@ -97,6 +97,7 @@ function build() {
     ${step(3, 'ใส่คำอธิบาย Agent (Description)', `
       <p>พิมพ์คำอธิบายลงในช่อง Describe เช่น ต้องการ Agent สไตล์ครู ที่ตอบคำถามเรื่อง Copilot โดยอ้างอิงจากเอกสาร Microsoft เท่านั้น</p>
       ${mockup(mock3, 'พิมพ์ Description แล้วส่ง — AI จะช่วยตั้งชื่อและ Tone ให้อัตโนมัติ')}
+      ${promptBox('ตัวอย่าง Description — Copy ไปวางในช่อง Describe ได้เลย', 'สร้าง Agent ชื่อ "Copilot Teacher" สไตล์ครูผู้สอนที่เป็นกันเอง ช่วยพนักงานเข้าใจความแตกต่างระหว่าง Microsoft 365 Copilot กับ Copilot Chat ตอบคำถามด้วยภาษาที่เข้าใจง่าย ไม่ใช้ศัพท์เทคนิคเกินจำเป็น\n\nถ้าถูกถามเรื่องนอกเหนือจาก Copilot ให้ตอบอย่างสุภาพว่าตอบได้เฉพาะเรื่องนี้ แล้วชวนกลับมาคุยเรื่อง Copilot\n\nอ้างอิงคำตอบจากเอกสาร Microsoft ที่กำหนดไว้เท่านั้น ห้ามตอบจากความรู้ทั่วไป')}
       ${box('tip', '', '<p>ยิ่งอธิบายละเอียดเท่าไหร่ Agent ยิ่งดีเท่านั้น — ใส่ให้ครบ 4 อย่างในคำอธิบายเดียว: (1) <strong>ชื่อ Agent</strong> ที่ต้องการ (2) <strong>Tone</strong> เช่น เป็นทางการ/เป็นกันเอง (3) <strong>ต้องทำอะไรเมื่อถูกถามนอกเรื่อง</strong> เช่น ปฏิเสธสุภาพและแนะกลับเข้าเรื่อง (4) <strong>วัตถุประสงค์</strong> ของ Agent — ก่อนกด Create ให้ตรวจ Starter prompts ที่ระบบสร้างให้ในแท็บ Configure ด้วย ปรับแก้ให้ตรงคำถามที่ผู้ใช้จะถามบ่อยได้เลย</p>')}
     `)}
     ${step(4, 'เพิ่ม Knowledge Source', `
@@ -113,6 +114,8 @@ function build() {
     ${step(6, 'กด Create แล้วทดสอบถามคำถาม', `
       <p>ตรวจสอบการตั้งค่าในแท็บ Configure อีกครั้ง แล้วกด <strong>Create</strong> มุมขวาบน จากนั้นถามคำถามทดสอบในช่อง Chat</p>
       ${mockup(mock6, 'ทดสอบถามคำถาม — Agent ตอบพร้อมโทนที่กำหนดไว้')}
+      ${mockup(mock7, 'ตัวอย่างแบบเดียวกัน แต่คนละแผนก: IT Helpdesk Bot ตอบคำถาม Reset Password ด้วยขั้นตอนเดียวกับ Lab นี้ทุกประการ')}
+      ${promptBox('ตัวอย่าง Description สำหรับ IT — Copy ไปปรับใช้ได้', 'สร้าง Agent ชื่อ "IT Helpdesk Bot" ที่ช่วยพนักงานแก้ปัญหาเบื้องต้นเกี่ยวกับระบบ IT เช่น การ Reset Password และการขอสิทธิ์เข้าถึงระบบ ตอบด้วยขั้นตอนที่ทำตามได้ทันที เป็นข้อๆ สั้นกระชับ\n\nถ้าปัญหาซับซ้อนเกินกว่าจะแก้ด้วยขั้นตอนพื้นฐาน ให้แนะนำให้ติดต่อ IT Helpdesk พร้อมเบอร์ติดต่อ\n\nอ้างอิงคำตอบจากคู่มือ IT ภายในองค์กรที่กำหนดไว้เท่านั้น')}
     `)}
 
     ${box('success', '', '<p>คุณสร้าง RAG Agent ตัวแรกสำเร็จแล้ว! Agent นี้ตอบจาก Knowledge Source ที่คุณกำหนด ไม่ใช่ความรู้ทั่วไปของ AI</p>')}
@@ -135,7 +138,6 @@ function build() {
         ['Programmer', 'ตอบ Coding Standard, API Documentation, ขั้นตอน Deploy ของทีม'],
         ['Logistic', 'ตอบตารางเวลาขนส่ง นโยบายการจัดส่ง วิธีติดตามสถานะสินค้า'],
       ])}
-      ${mockup(mock7, 'ตัวอย่าง: IT Helpdesk Bot ตอบคำถาม Reset Password ด้วยขั้นตอนเดียวกับ Lab นี้ทุกประการ')}
     `)}
     <ul>
       <li>แผนกของคุณอยากได้ Agent ตอบคำถามเรื่องอะไร?</li>
