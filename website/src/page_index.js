@@ -52,6 +52,34 @@ function build() {
         <tr><td class="term">Day 3</td><td><strong>Multi-Agent & Autonomous</strong></td><td>Agent หลายตัวทำงานร่วมกัน และทำงานอัตโนมัติตามเวลา</td></tr>
       </tbody>
     </table>
+
+    <h2 id="ideas">💡 ไอเดียการใช้ Copilot ในองค์กร (นอกเหนือจากที่เรียนในคอร์สนี้)</h2>
+    <p>คอร์สนี้เน้นสอนสร้าง RAG Agent ด้วย Copilot Studio โดยเฉพาะ แต่ตระกูล Microsoft Copilot มีเครื่องมืออีกหลายตัวที่ใช้ได้ทันทีโดยไม่ต้องสร้างอะไรเพิ่ม รวมถึงแนวทางต่อยอด Agent ที่สร้างวันนี้ให้ใหญ่ขึ้นระดับองค์กร</p>
+
+    <h3>M365 Copilot ในงานประจำวัน — ใช้ได้เลยถ้าองค์กรมี License</h3>
+    <table class="concept-table">
+      <thead><tr><th>แอป</th><th>ใช้ทำอะไรได้</th></tr></thead>
+      <tbody>
+        <tr><td class="term">Word</td><td>ร่าง/สรุปเอกสาร ปรับโทนภาษาให้เหมาะกับผู้อ่าน ตรวจทานให้กระชับตรงประเด็น</td></tr>
+        <tr><td class="term">Excel</td><td>วิเคราะห์ข้อมูล สร้างสูตร สร้างกราฟจากคำสั่งภาษาธรรมชาติ ไม่ต้องจำสูตรเอง</td></tr>
+        <tr><td class="term">PowerPoint</td><td>แปลง Document หรือ Outline เป็น Slide พร้อมดีไซน์ในไม่กี่นาที</td></tr>
+        <tr><td class="term">Outlook</td><td>สรุปอีเมลยาวๆ ให้อ่านเร็ว ร่างตอบกลับตามโทนที่ต้องการ</td></tr>
+        <tr><td class="term">Teams</td><td>สรุปการประชุมที่พลาด ดึง Action Items ออกมาอัตโนมัติ</td></tr>
+        <tr><td class="term">M365 Copilot Chat</td><td>ถามคำถามข้าม Office 365 ทั้งหมด อ้างอิงจากอีเมล เอกสาร ปฏิทินของคุณเอง — เหมือน Lab 1 แต่ไม่ต้องสร้าง Agent เพิ่ม</td></tr>
+      </tbody>
+    </table>
+
+    <h3>ต่อยอด Copilot Studio ระดับองค์กร</h3>
+    <table class="concept-table">
+      <thead><tr><th>ไอเดีย</th><th>รายละเอียด</th></tr></thead>
+      <tbody>
+        <tr><td class="term">Employee Self-Service Agent</td><td>รวม Agent ของ HR + IT + Warehouse Safety ที่แต่ละแผนกสร้างไว้ให้อยู่ใน Agent เดียว พนักงานถามได้ทุกเรื่องจากจุดเดียว ไม่ต้องจำว่าต้องถามใคร</td></tr>
+        <tr><td class="term">Customer-Facing Agent</td><td>Deploy Agent แบบ Sales Engineer ที่ทำใน Lab ออกไปตอบลูกค้าจริงผ่านเว็บไซต์บริษัทหรือ Line OA (Channel ที่ Copilot Studio รองรับ)</td></tr>
+        <tr><td class="term">Sales Enablement Agent</td><td>Agent ตอบสเปกสินค้า ราคา และเปรียบเทียบสินค้าให้ทีมขายภาคสนามใช้งานผ่านมือถือระหว่างพบลูกค้า</td></tr>
+        <tr><td class="term">Multi-Agent Orchestration</td><td>เชื่อม Agent ของแต่ละแผนก (HR Bot, IT Bot, Logistic Bot) เข้าด้วยกันเป็น Parent Agent เดียว ผู้ใช้ไม่ต้องสลับ Agent เอง (ต่อยอดจาก Roadmap Day 3)</td></tr>
+        <tr><td class="term">Live Data RAG</td><td>เชื่อม Agent กับระบบจริงแบบ Real-time แทนไฟล์ Excel นิ่งๆ — แก้ปัญหาที่เจอใน Lab 5–6 เรื่อง RAG ตอบผิดเวลาต้องรวมยอดข้ามหลายแถว (ต่อยอดจาก Roadmap Day 2)</td></tr>
+      </tbody>
+    </table>
   `;
 
   const html = pageShell({
