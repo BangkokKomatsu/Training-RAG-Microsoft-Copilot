@@ -2,26 +2,26 @@
 
 โฟลเดอร์นี้เป็นไฟล์ **Knowledge Source ตัวอย่าง** ให้ผู้เข้าอบรมแต่ละแผนก Upload ขึ้น SharePoint ส่วนตัว (หรือแนบไฟล์ตรง) แล้วใช้เป็น Knowledge ใน Lab 2 (Copilot Studio + Knowledge) ได้ทันที — ไฟล์กลุ่ม Word (.docx) ทุกไฟล์ถูกสร้างเป็นไฟล์ .docx จริงไว้ให้แล้ว ไม่ต้อง Copy/วางเอง
 
-ทุกไฟล์ใช้บริษัทสมมติเดียวกันคือ **"บริษัท XYZ อินดัสตรี จำกัด"** เพื่อให้เนื้อหาสอดคล้องกันและดูสมจริงเวลาถาม-ตอบ ครอบคลุมครบทั้ง 7 แผนกที่เข้าอบรม (Sales Engineer, Engineer, HR, Warehouse, IT, Programmer, Logistic)
+ทุกไฟล์ใช้บริษัทสมมติเดียวกันคือ **"บริษัท XYZ อินดัสตรี จำกัด"** เพื่อให้เนื้อหาสอดคล้องกันและดูสมจริงเวลาถาม-ตอบ แยกโฟลเดอร์ย่อยตามแผนกให้ครบทั้ง 7 แผนกที่เข้าอบรม — ผู้เข้าอบรมเปิดแค่โฟลเดอร์แผนกตัวเองได้เลย ไม่ต้องหาไฟล์ปนกับแผนกอื่น
 
-| แผนก | ไฟล์ต้นทาง (.md/.csv) | ไฟล์พร้อมใช้ | หัวข้อ | ขนาดเนื้อหา |
-|---|---|---|---|---|
-| Engineer | `work_permit_procedure.md` | **`work_permit_procedure.docx`** | ขั้นตอนการขอใบอนุญาตทำงาน (Work Permit SOP) | 11 หัวข้อ รวมประเภทใบอนุญาต 7 แบบ, บทบาทหน้าที่, กรณีศึกษา 3 เรื่อง, ตารางหลักสูตรอบรม, FAQ 8 ข้อ |
-| Warehouse | `factory_safety_policy.md` | **`factory_safety_policy.docx`** (หรือ Save As PDF เอง) | นโยบายความปลอดภัยในโรงงาน (Safety Policy / PPE) | 11 หัวข้อ รวม PPE รายโซน, หลัก LOTO, ขั้นตอนฉุกเฉิน 3 ประเภท (บาดเจ็บ/เพลิงไหม้/สารเคมีรั่วไหล), นโยบาย 5ส |
-| Sales Engineer | `sales_data_raw.csv` | **`sales_data_raw.xlsx`** | ยอดขายดิบ 3 สาขา × 2 ปี × 12 เดือน × 9 หมวดสินค้า (648 แถว) | ไม่มี Sheet สรุป — ตั้งใจให้เป็น Raw Data ล้วน |
-| Sales Engineer | `sales_product_catalog.md` | **`sales_product_catalog.docx`** | แคตตาล็อกสินค้าและบริการ (Product Catalog & Price List) | 10 หัวข้อ รวมสเปก/ราคารถ Forklift ใหม่และมือสอง, อุปกรณ์เสริม, บริการเช่า/ซ่อมบำรุง, ราคาอะไหล่, โปรโมชั่น, FAQ 6 ข้อ |
-| HR | `hr_policy_handbook.md` | **`hr_policy_handbook.docx`** | คู่มือนโยบายพนักงาน (Employee Policy Handbook) | 11 หัวข้อ รวมประเภทวันลา 7 แบบ, สวัสดิการ, ระเบียบวินัย, ช่องทางร้องเรียน, กรณีศึกษา 2 เรื่อง, FAQ 8 ข้อ |
-| IT | `it_support_handbook.md` | **`it_support_handbook.docx`** | คู่มือการใช้งานระบบ IT และการขอสิทธิ์เข้าถึง | 9 หัวข้อ รวมขั้นตอน Access Request, นโยบายรหัสผ่าน, SLA แจ้งซ่อม, FAQ 6 ข้อ |
-| Programmer | `coding_standard_guide.md` | **`coding_standard_guide.docx`** | มาตรฐานการเขียนโค้ดและขั้นตอนการ Deploy | 9 หัวข้อ รวม Naming Convention, Git Workflow, ขั้นตอน Deploy 4 Environment, Code Review Checklist, FAQ 6 ข้อ |
-| Logistic | `logistics_shipping_policy.md` | **`logistics_shipping_policy.docx`** | นโยบายการจัดส่งและติดตามสถานะสินค้า | 8 หัวข้อ รวมตารางเวลาขนส่งรายเขต, วิธีติดตามสถานะ, เงื่อนไขเคลม, กรณีศึกษา 2 เรื่อง, FAQ 6 ข้อ |
+| แผนก | โฟลเดอร์ | ไฟล์ต้นทาง (.md/.csv) | ไฟล์พร้อมใช้ | หัวข้อ | ขนาดเนื้อหา |
+|---|---|---|---|---|---|
+| Engineer | `Engineer/` | `work_permit_procedure.md` | **`work_permit_procedure.docx`** | ขั้นตอนการขอใบอนุญาตทำงาน (Work Permit SOP) | 11 หัวข้อ รวมประเภทใบอนุญาต 7 แบบ, บทบาทหน้าที่, กรณีศึกษา 3 เรื่อง, ตารางหลักสูตรอบรม, FAQ 8 ข้อ |
+| Warehouse | `Warehouse/` | `factory_safety_policy.md` | **`factory_safety_policy.docx`** (หรือ Save As PDF เอง) | นโยบายความปลอดภัยในโรงงาน (Safety Policy / PPE) | 11 หัวข้อ รวม PPE รายโซน, หลัก LOTO, ขั้นตอนฉุกเฉิน 3 ประเภท (บาดเจ็บ/เพลิงไหม้/สารเคมีรั่วไหล), นโยบาย 5ส |
+| Sales Engineer | `Sales_Engineer/` | `sales_data_raw.csv` | **`sales_data_raw.xlsx`** | ยอดขายดิบ 3 สาขา × 2 ปี × 12 เดือน × 9 หมวดสินค้า (648 แถว) | ไม่มี Sheet สรุป — ตั้งใจให้เป็น Raw Data ล้วน |
+| Sales Engineer | `Sales_Engineer/` | `sales_product_catalog.md` | **`sales_product_catalog.docx`** | แคตตาล็อกสินค้าและบริการ (Product Catalog & Price List) | 10 หัวข้อ รวมสเปก/ราคารถ Forklift ใหม่และมือสอง, อุปกรณ์เสริม, บริการเช่า/ซ่อมบำรุง, ราคาอะไหล่, โปรโมชั่น, FAQ 6 ข้อ |
+| HR | `HR/` | `hr_policy_handbook.md` | **`hr_policy_handbook.docx`** | คู่มือนโยบายพนักงาน (Employee Policy Handbook) | 11 หัวข้อ รวมประเภทวันลา 7 แบบ, สวัสดิการ, ระเบียบวินัย, ช่องทางร้องเรียน, กรณีศึกษา 2 เรื่อง, FAQ 8 ข้อ |
+| IT | `IT/` | `it_support_handbook.md` | **`it_support_handbook.docx`** | คู่มือการใช้งานระบบ IT และการขอสิทธิ์เข้าถึง | 9 หัวข้อ รวมขั้นตอน Access Request, นโยบายรหัสผ่าน, SLA แจ้งซ่อม, FAQ 6 ข้อ |
+| Programmer | `Programmer/` | `coding_standard_guide.md` | **`coding_standard_guide.docx`** | มาตรฐานการเขียนโค้ดและขั้นตอนการ Deploy | 9 หัวข้อ รวม Naming Convention, Git Workflow, ขั้นตอน Deploy 4 Environment, Code Review Checklist, FAQ 6 ข้อ |
+| Logistic | `Logistic/` | `logistics_shipping_policy.md` | **`logistics_shipping_policy.docx`** | นโยบายการจัดส่งและติดตามสถานะสินค้า | 8 หัวข้อ รวมตารางเวลาขนส่งรายเขต, วิธีติดตามสถานะ, เงื่อนไขเคลม, กรณีศึกษา 2 เรื่อง, FAQ 6 ข้อ |
 
 ไฟล์ `.md` แต่ละไฟล์เก็บไว้เป็นต้นทางให้แก้ไขเนื้อหาได้ง่าย (เช่น เปลี่ยนชื่อบริษัท/ตัวเลข) — ถ้าแก้ไข ให้รันสร้าง `.docx` ใหม่อีกครั้งด้วยสคริปต์แปลงไฟล์ (ดูหัวข้อถัดไป) หรือ Copy เนื้อหาไปวางใน Word เองตามขั้นตอนแบบเดิม
 
 ## วิธีแปลง/สร้างไฟล์ใหม่ (ถ้าแก้ไขเนื้อหา)
 
 1. **Word (.docx)**: แก้เนื้อหาในไฟล์ `.md` ที่ต้องการ แล้วรันสคริปต์ Node ที่ใช้ Library [`docx`](https://www.npmjs.com/package/docx) แปลง Markdown (`#`/`##` = Heading, ตาราง `|...|` = Table, `**text**` = ตัวหนา) เป็นไฟล์ `.docx` จริงโดยอัตโนมัติ (ไม่ต้องเปิด Word เอง) — หรือจะ Copy เนื้อหาไปวางใน Word เองแล้วจัด Heading/ตารางเองก็ได้เช่นกัน
-2. **PDF**: เปิด `factory_safety_policy.md` (หรือไฟล์ `.docx` ที่แปลงแล้ว) → File → Save As / Print → PDF
-3. **Excel**: เปิด `sales_data_raw.csv` ด้วย Excel โดยตรง (ไฟล์มี UTF-8 BOM แล้ว ภาษาไทยจะไม่เพี้ยน) → Save As เป็น `sales_data_raw.xlsx`
+2. **PDF**: เปิด `Warehouse/factory_safety_policy.md` (หรือไฟล์ `.docx` ที่แปลงแล้ว) → File → Save As / Print → PDF
+3. **Excel**: เปิด `Sales_Engineer/sales_data_raw.csv` ด้วย Excel โดยตรง (ไฟล์มี UTF-8 BOM แล้ว ภาษาไทยจะไม่เพี้ยน) → Save As เป็น `sales_data_raw.xlsx`
 
 ## โครงสร้างข้อมูล Sales Data
 
