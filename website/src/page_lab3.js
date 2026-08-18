@@ -15,11 +15,11 @@ function build() {
   const mock2 = M.studioChrome({ activeTab: 'Overview', agentName: 'HR Policy Bot', body: chat2.svg, bodyHeight: chat2.endY + 30, showTest: true });
 
   // ---- Mockup 3: GOOD instructions (CARE) ----
-  const careText = 'You are an HR assistant for Contoso. Answer ONLY from the provided HR policy documents. If not found, say "ขออภัย ข้อมูลนี้ไม่อยู่ใน Policy กรุณาติดต่อ HR โดยตรง". Always answer in Thai with max 3 bullet points.';
+  const careText = 'Role: You are an HR assistant for Contoso.\nTask: Answer employee questions about HR policy.\nScope: Answer ONLY from the provided HR policy documents.\nRule: If not found, say "ขออภัย ข้อมูลนี้ไม่อยู่ใน Policy กรุณาติดต่อ HR โดยตรง". Answer in Thai with max 3 bullet points.\nTone: Professional, concise, helpful — like a reliable HR colleague.';
   const m3body = `${M.text(24, 30, 'Instructions', { fontSize: 14, weight: 700, fill: M.COL.navy })}
-    ${M.textArea(24, 42, 700, 100, '', careText, {})}
-    ${M.badge(24, 156, '✅ GOOD — มี Context + Ask + Rules ครบ', M.COL.green, M.COL.greenBg)}`;
-  const mock3 = M.studioChrome({ activeTab: 'Overview', agentName: 'HR Policy Bot', body: m3body, bodyHeight: 210 });
+    ${M.textArea(24, 42, 700, 140, '', careText, {})}
+    ${M.badge(24, 198, '✅ GOOD — ครบ Role/Task/Scope/Rule/Tone', M.COL.green, M.COL.greenBg)}`;
+  const mock3 = M.studioChrome({ activeTab: 'Overview', agentName: 'HR Policy Bot', body: m3body, bodyHeight: 250 });
 
   // ---- Mockup 4: good answer ----
   const chat4 = M.chatMessages([
@@ -36,12 +36,12 @@ function build() {
   const mock5 = M.studioChrome({ activeTab: 'Overview', agentName: 'HR Policy Bot', body: chat5.svg, bodyHeight: chat5.endY + 30 });
 
   // ---- Mockup 6: Programmer department example (CARE for Code Review Bot) ----
-  const careText6 = 'You are a senior developer assistant for the internal team (Context). Review the code snippet the user pastes against our Coding Standard doc, and list violations with line references (Ask). Never rewrite the whole file — only point out issues; keep each point to 1 line; if the standard doc doesn\'t cover something, say so instead of guessing (Rules). Example: "Line 12: ตัวแปรตั้งชื่อไม่สื่อความหมาย ควรใช้ camelCase" (Examples).';
+  const careText6 = 'Role: You are a senior developer assistant for the internal team.\nTask: Review the code snippet the user pastes against our Coding Standard doc, and list violations with line references.\nScope: Only use the Coding Standard doc provided. If it doesn\'t cover something, say so instead of guessing.\nRule: Never rewrite the whole file — only point out issues. Keep each point to 1 line.\nTone: Direct, technical, peer-reviewer style — no fluff.\nExample: "Line 12: ตัวแปรตั้งชื่อไม่สื่อความหมาย ควรใช้ camelCase"';
   const m6body = `${M.text(24, 30, 'Instructions', { fontSize: 14, weight: 700, fill: M.COL.navy })}
-    ${M.textArea(24, 42, 700, 110, '', careText6, {})}
-    ${M.badge(24, 166, '✅ Code Review Bot — CARE ครบทั้ง 4 องค์ประกอบ', M.COL.green, M.COL.greenBg)}`;
-  const mock6 = M.studioChrome({ activeTab: 'Overview', agentName: 'Code Review Bot', body: m6body, bodyHeight: 220 });
-  const careText6Clean = 'You are a senior developer assistant for the internal team. Review the code snippet the user pastes against our Coding Standard doc, and list violations with line references.\n\nNever rewrite the whole file — only point out issues. Keep each point to 1 line. If the standard doc doesn\'t cover something, say so instead of guessing.\n\nExample: "Line 12: ตัวแปรตั้งชื่อไม่สื่อความหมาย ควรใช้ camelCase"';
+    ${M.textArea(24, 42, 700, 130, '', careText6, {})}
+    ${M.badge(24, 186, '✅ Code Review Bot — ครบ Role/Task/Scope/Rule/Tone', M.COL.green, M.COL.greenBg)}`;
+  const mock6 = M.studioChrome({ activeTab: 'Overview', agentName: 'Code Review Bot', body: m6body, bodyHeight: 240 });
+  const careText6Clean = careText6;
 
   const bodyHtml = `
     <p>Agent จาก Lab 2 ตอบได้แล้ว แต่ยัง "ฉลาด" ไม่พอ — Lab นี้สอนวิธีเขียน <strong>Instructions</strong> ให้ Agent ตอบตรงประเด็น มี Tone ที่เหมาะสม และรู้ขอบเขตของตัวเอง</p>
@@ -63,6 +63,10 @@ function build() {
       <p style="margin-top:10px;font-size:12.5px;color:${M.COL.gray500}">อ้างอิงจาก <strong>CAREful Prompts</strong> โดย Nielsen Norman Group (nngroup.com/articles/careful-prompts) — Framework เดียวกับที่ใช้ใน Microsoft Copilot Studio Labs ต้นฉบับ</p>
     `)}
 
+    ${box('tip', 'เทียบกับ Checklist "Role/Task/Scope/Rule/Tone" จาก Lab 1–2', `
+      <p>Role + Task + Scope ≈ Context + Ask ของ CARE, Rule ≈ Rules ของ CARE — ส่วน <strong>Tone</strong> และ <strong>Example</strong> คือรายละเอียดเสริมที่ CARE ไม่ได้แยกเป็นหัวข้อของตัวเอง ใช้ Checklist 5 ส่วนเป็นตัวช่วยเขียนเร็วๆ ระหว่างลงมือ ส่วน CARE คือ Framework ทางการที่อ้างอิงได้เวลาต้องอธิบายให้คนอื่นเข้าใจ</p>
+    `)}
+
     <h2 id="step1">ขั้นตอนที่ 1–2: ดูปัญหาของ Instructions แบบ BAD</h2>
     ${step(1, 'เปิด Instructions ปัจจุบัน', `
       <p>ไปที่ Overview → Instructions → Edit ดู Instructions เดิมที่มักสั้นและกำกวมเกินไป</p>
@@ -76,7 +80,7 @@ function build() {
     <h2 id="step3">ขั้นตอนที่ 3–4: แก้ไขด้วย CARE Framework</h2>
     ${step(3, 'เขียน Instructions ใหม่ด้วย CARE', `
       <p>ลบ Instructions เดิม แล้วเขียนใหม่ให้ครบทั้ง 4 องค์ประกอบ: Context, Ask, Rules, Examples</p>
-      ${mockup(mock3, 'Instructions แบบ GOOD — ครบ Context + Ask + Rules')}
+      ${mockup(mock3, 'Instructions แบบ GOOD — ครบ Role/Task/Scope/Rule/Tone (CARE ครบทุกองค์ประกอบ)')}
       ${promptBox('ตัวอย่าง Instructions (CARE) — Copy ไปวางแทน Instructions เดิมได้เลย', careText)}
       ${box('tip', '', '<p>เขียน Fallback message ให้ชัดเจนเสมอ เช่น "ถ้าไม่พบข้อมูล ให้บอกว่า..." เพื่อป้องกัน Agent เดาคำตอบ (Hallucinate)</p>')}
       ${mockup(mock6, 'ตัวอย่างแบบเดียวกัน แต่คนละแผนก: Code Review Bot สำหรับทีม Programmer — เขียน Instructions ด้วย CARE เหมือนกันแค่เปลี่ยนเนื้อหา')}

@@ -7,4 +7,5 @@ require('./page_lab3.js').build();
 require('./page_lab4.js').build();
 require('./page_lab5.js').build();
 require('./page_lab6.js').build();
-console.log('\n✅ Build complete — 7 files written to ../ (website root)');
+require('./page_lab7.js').build();
+console.log('\n✅ Build complete — 8 files written to ../ (website root)');

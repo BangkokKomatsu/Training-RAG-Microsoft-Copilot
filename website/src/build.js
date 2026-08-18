@@ -15,6 +15,7 @@ const NAV = [
   { href: 'lab4.html', label: 'Lab 4' },
   { href: 'lab5.html', label: 'Lab 5' },
   { href: 'lab6.html', label: 'Lab 6' },
+  { href: 'lab7.html', label: 'Lab 7' },
 ];
 
 const LABS_META = [
@@ -23,7 +24,8 @@ const LABS_META = [
   { href: 'lab3.html', short: 'Lab 3', title: 'Prompt Engineering', sub: 'CARE Framework — ปรับ Instructions ให้ RAG ฉลาดขึ้น', icon: '✍️', color: M.COL.navy, time: '40 นาที' },
   { href: 'lab4.html', short: 'Lab 4', title: 'Custom Topics', sub: 'Fallback + Escalation — จัดการเมื่อ Agent ตอบไม่ได้', icon: '🧩', color: M.COL.purple, time: '35 นาที' },
   { href: 'lab5.html', short: 'Lab 5', title: 'Evaluation', sub: 'วัดคุณภาพ RAG ด้วย Test Set + Improvement Loop', icon: '📊', color: M.COL.orange, time: '30 นาที' },
-  { href: 'lab6.html', short: 'Lab 6', title: 'Deploy to Teams', sub: 'ปล่อย Agent ให้ทีมใช้งานจริงใน Microsoft Teams', icon: '🚀', color: M.COL.green, time: '15 นาที' },
+  { href: 'lab6.html', short: 'Lab 6', title: 'Actions & Tools', sub: 'เชื่อม Outlook/Teams/SharePoint — ให้ Agent ลงมือทำงานแทนคน', icon: '🔌', color: M.COL.cyan, time: '35 นาที' },
+  { href: 'lab7.html', short: 'Lab 7', title: 'Deploy to Teams', sub: 'ปล่อย Agent ให้ทีมใช้งานจริงใน Microsoft Teams', icon: '🚀', color: M.COL.green, time: '15 นาที' },
 ];
 
 // ============================================================

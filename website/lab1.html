@@ -9,7 +9,7 @@
 <body>
 <nav class="topnav"><div class="topnav-inner">
   <div class="topnav-brand"><span>🤖</span> Build Your Own RAG Agent<span class="dot"> · Copilot Studio</span></div>
-  <div class="topnav-links"><a href="index.html">🏠 หน้าแรก</a><a href="lab1.html" class="active">Lab 1</a><a href="lab2.html">Lab 2</a><a href="lab3.html">Lab 3</a><a href="lab4.html">Lab 4</a><a href="lab5.html">Lab 5</a><a href="lab6.html">Lab 6</a></div>
+  <div class="topnav-links"><a href="index.html">🏠 หน้าแรก</a><a href="lab1.html" class="active">Lab 1</a><a href="lab2.html">Lab 2</a><a href="lab3.html">Lab 3</a><a href="lab4.html">Lab 4</a><a href="lab5.html">Lab 5</a><a href="lab6.html">Lab 6</a><a href="lab7.html">Lab 7</a></div>
 </div></nav>
 <header class="hero"><div class="hero-inner">
     <span class="hero-eyebrow">LAB 1 · ⏱ 35 นาที · Level 100</span>
@@ -129,20 +129,30 @@
     <g transform="translate(210, 0)"><rect x="250" y="20" width="486" height="94" rx="10" ry="10" fill="#2E75B6" stroke="none" stroke-width="1"/><text x="264" y="42" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#FFFFFF" text-anchor="start" style="">สร้าง Agent สไตล์ครูผู้สอน ที่ช่วยอธิบายความแตกต่างระหว่าง</text><text x="264" y="60" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#FFFFFF" text-anchor="start" style="">Microsoft 365 Copilot และ Copilot Chat</text><text x="264" y="78" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#FFFFFF" text-anchor="start" style="">ตอบคำถามด้วยน้ำเสียงเป็นกันเอง และอ้างอิงจากเอกสาร Microsoft</text><text x="264" y="96" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#FFFFFF" text-anchor="start" style="">เท่านั้น</text>
     <text x="30" y="150" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="400" fill="#767676" text-anchor="start" style="">🤖 Agent Builder กำลังสร้างชื่อ, Tone และ Starter Prompts ให้อัตโนมัติ...</text></g>
   </svg></div><div class="mockup-caption">พิมพ์ Description แล้วส่ง — AI จะช่วยตั้งชื่อและ Tone ให้อัตโนมัติ</div>
+      <div class="box box-tip">
+    <div class="box-title">💡 เขียน Description/Instructions ให้ครบ 5 มุม</div>
+    
+        <table class="concept-table">
+    <thead><tr><th>ส่วน</th><th>ใส่อะไร</th></tr></thead>
+    <tbody><tr><td class="term">Role</td><td>Agent คือใคร ทำงานให้ใคร</td></tr><tr><td class="term">Task</td><td>สิ่งที่ต้องทำหลัก</td></tr><tr><td class="term">Scope</td><td>ขอบเขตข้อมูล/สิ่งที่ตอบได้-ไม่ได้</td></tr><tr><td class="term">Rule</td><td>กฎ ข้อจำกัด รูปแบบคำตอบ</td></tr><tr><td class="term">Tone</td><td>น้ำเสียง/บุคลิกในการตอบ</td></tr></tbody>
+  </table>
+        <p style="margin-top:8px;font-size:12.5px;color:#767676">Checklist 5 ส่วนนี้ช่วยเช็คว่าเขียน Description/Instructions ครบทุกมุมหรือยัง — Lab 3 จะแนะนำ <strong>CARE Framework</strong> อย่างเป็นทางการต่อจากนี้</p>
+      
+  </div>
       <div class="prompt-box">
     <div class="prompt-box-header">
       <span class="prompt-box-label">📋 ตัวอย่าง Description — Copy ไปวางในช่อง Describe ได้เลย</span>
       <button class="prompt-copy-btn" onclick="copyPromptBox(this)">คัดลอก</button>
     </div>
-    <pre class="prompt-box-text">สร้าง Agent ชื่อ "Copilot Teacher" สไตล์ครูผู้สอนที่เป็นกันเอง ช่วยพนักงานเข้าใจความแตกต่างระหว่าง Microsoft 365 Copilot กับ Copilot Chat ตอบคำถามด้วยภาษาที่เข้าใจง่าย ไม่ใช้ศัพท์เทคนิคเกินจำเป็น
-
-ถ้าถูกถามเรื่องนอกเหนือจาก Copilot ให้ตอบอย่างสุภาพว่าตอบได้เฉพาะเรื่องนี้ แล้วชวนกลับมาคุยเรื่อง Copilot
-
-อ้างอิงคำตอบจากเอกสาร Microsoft ที่กำหนดไว้เท่านั้น ห้ามตอบจากความรู้ทั่วไป</pre>
+    <pre class="prompt-box-text">Role: คุณคือ "Copilot Teacher" ครูผู้สอนที่เป็นกันเอง ช่วยพนักงานเข้าใจการใช้งาน Microsoft Copilot
+Task: อธิบายความแตกต่างระหว่าง Microsoft 365 Copilot กับ Copilot Chat และตอบคำถามการใช้งานที่เกี่ยวข้อง
+Scope: ตอบจากเอกสาร Microsoft ที่กำหนดไว้เท่านั้น ห้ามตอบจากความรู้ทั่วไป — คำถามนอกเรื่อง Copilot ให้ปฏิเสธสุภาพแล้วชวนกลับมาคุยเรื่อง Copilot
+Rule: ใช้ภาษาที่เข้าใจง่าย ไม่ใช้ศัพท์เทคนิคเกินจำเป็น
+Tone: เป็นกันเอง ใจดี เหมือนครูที่อดทนสอนทีละขั้น</pre>
   </div>
       <div class="box box-tip">
     <div class="box-title">💡 Tip</div>
-    <p>ยิ่งอธิบายละเอียดเท่าไหร่ Agent ยิ่งดีเท่านั้น — ใส่ให้ครบ 4 อย่างในคำอธิบายเดียว: (1) <strong>ชื่อ Agent</strong> ที่ต้องการ (2) <strong>Tone</strong> เช่น เป็นทางการ/เป็นกันเอง (3) <strong>ต้องทำอะไรเมื่อถูกถามนอกเรื่อง</strong> เช่น ปฏิเสธสุภาพและแนะกลับเข้าเรื่อง (4) <strong>วัตถุประสงค์</strong> ของ Agent — ก่อนกด Create ให้ตรวจ Starter prompts ที่ระบบสร้างให้ในแท็บ Configure ด้วย ปรับแก้ให้ตรงคำถามที่ผู้ใช้จะถามบ่อยได้เลย</p>
+    <p>ยิ่งอธิบายละเอียดเท่าไหร่ Agent ยิ่งดีเท่านั้น — ก่อนกด Create ให้ตรวจ Starter prompts ที่ระบบสร้างให้ในแท็บ Configure ด้วย ปรับแก้ให้ตรงคำถามที่ผู้ใช้จะถามบ่อยได้เลย</p>
   </div>
     </div>
   </div>
@@ -257,11 +267,11 @@
       <span class="prompt-box-label">📋 ตัวอย่าง Description สำหรับ IT — Copy ไปปรับใช้ได้</span>
       <button class="prompt-copy-btn" onclick="copyPromptBox(this)">คัดลอก</button>
     </div>
-    <pre class="prompt-box-text">สร้าง Agent ชื่อ "IT Helpdesk Bot" ที่ช่วยพนักงานแก้ปัญหาเบื้องต้นเกี่ยวกับระบบ IT เช่น การ Reset Password และการขอสิทธิ์เข้าถึงระบบ ตอบด้วยขั้นตอนที่ทำตามได้ทันที เป็นข้อๆ สั้นกระชับ
-
-ถ้าปัญหาซับซ้อนเกินกว่าจะแก้ด้วยขั้นตอนพื้นฐาน ให้แนะนำให้ติดต่อ IT Helpdesk พร้อมเบอร์ติดต่อ
-
-อ้างอิงคำตอบจากคู่มือ IT ภายในองค์กรที่กำหนดไว้เท่านั้น</pre>
+    <pre class="prompt-box-text">Role: คุณคือ "IT Helpdesk Bot" ผู้ช่วยแก้ปัญหา IT เบื้องต้นให้พนักงาน
+Task: ช่วยพนักงานแก้ปัญหาเบื้องต้นเกี่ยวกับระบบ IT เช่น Reset Password และขอสิทธิ์เข้าถึงระบบ
+Scope: อ้างอิงคำตอบจากคู่มือ IT ภายในองค์กรที่กำหนดไว้เท่านั้น — ถ้าปัญหาซับซ้อนเกินขั้นตอนพื้นฐาน ให้แนะนำติดต่อ IT Helpdesk พร้อมเบอร์ติดต่อ
+Rule: ตอบเป็นขั้นตอนที่ทำตามได้ทันที เป็นข้อๆ สั้นกระชับ
+Tone: กระชับ ตรงไปตรงมา เหมือนทีม Support ที่ช่วยแก้ปัญหาได้จริง</pre>
   </div>
     </div>
   </div>

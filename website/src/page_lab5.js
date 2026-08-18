@@ -153,7 +153,7 @@ function build() {
       { id: 'mistakes', label: 'ข้อผิดพลาดที่พบบ่อย' },
       { id: 'challenge', label: 'ลองประยุกต์ใช้' },
     ],
-    prevNext: { prev: { href: 'lab4.html', label: 'Lab 4: Custom Topics' }, next: { href: 'lab6.html', label: 'Lab 6: Deploy to Teams' } },
+    prevNext: { prev: { href: 'lab4.html', label: 'Lab 4: Custom Topics' }, next: { href: 'lab6.html', label: 'Lab 6: Actions & Tools' } },
     bodyHtml,
   });
   writePage('lab5.html', html);

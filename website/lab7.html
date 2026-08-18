@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 7: Deploy to Teams — RAG Course</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav class="topnav"><div class="topnav-inner">
+  <div class="topnav-brand"><span>🤖</span> Build Your Own RAG Agent<span class="dot"> · Copilot Studio</span></div>
+  <div class="topnav-links"><a href="index.html">🏠 หน้าแรก</a><a href="lab1.html">Lab 1</a><a href="lab2.html">Lab 2</a><a href="lab3.html">Lab 3</a><a href="lab4.html">Lab 4</a><a href="lab5.html">Lab 5</a><a href="lab6.html">Lab 6</a><a href="lab7.html" class="active">Lab 7</a></div>
+</div></nav>
+<header class="hero"><div class="hero-inner">
+    <span class="hero-eyebrow">LAB 7 · ⏱ 15 นาที · Level 100</span>
+    <h1>🚀 Deploy to Microsoft Teams</h1>
+    <p class="lead">ปล่อย RAG Agent ที่สร้างมาทั้งวันให้ทีมใช้งานจริงผ่าน Microsoft Teams</p>
+    <div class="hero-meta"><span class="hero-pill">⏱ 15 นาที</span><span class="hero-pill">🎓 Level 100</span><span class="hero-pill">✅ Production Ready</span></div>
+  </div></header>
+<div class="page-wrap"><nav class="toc"><div class="toc-title">ในหน้านี้</div>
+    <a href="#step1">1–2. Publish + Channel</a><a href="#step3">3–4. เปิดใช้งานใน Teams</a><a href="#step5">5. ทดสอบจริง</a><a href="#mistakes">ข้อผิดพลาดที่พบบ่อย</a><a href="#next">ก้าวต่อไป</a>
+  </nav><div class="content">
+    <p>Lab สุดท้าย! นำ Agent ที่สร้างมาทั้งวันไป Deploy ให้ทีมงานใช้งานได้จริงผ่าน <strong>Microsoft Teams</strong></p>
+
+    <table class="meta-table"><tbody>
+    <tr><th>Level</th><td><span class="badge badge-green">100</span></td></tr><tr><th>Persona</th><td>Maker ที่พร้อมนำ Agent ไปใช้งานจริง</td></tr><tr><th>ระยะเวลา</th><td>15 นาที</td></tr><tr><th>เป้าหมาย</th><td>Publish และ Deploy Agent ไปยัง Microsoft Teams ให้ทีมใช้งานได้ทันที</td></tr>
+  </tbody></table>
+
+    <h2 id="step1">ขั้นตอนที่ 1–2: Publish และเปิด Channel</h2>
+    <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body"><h4>กด Publish</h4>
+      <p>กด <strong>Publish</strong> มุมขวาบน → ยืนยัน → รอ Status เป็น Published</p>
+      <div class="mockup"><svg viewBox="0 0 1000 234" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
+    <rect width="1000" height="234" fill="#F4F6F9"/>
+    <rect width="1000" height="54" fill="#FFFFFF"/>
+    <rect width="1000" height="54" fill="none" stroke="#E8EBF0" stroke-width="1"/>
+    <circle cx="24" cy="27" r="11" fill="#2E75B6"/>
+    <text x="24" y="31" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">CS</text>
+    <text x="44" y="24" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="700" fill="#1A1A1A" text-anchor="start" style="">HR Policy Bot</text>
+    <text x="44" y="39" font-family="Segoe UI, Tahoma, sans-serif" font-size="9.5" font-weight="400" fill="#767676" text-anchor="start" style="">Copilot Studio</text>
+    <g><rect x="178" y="13" width="61.8" height="28" rx="6" ry="6" fill="#EEF4FB" stroke="none" stroke-width="1"/>
+      <text x="208.9" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="700" fill="#1F3864" text-anchor="middle" style="">Overview</text>
+      <rect x="178" y="51" width="61.8" height="3" fill="#2E75B6"/>
+    </g><g>
+      <text x="276.75" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Knowledge</text>
+      
+    </g><g>
+      <text x="335.45000000000005" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Tools</text>
+      
+    </g><g>
+      <text x="385.00000000000006" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Agents</text>
+      
+    </g><g>
+      <text x="437.6000000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Topics</text>
+      
+    </g><g>
+      <text x="496.30000000000007" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Activity</text>
+      
+    </g><g>
+      <text x="567.2" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Evaluation</text>
+      
+    </g><g>
+      <text x="641.1500000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Analytics</text>
+      
+    </g><g>
+      <text x="709" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Channels</text>
+      
+    </g>
+    <g><rect x="818" y="14" width="76" height="26" rx="6" ry="6" fill="#2E75B6" stroke="none" stroke-width="1.3"/><text x="856" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">Publish</text></g>
+    <g><rect x="904" y="14" width="76" height="26" rx="6" ry="6" fill="#1F3864" stroke="none" stroke-width="1.3"/><text x="942" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">▶ Test</text></g>
+    <g transform="translate(0, 54)">
+    <rect x="24" y="20" width="700" height="44" rx="8" ry="8" fill="#E8F5E9" stroke="none" stroke-width="1"/>
+    <text x="40" y="48" font-size="16">✅</text>
+    <text x="68" y="47" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="700" fill="#107C10" text-anchor="start" style="">The agent was published — Agent เวอร์ชันล่าสุดพร้อมใช้งานแล้ว</text>
+    <text x="24" y="90" font-family="Segoe UI, Tahoma, sans-serif" font-size="13.5" font-weight="700" fill="#1F3864" text-anchor="start" style="">Published agent status</text>
+    <rect x="24" y="100" width="700" height="50" rx="8" ry="8" fill="#FFFFFF" stroke="#E8EBF0" stroke-width="1"/>
+    <text x="44" y="130" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="700" fill="#107C10" text-anchor="start" style="">✓ Published by User · เมื่อสักครู่</text>
+  </g>
+  </svg></div><div class="mockup-caption">Agent ถูก Publish สำเร็จ</div>
+    </div>
+  </div>
+    <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body"><h4>ไปที่ Channels</h4>
+      <p>กด <strong>Channels</strong> ในแถบนำทาง → เลือก "Microsoft 365 and Microsoft Teams"</p>
+      <div class="mockup"><svg viewBox="0 0 1000 204" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
+    <rect width="1000" height="204" fill="#F4F6F9"/>
+    <rect width="1000" height="54" fill="#FFFFFF"/>
+    <rect width="1000" height="54" fill="none" stroke="#E8EBF0" stroke-width="1"/>
+    <circle cx="24" cy="27" r="11" fill="#2E75B6"/>
+    <text x="24" y="31" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">CS</text>
+    <text x="44" y="24" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="700" fill="#1A1A1A" text-anchor="start" style="">HR Policy Bot</text>
+    <text x="44" y="39" font-family="Segoe UI, Tahoma, sans-serif" font-size="9.5" font-weight="400" fill="#767676" text-anchor="start" style="">Copilot Studio</text>
+    <g>
+      <text x="208.9" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Overview</text>
+      
+    </g><g>
+      <text x="276.75" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Knowledge</text>
+      
+    </g><g>
+      <text x="335.45000000000005" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Tools</text>
+      
+    </g><g>
+      <text x="385.00000000000006" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Agents</text>
+      
+    </g><g>
+      <text x="437.6000000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Topics</text>
+      
+    </g><g>
+      <text x="496.30000000000007" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Activity</text>
+      
+    </g><g>
+      <text x="567.2" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Evaluation</text>
+      
+    </g><g>
+      <text x="641.1500000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Analytics</text>
+      
+    </g><g><rect x="678.1" y="13" width="61.8" height="28" rx="6" ry="6" fill="#EEF4FB" stroke="none" stroke-width="1"/>
+      <text x="709" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="700" fill="#1F3864" text-anchor="middle" style="">Channels</text>
+      <rect x="678.1" y="51" width="61.8" height="3" fill="#2E75B6"/>
+    </g>
+    <g><rect x="818" y="14" width="76" height="26" rx="6" ry="6" fill="#2E75B6" stroke="none" stroke-width="1.3"/><text x="856" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">Publish</text></g>
+    <g><rect x="904" y="14" width="76" height="26" rx="6" ry="6" fill="#1F3864" stroke="none" stroke-width="1.3"/><text x="942" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">▶ Test</text></g>
+    <g transform="translate(0, 54)"><text x="24" y="12" font-family="Segoe UI, Tahoma, sans-serif" font-size="14" font-weight="700" fill="#1F3864" text-anchor="start" style="">Channels</text><rect x="24" y="20" width="160" height="90" rx="8" ry="8" fill="#FFFFFF" stroke="#2E75B6" stroke-width="2"/><circle cx="104" cy="50" r="18" fill="#D6E4F0"/><text x="104" y="56" font-family="Segoe UI, Tahoma, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle" style="">👥</text><text x="104" y="84" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="700" fill="#1A1A1A" text-anchor="middle" style="">Microsoft 365 &amp; Teams</text><g><rect x="80" y="90" width="53" height="22" rx="11" ry="11" fill="#E8F5E9" stroke="none" stroke-width="1"/><text x="106.5" y="105" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="700" fill="#107C10" text-anchor="middle" style="">แนะนำ</text></g><rect x="198" y="20" width="160" height="90" rx="8" ry="8" fill="#FFFFFF" stroke="#E8EBF0" stroke-width="1"/><circle cx="278" cy="50" r="18" fill="#D6E4F0"/><text x="278" y="56" font-family="Segoe UI, Tahoma, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle" style="">📂</text><text x="278" y="84" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="700" fill="#1A1A1A" text-anchor="middle" style="">SharePoint</text><rect x="372" y="20" width="160" height="90" rx="8" ry="8" fill="#FFFFFF" stroke="#E8EBF0" stroke-width="1"/><circle cx="452" cy="50" r="18" fill="#D6E4F0"/><text x="452" y="56" font-family="Segoe UI, Tahoma, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle" style="">🌐</text><text x="452" y="84" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="700" fill="#1A1A1A" text-anchor="middle" style="">Web app</text><rect x="546" y="20" width="160" height="90" rx="8" ry="8" fill="#FFFFFF" stroke="#E8EBF0" stroke-width="1"/><circle cx="626" cy="50" r="18" fill="#D6E4F0"/><text x="626" y="56" font-family="Segoe UI, Tahoma, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle" style="">📱</text><text x="626" y="84" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="700" fill="#1A1A1A" text-anchor="middle" style="">Native app</text></g>
+  </svg></div><div class="mockup-caption">ตัวเลือก Channels ที่ Deploy ได้</div>
+      <div class="box box-tip">
+    <div class="box-title">💡 Tip</div>
+    <p>ก่อน Deploy ให้เปิดแท็บใหม่แล้ว Login เข้า Teams (Web) ไว้ล่วงหน้า — ป้องกันไม่ให้ขั้นตอน Login มาขัดจังหวะตอนที่กำลังทดสอบ Agent ใน Teams ช่วงท้าย Lab</p>
+  </div>
+      <div class="box box-note">
+    <div class="box-title">📌 หมายเหตุ</div>
+    <p>นอกจาก Teams แล้ว Copilot Studio ยังรองรับ Channel อื่นอีกมาก เช่น Web app แบบฝังในเว็บ, Native app (iOS/Android), Email, Facebook, WhatsApp, Line — เลือก Deploy ไปที่ Channel ที่ผู้ใช้งานจริงอยู่แล้ว ไม่ใช่บังคับให้ผู้ใช้มาเรียนรู้เครื่องมือใหม่</p>
+  </div>
+    </div>
+  </div>
+
+    <h2 id="step3">ขั้นตอนที่ 3–4: เปิดใช้งานใน Teams</h2>
+    <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body"><h4>ติ๊ก Make available in M365 Copilot</h4>
+      <p>ในหน้า Channel Panel → ติ๊ก Checkbox นี้ → กด Save จากนั้นกด "See agent in Teams"</p>
+      <div class="mockup"><svg viewBox="0 0 1000 264" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
+    <rect width="1000" height="264" fill="#F4F6F9"/>
+    <rect width="1000" height="54" fill="#FFFFFF"/>
+    <rect width="1000" height="54" fill="none" stroke="#E8EBF0" stroke-width="1"/>
+    <circle cx="24" cy="27" r="11" fill="#2E75B6"/>
+    <text x="24" y="31" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">CS</text>
+    <text x="44" y="24" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="700" fill="#1A1A1A" text-anchor="start" style="">HR Policy Bot</text>
+    <text x="44" y="39" font-family="Segoe UI, Tahoma, sans-serif" font-size="9.5" font-weight="400" fill="#767676" text-anchor="start" style="">Copilot Studio</text>
+    <g>
+      <text x="208.9" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Overview</text>
+      
+    </g><g>
+      <text x="276.75" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Knowledge</text>
+      
+    </g><g>
+      <text x="335.45000000000005" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Tools</text>
+      
+    </g><g>
+      <text x="385.00000000000006" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Agents</text>
+      
+    </g><g>
+      <text x="437.6000000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Topics</text>
+      
+    </g><g>
+      <text x="496.30000000000007" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Activity</text>
+      
+    </g><g>
+      <text x="567.2" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Evaluation</text>
+      
+    </g><g>
+      <text x="641.1500000000001" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" style="">Analytics</text>
+      
+    </g><g><rect x="678.1" y="13" width="61.8" height="28" rx="6" ry="6" fill="#EEF4FB" stroke="none" stroke-width="1"/>
+      <text x="709" y="31" font-family="Segoe UI, Tahoma, sans-serif" font-size="11" font-weight="700" fill="#1F3864" text-anchor="middle" style="">Channels</text>
+      <rect x="678.1" y="51" width="61.8" height="3" fill="#2E75B6"/>
+    </g>
+    <g><rect x="818" y="14" width="76" height="26" rx="6" ry="6" fill="#2E75B6" stroke="none" stroke-width="1.3"/><text x="856" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">Publish</text></g>
+    <g><rect x="904" y="14" width="76" height="26" rx="6" ry="6" fill="#1F3864" stroke="none" stroke-width="1.3"/><text x="942" y="31.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">▶ Test</text></g>
+    <g transform="translate(0, 54)">
+    <text x="24" y="30" font-family="Segoe UI, Tahoma, sans-serif" font-size="14" font-weight="700" fill="#1F3864" text-anchor="start" style="">Microsoft 365 and Microsoft Teams</text>
+    <rect x="24" y="44" width="700" height="90" rx="8" ry="8" fill="#FFFFFF" stroke="#E8EBF0" stroke-width="1"/>
+    <text x="40" y="66" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="700" fill="#1A1A1A" text-anchor="start" style="">Turn on Microsoft 365</text>
+    <rect x="40" y="78" width="20" height="20" rx="4" ry="4" fill="#2E75B6" stroke="#2E75B6" stroke-width="1.5"/><path d="M 44 88 L 48.5 93 L 56 83" stroke="#FFFFFF" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="70" y="93" font-family="Segoe UI, Tahoma, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start" style="">Make agent available in Microsoft 365 Copilot</text>
+    <g><rect x="560" y="150" width="160" height="34" rx="6" ry="6" fill="#1F3864" stroke="none" stroke-width="1.3"/><text x="640" y="171.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">See agent in Teams</text></g>
+  </g>
+  </svg></div><div class="mockup-caption">เปิดใช้งาน Agent ใน Microsoft 365 Copilot</div>
+    </div>
+  </div>
+    <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body"><h4>เพิ่ม Agent ใน Teams</h4>
+      <p>Browser จะเปิด Teams Web ให้อัตโนมัติ → กด <strong>Add</strong> เพื่อเพิ่ม Agent เข้าบัญชี Teams ของคุณ</p>
+      <div class="mockup"><svg viewBox="0 0 1010 280" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
+    <rect width="1010" height="280" fill="#FFFFFF"/>
+    <rect width="64" height="280" fill="#4B3F8F"/>
+    <text x="32" y="50" font-size="22" text-anchor="middle">💬</text><text x="32" y="106" font-size="22" text-anchor="middle">📅</text><text x="32" y="162" font-size="22" text-anchor="middle">📞</text><text x="32" y="218" font-size="22" text-anchor="middle">☁️</text><text x="32" y="274" font-size="22" text-anchor="middle">🧩</text>
+    <rect x="64" width="230" height="280" fill="#F4F6F9"/>
+    <rect x="294" width="1" height="280" fill="#E8EBF0"/>
+    <text x="84" y="34" font-family="Segoe UI, Tahoma, sans-serif" font-size="14" font-weight="700" fill="#1A1A1A" text-anchor="start" style="">Chat</text>
+    <rect x="78" y="50" width="202" height="40" rx="8" ry="8" fill="#FFFFFF" stroke="#2E75B6" stroke-width="1.5"/>
+    <circle cx="98" cy="70" r="12" fill="#1F3864"/>
+    <text x="98" y="74" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">🤖</text>
+    <text x="120" y="66" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="700" fill="#1F3864" text-anchor="start" style="">Copilot Studio Assistant</text>
+    <text x="120" y="80" font-family="Segoe UI, Tahoma, sans-serif" font-size="10" font-weight="400" fill="#767676" text-anchor="start" style="">ทดสอบ Agent ใน Teams</text>
+    <g transform="translate(294, 0)">
+    <text x="340" y="130" font-family="Segoe UI, Tahoma, sans-serif" font-size="40" font-weight="400" fill="#1A1A1A" text-anchor="middle" style="">🤖</text>
+    <text x="340" y="172" font-family="Segoe UI, Tahoma, sans-serif" font-size="14.5" font-weight="700" fill="#1F3864" text-anchor="middle" style="">เพิ่ม HR Policy Bot ใน Teams</text>
+    <text x="340" y="194" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="400" fill="#767676" text-anchor="middle" style="">Agent นี้จะพร้อมใช้งานในแชทของคุณ</text>
+    <g><rect x="280" y="214" width="120" height="34" rx="6" ry="6" fill="#2E75B6" stroke="none" stroke-width="1.3"/><text x="340" y="235.5" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="600" fill="#FFFFFF" text-anchor="middle" style="">Add</text></g>
+  </g>
+  </svg></div><div class="mockup-caption">หน้าต่างยืนยันเพิ่ม Agent ใน Teams</div>
+      <div class="box box-tip">
+    <div class="box-title">💡 Tip</div>
+    <p>ถ้า Teams ถามว่าจะเปิด Desktop App หรือไม่ ให้เลือก "Use the web app instead" เพื่อความรวดเร็ว</p>
+  </div>
+    </div>
+  </div>
+
+    <h2 id="step5">ขั้นตอนที่ 5: ทดสอบใน Teams จริง</h2>
+    <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-body"><h4>พิมพ์คำถามทดสอบใน Teams</h4>
+      <p>ลองพิมพ์คำถามใน Teams Chat กับ Agent เปรียบเทียบ User Experience กับ Test Panel ใน Copilot Studio</p>
+      <div class="mockup"><svg viewBox="0 0 1010 190" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
+    <rect width="1010" height="190" fill="#FFFFFF"/>
+    <rect width="64" height="190" fill="#4B3F8F"/>
+    <text x="32" y="50" font-size="22" text-anchor="middle">💬</text><text x="32" y="106" font-size="22" text-anchor="middle">📅</text><text x="32" y="162" font-size="22" text-anchor="middle">📞</text><text x="32" y="218" font-size="22" text-anchor="middle">☁️</text><text x="32" y="274" font-size="22" text-anchor="middle">🧩</text>
+    <rect x="64" width="230" height="190" fill="#F4F6F9"/>
+    <rect x="294" width="1" height="190" fill="#E8EBF0"/>
+    <text x="84" y="34" font-family="Segoe UI, Tahoma, sans-serif" font-size="14" font-weight="700" fill="#1A1A1A" text-anchor="start" style="">Chat</text>
+    <rect x="78" y="50" width="202" height="40" rx="8" ry="8" fill="#FFFFFF" stroke="#2E75B6" stroke-width="1.5"/>
+    <circle cx="98" cy="70" r="12" fill="#1F3864"/>
+    <text x="98" y="74" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">🤖</text>
+    <text x="120" y="66" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="700" fill="#1F3864" text-anchor="start" style="">Copilot Studio Assistant</text>
+    <text x="120" y="80" font-family="Segoe UI, Tahoma, sans-serif" font-size="10" font-weight="400" fill="#767676" text-anchor="start" style="">ทดสอบ Agent ใน Teams</text>
+    <g transform="translate(294, 0)"><rect x="304.8" y="20" width="311.2" height="40" rx="10" ry="10" fill="#2E75B6" stroke="none" stroke-width="1"/><text x="318.8" y="42" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#FFFFFF" text-anchor="start" style="">สวัสดีครับ ขอถามเรื่องนโยบายลาพักร้อน</text><rect x="24" y="76" width="387.2" height="58" rx="10" ry="10" fill="#F4F6F9" stroke="none" stroke-width="1"/><text x="38" y="98" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">สวัสดีครับ! พนักงานมีสิทธิ์ลาพักร้อนปีละ 10 วัน</text><text x="38" y="116" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">สอบถามเพิ่มเติมได้เลยครับ 😊</text></g>
+  </svg></div><div class="mockup-caption">Agent ตอบคำถามใน Microsoft Teams จริง</div>
+      <div class="mockup"><svg viewBox="0 0 1010 190" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, sans-serif">
+    <rect width="1010" height="190" fill="#FFFFFF"/>
+    <rect width="64" height="190" fill="#4B3F8F"/>
+    <text x="32" y="50" font-size="22" text-anchor="middle">💬</text><text x="32" y="106" font-size="22" text-anchor="middle">📅</text><text x="32" y="162" font-size="22" text-anchor="middle">📞</text><text x="32" y="218" font-size="22" text-anchor="middle">☁️</text><text x="32" y="274" font-size="22" text-anchor="middle">🧩</text>
+    <rect x="64" width="230" height="190" fill="#F4F6F9"/>
+    <rect x="294" width="1" height="190" fill="#E8EBF0"/>
+    <text x="84" y="34" font-family="Segoe UI, Tahoma, sans-serif" font-size="14" font-weight="700" fill="#1A1A1A" text-anchor="start" style="">Chat</text>
+    <rect x="78" y="50" width="202" height="40" rx="8" ry="8" fill="#FFFFFF" stroke="#2E75B6" stroke-width="1.5"/>
+    <circle cx="98" cy="70" r="12" fill="#1F3864"/>
+    <text x="98" y="74" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">🤖</text>
+    <text x="120" y="66" font-family="Segoe UI, Tahoma, sans-serif" font-size="11.5" font-weight="700" fill="#1F3864" text-anchor="start" style="">Copilot Studio Assistant</text>
+    <text x="120" y="80" font-family="Segoe UI, Tahoma, sans-serif" font-size="10" font-weight="400" fill="#767676" text-anchor="start" style="">ทดสอบ Agent ใน Teams</text>
+    <g transform="translate(294, 0)"><rect x="114.80000000000001" y="20" width="501.2" height="40" rx="10" ry="10" fill="#2E75B6" stroke="none" stroke-width="1"/><text x="128.8" y="42" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#FFFFFF" text-anchor="start" style="">ยอดขายรถ Forklift ใหม่ของสาขากรุงเทพเดือนมกราคม 2568 เท่าไหร่?</text><rect x="24" y="76" width="470.79999999999995" height="58" rx="10" ry="10" fill="#F4F6F9" stroke="none" stroke-width="1"/><text x="38" y="98" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">ยอดขายรถ Forklift ใหม่ สาขากรุงเทพ เดือน ม.ค. 2568 อยู่ที่</text><text x="38" y="116" font-family="Segoe UI, Tahoma, sans-serif" font-size="12.5" font-weight="400" fill="#1A1A1A" text-anchor="start" style="">1,397,000 บาท (2 คัน) [อ้างอิง: Sales_Data_Raw.xlsx]</text></g>
+  </svg></div><div class="mockup-caption">ตัวอย่างแบบเดียวกัน แต่คนละแผนก: Sales Data Bot ของทีม Sales Engineer ใน Teams — ตอบยอดขายเจาะจงจุดเดียวได้ถูกต้อง (ลองคำถามรวมยอดข้ามเดือน/สาขาดูด้วย จะเห็นข้อจำกัดของ RAG ตามที่คุยกันใน Lab 5)</div>
+      <div class="prompt-box">
+    <div class="prompt-box-header">
+      <span class="prompt-box-label">📋 ตัวอย่างข้อความทดสอบใน Teams — Copy ไปวางถามได้เลย</span>
+      <button class="prompt-copy-btn" onclick="copyPromptBox(this)">คัดลอก</button>
+    </div>
+    <pre class="prompt-box-text">ยอดขายรถ Forklift ใหม่ของสาขากรุงเทพเดือนมกราคม 2568 เท่าไหร่?</pre>
+  </div>
+    </div>
+  </div>
+
+    <div class="box box-warn">
+    <div class="box-title">⚠️ ก่อนใช้งานจริงในองค์กร (Production)</div>
+    
+      <p>Lab นี้ Deploy แบบง่ายสุดสำหรับการเรียนรู้ ก่อนปล่อยให้ทั้งองค์กรใช้จริง ควรกลับมาตรวจสอบเพิ่มเติม: ตั้งค่า Authentication ให้เหมาะกับความละเอียดอ่อนของข้อมูล, จำกัด Domain ที่อนุญาตให้ฝัง Agent (สำหรับ Web channel), และทดสอบ Agent บนทุก Channel ที่ Deploy จริง เพราะ Feature บาง UI อาจแสดงผลต่างกันระหว่าง Test Pane กับ Teams</p>
+    
+  </div>
+
+    <div class="box box-success">
+    <div class="box-title">🎉 สำเร็จแล้ว!</div>
+    <p>🎉 ยินดีด้วย! Agent ของคุณพร้อมให้ทีมใช้งานจริงผ่าน Microsoft Teams แล้ว — คุณสร้าง RAG Agent ตั้งแต่ต้นจนถึง Production ได้ภายในวันเดียว!</p>
+  </div>
+
+    <h2 id="mistakes">⚠️ ข้อผิดพลาดที่พบบ่อย</h2>
+    <ul>
+      <li>ลืมกด Publish ก่อน → Channel จะยังใช้ Agent เวอร์ชันเก่าอยู่</li>
+      <li>App Policy ขององค์กรปิดอยู่ → ต้องติดต่อ IT Admin ให้เปิด Teams App Policy</li>
+      <li>ทดสอบใน Test Pane ผ่านแล้วไม่ทดสอบซ้ำใน Teams → บาง Feature อาจแสดงผลต่างกัน</li>
+    </ul>
+
+    <h2 id="next">🗺️ ก้าวต่อไปหลังจบคอร์ส</h2>
+    <ul>
+      <li><strong>Live Data RAG:</strong> เชื่อม Agent กับ Database แบบ Real-time ด้วย MCP Server (Dataverse, ServiceNow)</li>
+      <li><strong>Multi-Agent:</strong> สร้าง Agent หลายตัวที่ทำงานร่วมกัน แบ่งความเชี่ยวชาญตามแผนก</li>
+      <li><strong>Autonomous Agent:</strong> Agent ที่ทำงานอัตโนมัติตามเวลา ไม่ต้องรอคนถาม</li>
+    </ul>
+  <div class="footer-nav">
+    <a href="lab6.html"><div class="dir">← ก่อนหน้า</div><div class="lbl">Lab 6: Actions & Tools</div></a>
+    <a href="index.html" class="next"><div class="dir">ถัดไป →</div><div class="lbl">กลับหน้าแรก 🎉</div></a>
+  </div></div></div>
+<footer class="site-footer">
+  Build Your Own RAG Agent with Microsoft Copilot Studio &nbsp;|&nbsp; คู่มือสอนภายในองค์กร ฉบับภาษาไทย &nbsp;|&nbsp; อ้างอิงจาก <a href="https://microsoft.github.io/mcs-labs/" target="_blank">Microsoft Copilot Agents Labs</a>
+</footer>
+<script>
+function copyPromptBox(btn) {
+  var pre = btn.closest('.prompt-box').querySelector('.prompt-box-text');
+  var text = pre.innerText;
+  function done() {
+    var original = btn.textContent;
+    btn.textContent = '✓ คัดลอกแล้ว';
+    btn.classList.add('copied');
+    setTimeout(function () {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1500);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopyPrompt(text, done); });
+  } else {
+    fallbackCopyPrompt(text, done);
+  }
+}
+function fallbackCopyPrompt(text, cb) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(ta);
+  if (cb) cb();
+}
+</script>
+</body>
+</html>

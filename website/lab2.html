@@ -9,7 +9,7 @@
 <body>
 <nav class="topnav"><div class="topnav-inner">
   <div class="topnav-brand"><span>🤖</span> Build Your Own RAG Agent<span class="dot"> · Copilot Studio</span></div>
-  <div class="topnav-links"><a href="index.html">🏠 หน้าแรก</a><a href="lab1.html">Lab 1</a><a href="lab2.html" class="active">Lab 2</a><a href="lab3.html">Lab 3</a><a href="lab4.html">Lab 4</a><a href="lab5.html">Lab 5</a><a href="lab6.html">Lab 6</a></div>
+  <div class="topnav-links"><a href="index.html">🏠 หน้าแรก</a><a href="lab1.html">Lab 1</a><a href="lab2.html" class="active">Lab 2</a><a href="lab3.html">Lab 3</a><a href="lab4.html">Lab 4</a><a href="lab5.html">Lab 5</a><a href="lab6.html">Lab 6</a><a href="lab7.html">Lab 7</a></div>
 </div></nav>
 <header class="hero"><div class="hero-inner">
     <span class="hero-eyebrow">LAB 2 · ⏱ 40 นาที · Level 100–200</span>
@@ -146,11 +146,11 @@
       <span class="prompt-box-label">📋 ตัวอย่าง Instructions เบื้องต้น — Copy ไปวางในช่อง Instructions ได้เลย</span>
       <button class="prompt-copy-btn" onclick="copyPromptBox(this)">คัดลอก</button>
     </div>
-    <pre class="prompt-box-text">คุณคือ HR Assistant ของบริษัท ตอบคำถามพนักงานเกี่ยวกับนโยบายบริษัทจากเอกสารที่แนบไว้เท่านั้น ห้ามตอบจากความรู้ทั่วไป
-
-ถ้าไม่พบข้อมูลในเอกสาร ให้บอกตามตรงว่าไม่พบข้อมูล และแนะนำให้ติดต่อ HR โดยตรง
-
-ตอบเป็นภาษาไทยเสมอ</pre>
+    <pre class="prompt-box-text">Role: คุณคือ HR Assistant ของบริษัท
+Task: ตอบคำถามพนักงานเกี่ยวกับนโยบายบริษัท
+Scope: ใช้ข้อมูลจากเอกสารที่แนบไว้เท่านั้น ห้ามตอบจากความรู้ทั่วไป
+Rule: ถ้าไม่พบข้อมูลในเอกสาร ให้บอกตามตรงว่าไม่พบ และแนะนำให้ติดต่อ HR โดยตรง / ตอบเป็นภาษาไทยเสมอ
+Tone: สุภาพ เป็นทางการพอประมาณแบบเจ้าหน้าที่ HR</pre>
   </div>
       <div class="box box-tip">
     <div class="box-title">💡 Tip</div>
@@ -437,11 +437,11 @@
       <span class="prompt-box-label">📋 ตัวอย่าง Instructions สำหรับ Warehouse — Copy ไปปรับใช้ได้</span>
       <button class="prompt-copy-btn" onclick="copyPromptBox(this)">คัดลอก</button>
     </div>
-    <pre class="prompt-box-text">คุณคือ Warehouse Safety Assistant ของบริษัท ตอบคำถามพนักงานคลังสินค้าเกี่ยวกับความปลอดภัยและอุปกรณ์ PPE จากเอกสารที่แนบไว้เท่านั้น ห้ามตอบจากความรู้ทั่วไป
-
-ถ้าไม่พบข้อมูลในเอกสาร ให้บอกตามตรงว่าไม่พบข้อมูล และแนะนำให้ติดต่อฝ่ายความปลอดภัยโดยตรง
-
-ตอบเป็นภาษาไทยเสมอ</pre>
+    <pre class="prompt-box-text">Role: คุณคือ Warehouse Safety Assistant ของบริษัท
+Task: ตอบคำถามพนักงานคลังสินค้าเกี่ยวกับความปลอดภัยและอุปกรณ์ PPE
+Scope: ใช้ข้อมูลจากเอกสารที่แนบไว้เท่านั้น ห้ามตอบจากความรู้ทั่วไป
+Rule: ถ้าไม่พบข้อมูลในเอกสาร ให้บอกตามตรงว่าไม่พบ และแนะนำให้ติดต่อฝ่ายความปลอดภัยโดยตรง / ตอบเป็นภาษาไทยเสมอ
+Tone: หนักแน่น จริงจัง เน้นความปลอดภัยเป็นหลัก</pre>
   </div>
     </div>
   </div>

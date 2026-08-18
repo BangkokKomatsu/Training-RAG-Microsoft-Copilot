@@ -24,8 +24,9 @@ function build() {
     ['14:15', '<a href="lab4.html">Lab 4: Custom Topics</a>', 'Fallback + Escalation'],
     ['15:10', '☕ Break', '—'],
     ['15:25', '<a href="lab5.html">Lab 5: Evaluation</a>', 'วัดคุณภาพ RAG + Improvement Loop'],
-    ['15:55', '<a href="lab6.html">Lab 6: Deploy to Teams</a>', 'ปล่อยใช้งานจริงใน Microsoft Teams'],
-    ['16:15', '🏗️ Free Build + 🎤 Showcase', 'สร้าง RAG Agent ของแผนกตัวเอง + นำเสนอ'],
+    ['15:55', '<a href="lab6.html">Lab 6: Actions & Tools</a>', 'เชื่อม Outlook/Teams/SharePoint — HR Onboarding Agent'],
+    ['16:30', '<a href="lab7.html">Lab 7: Deploy to Teams</a>', 'ปล่อยใช้งานจริงใน Microsoft Teams'],
+    ['16:45', '🏗️ Free Build + 🎤 Showcase', 'สร้าง RAG Agent ของแผนกตัวเอง + นำเสนอ'],
   ];
 
   const agendaHtml = `<table class="agenda-table"><thead><tr><th>เวลา</th><th>หัวข้อ</th><th>รายละเอียด</th></tr></thead>
@@ -40,7 +41,7 @@ function build() {
     <h2 id="labs">🔬 Lab ทั้งหมดในคอร์สนี้</h2>
     <div class="lab-grid">${labCards}</div>
 
-    <h2 id="agenda">📅 Agenda เต็มวัน (09:00–16:30 น.)</h2>
+    <h2 id="agenda">📅 Agenda เต็มวัน (09:00–17:00 น.)</h2>
     ${agendaHtml}
 
     <h2 id="roadmap">🗺️ Roadmap หลังจบคอร์สนี้</h2>
@@ -77,7 +78,8 @@ function build() {
         <tr><td class="term">Customer-Facing Agent</td><td>Deploy Agent แบบ Sales Engineer ที่ทำใน Lab ออกไปตอบลูกค้าจริงผ่านเว็บไซต์บริษัทหรือ Line OA (Channel ที่ Copilot Studio รองรับ)</td></tr>
         <tr><td class="term">Sales Enablement Agent</td><td>Agent ตอบสเปกสินค้า ราคา และเปรียบเทียบสินค้าให้ทีมขายภาคสนามใช้งานผ่านมือถือระหว่างพบลูกค้า</td></tr>
         <tr><td class="term">Multi-Agent Orchestration</td><td>เชื่อม Agent ของแต่ละแผนก (HR Bot, IT Bot, Logistic Bot) เข้าด้วยกันเป็น Parent Agent เดียว ผู้ใช้ไม่ต้องสลับ Agent เอง (ต่อยอดจาก Roadmap Day 3)</td></tr>
-        <tr><td class="term">Live Data RAG</td><td>เชื่อม Agent กับระบบจริงแบบ Real-time แทนไฟล์ Excel นิ่งๆ — แก้ปัญหาที่เจอใน Lab 5–6 เรื่อง RAG ตอบผิดเวลาต้องรวมยอดข้ามหลายแถว (ต่อยอดจาก Roadmap Day 2)</td></tr>
+        <tr><td class="term">Live Data RAG</td><td>เชื่อม Agent กับระบบจริงแบบ Real-time แทนไฟล์ Excel นิ่งๆ — แก้ปัญหาที่เจอใน Lab 5, 7 เรื่อง RAG ตอบผิดเวลาต้องรวมยอดข้ามหลายแถว (ต่อยอดจาก Roadmap Day 2)</td></tr>
+        <tr><td class="term">ขยาย Actions ระดับองค์กร</td><td>ต่อยอดจาก Lab 6 — เชื่อม Agent กับระบบภายในอื่นๆ เช่น ERP, Dynamics 365 หรือ Custom Connector ที่บริษัทพัฒนาเอง ไม่จำกัดแค่ Outlook/Teams/SharePoint</td></tr>
       </tbody>
     </table>
   `;
@@ -85,10 +87,10 @@ function build() {
   const html = pageShell({
     file: 'index.html',
     title: 'Build Your Own RAG Agent — คอร์สอบรม 1 วัน',
-    eyebrow: 'AI WORKSHOP · 1 วัน · 09:00–16:30 น.',
+    eyebrow: 'AI WORKSHOP · 1 วัน · 09:00–17:00 น.',
     heroTitle: 'สร้าง RAG Agent ด้วยตัวเอง<br>ด้วย Microsoft Copilot Studio',
     heroLead: 'คู่มือสอนฉบับภาษาไทย พร้อม Mockup หน้าจอจำลองทุกขั้นตอน — ไม่ต้องมีพื้นฐาน Coding',
-    pills: [['⏱', '1 วัน · 09:00–16:30 น.'], ['🎯', '6 Labs'], ['💻', 'No-Code 100%'], ['🚀', 'Deploy ได้จริงใน Teams']],
+    pills: [['⏱', '1 วัน · 09:00–17:00 น.'], ['🎯', '7 Labs'], ['💻', 'No-Code 100%'], ['🚀', 'Deploy ได้จริงใน Teams']],
     isHome: true,
     bodyHtml,
   });

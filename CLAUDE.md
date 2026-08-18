@@ -4,9 +4,9 @@
 
 ## ภาพรวมโปรเจกต์
 
-โปรเจกต์นี้คือชุดสื่อการสอน **"Build Your Own RAG Agent with Microsoft Copilot Studio"** — คอร์สอบรมภายในองค์กรระยะเวลา 1 วัน (09:00–16:30 น.) สอนพนักงานให้สร้าง RAG Agent (Retrieval-Augmented Generation) ด้วยตัวเองแบบ No-Code
+โปรเจกต์นี้คือชุดสื่อการสอน **"Build Your Own RAG Agent with Microsoft Copilot Studio"** — คอร์สอบรมภายในองค์กรระยะเวลา 1 วัน (09:00–17:00 น.) สอนพนักงานให้สร้าง RAG Agent (Retrieval-Augmented Generation) ด้วยตัวเองแบบ No-Code
 
-เนื้อหาดัดแปลงมาจาก **Microsoft Copilot Agents Labs — Architecture Bootcamp** (ต้นฉบับ 3 วัน, 11 Labs, ภาษาอังกฤษ) โดยคัดเฉพาะส่วนที่เกี่ยวกับ RAG จริงๆ (Lab 1, 2 และแนวคิดจาก Lab 3/4/7 บางส่วน) แปลเป็นภาษาไทย และร้อยเรียงใหม่เป็น 6 Lab ที่กระชับและเรียงลำดับความยากง่ายจากง่ายไปยาก
+เนื้อหาดัดแปลงมาจาก **Microsoft Copilot Agents Labs — Architecture Bootcamp** (ต้นฉบับ 3 วัน, 11 Labs, ภาษาอังกฤษ) โดยคัดเฉพาะส่วนที่เกี่ยวกับ RAG จริงๆ (Lab 1, 2, 3 และแนวคิดจาก Lab 4/7 บางส่วน) แปลเป็นภาษาไทย และร้อยเรียงใหม่เป็น 7 Lab ที่กระชับและเรียงลำดับความยากง่ายจากง่ายไปยาก
 
 อ้างอิงต้นฉบับ: https://microsoft.github.io/mcs-labs/events/bootcamp/
 
@@ -22,14 +22,15 @@ Project_Thitiwut/
 │   └── Lab_Guide_TH.docx                      ← คู่มือ Lab แบบ Step-by-step (เอกสาร Word อย่างเดียว ไม่มีภาพ)
 └── website/                                   ← เว็บคู่มือ Lab แบบ Interactive (มี Mockup ภาพประกอบ)
     ├── index.html                             ← หน้าแรก (Agenda + Lab Cards)
-    ├── lab1.html ... lab6.html                ← เนื้อหาแต่ละ Lab
+    ├── lab1.html ... lab7.html                ← เนื้อหาแต่ละ Lab
     ├── assets/style.css                       ← Stylesheet กลางของทั้งเว็บ
+    ├── assets/copilot_tool1-3.png             ← Screenshot จริงของหน้า "Add tool" (SharePoint/Teams/Outlook) ใช้ใน Lab 6
     └── src/                                   ← ซอร์สโค้ดที่ "สร้าง" ไฟล์ HTML ด้านบน (ดูหัวข้อถัดไป)
         ├── build.js                           ← Template engine หลัก (nav, hero, page shell)
         ├── mockups.js                         ← Library สร้างภาพ SVG จำลอง UI ของ Copilot Studio/M365/Teams
         ├── build_all.js                       ← สคริปต์ Build ทุกหน้าในคำสั่งเดียว
         ├── page_index.js                      ← เนื้อหาหน้า index.html
-        ├── page_lab1.js ... page_lab6.js      ← เนื้อหาแต่ละ Lab (1 ไฟล์ต่อ 1 Lab)
+        ├── page_lab1.js ... page_lab7.js      ← เนื้อหาแต่ละ Lab (1 ไฟล์ต่อ 1 Lab)
         └── shot.js                            ← เครื่องมือ Screenshot หน้าเว็บด้วย Playwright (ใช้ตอน QA เท่านั้น)
 ```
 
@@ -43,7 +44,7 @@ Project_Thitiwut/
 เปิด `website/index.html` ด้วย Browser (Chrome/Edge) ได้เลย — เป็น Static HTML ล้วน ไม่ต้องมี Server, ไม่ต้องต่อเน็ต ทำงาน Offline 100%
 
 ### แก้ไขเนื้อหา (เช่น แก้คำผิด, เปลี่ยนตัวอย่าง, เพิ่มขั้นตอน)
-1. เปิดไฟล์ `website/src/page_labN.js` ของ Lab ที่ต้องการแก้ (N = 1-6) หรือ `page_index.js` สำหรับหน้าแรก
+1. เปิดไฟล์ `website/src/page_labN.js` ของ Lab ที่ต้องการแก้ (N = 1-7) หรือ `page_index.js` สำหรับหน้าแรก
 2. เนื้อหาทั้งหมดอยู่ในตัวแปร `bodyHtml` เป็น Template String (HTML ธรรมดาผสม Helper Function เช่น `step()`, `box()`, `mockup()`)
 3. แก้ข้อความ/เพิ่มขั้นตอนตามต้องการ
 4. รัน Build ใหม่ (ดูคำสั่งด้านล่าง)
@@ -68,11 +69,11 @@ node -e "require('./page_lab3.js').build()"
 const OUT = path.join(__dirname, '..'); // เขียนไฟล์ไปที่ website/ ไม่ใช่ website/src/
 ```
 
-### เพิ่ม Lab ใหม่ (เช่น Lab 7)
-1. Copy `page_lab6.js` เป็น `page_lab7.js` แล้วแก้เนื้อหาข้างในตามต้องการ
+### เพิ่ม Lab ใหม่ (เช่น Lab 8)
+1. Copy `page_lab7.js` (Lab สุดท้ายปัจจุบัน) เป็น `page_lab8.js` แล้วแก้เนื้อหาข้างในตามต้องการ
 2. เพิ่ม Entry ใหม่ใน `NAV` และ `LABS_META` array ที่ `build.js` (ด้านบนของไฟล์)
-3. แก้ `prevNext` ของ `page_lab6.js` ให้ `next` ชี้ไป `lab7.html`
-4. เพิ่มบรรทัด `require('./page_lab7.js').build();` ใน `build_all.js`
+3. แก้ `prevNext` ของ `page_lab7.js` ให้ `next` ชี้ไป `lab8.html`
+4. เพิ่มบรรทัด `require('./page_lab8.js').build();` ใน `build_all.js`
 5. รัน `node build_all.js`
 
 ---
@@ -86,7 +87,7 @@ Theme สียึดตามสไลด์และเอกสาร Course 
 | `navy` | `#1F3864` | Header, Nav, หัวข้อหลัก |
 | `blue` | `#2E75B6` | ปุ่ม, Link, Active Tab |
 | `blueLight` | `#D6E4F0` | พื้นหลัง Note Box, Badge |
-| `cyan` | `#00B4D8` | Accent (Eyebrow text, จุดตกแต่ง) |
+| `cyan` | `#00B4D8` | Accent (Eyebrow text, จุดตกแต่ง), Lab 6 (Actions & Tools) |
 | `green` / `greenBg` | `#107C10` / `#E8F5E9` | สถานะ Ready/Pass, Success Box |
 | `orange` / `orangeBg` | `#C55A11` / `#FFF3E0` | Warning Box, สถานะ Processing |
 | `red` / `redBg` | `#C00000` / `#FFEBEE` | สถานะ Fail/Blocked |
@@ -143,9 +144,10 @@ node shot.js ../lab1.html /tmp/lab1_check 1
 | Lab 3: Prompt Engineering | 40 นาที | — (เสริมเอง ไม่มีใน Microsoft Lab โดยตรง) | ใช้แนวคิด Instructions จาก `core-concepts-agent-knowledge-tools` UC#2 |
 | Lab 4: Custom Topics | 35 นาที | `core-concepts-agent-knowledge-tools` | UC#4 (Mailing List → ดัดแปลงเป็น Fallback/Escalation) |
 | Lab 5: Evaluation | 30 นาที | `core-concepts-analytics-evaluations` | UC#2 + UC#3 (ข้าม UC#1 Analytics เพราะข้อมูลยังไม่มีในวันสอน) |
-| Lab 6: Deploy to Teams | 15 นาที | `core-concepts-variables-agents-channels` | UC#3 เท่านั้น (ข้าม UC#1 Variables, UC#2 Child Agents) |
+| Lab 6: Actions & Tools | 35 นาที | `core-concepts-agent-knowledge-tools` (UC#3) + `mcp-tools` (Actions ส่วน Pre-built Connector) | UC#3 Weather Tool ที่เคยข้ามใน Lab 2 — ดัดแปลงเป็น Outlook/Teams/SharePoint Connector รวมเป็น Capstone "HR Onboarding Agent" |
+| Lab 7: Deploy to Teams | 15 นาที | `core-concepts-variables-agents-channels` | UC#3 เท่านั้น (ข้าม UC#1 Variables, UC#2 Child Agents) |
 
-**หมายเหตุ:** เนื้อหา Lab 7 (Tools/MCP) และ Lab 10 (Multi-Agent) ของ Microsoft **ไม่ได้ใส่ไว้ในคอร์ส 1 วันนี้** เพราะเป็น RAG ขั้นสูงกว่า (Live Data RAG / Routing RAG) — วางแผนไว้เป็นคอร์ส Day 2/Day 3 ตาม Roadmap ที่ระบุในหน้า `index.html`
+**หมายเหตุ:** Lab 6 ครอบคลุมเฉพาะ **Actions แบบ Pre-built Connector** (Outlook/Teams/SharePoint) ที่ใช้งานได้แบบ No-Code เท่านั้น ส่วนเนื้อหา **Custom Tools/MCP Server** (เขียน Connector เอง เชื่อมระบบภายนอกแบบ Real-time) และ Lab 10 (Multi-Agent) ของ Microsoft **ยังไม่ได้ใส่ไว้ในคอร์ส 1 วันนี้** เพราะเป็น RAG ขั้นสูงกว่า (Live Data RAG / Routing RAG) — วางแผนไว้เป็นคอร์ส Day 2/Day 3 ตาม Roadmap ที่ระบุในหน้า `index.html`
 
 ---
 

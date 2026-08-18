@@ -1,135 +1,136 @@
 const { M, step, mockup, box, promptBox, metaTable, conceptTable, pageShell, writePage } = require('./build.js');
 
 function build() {
-  // ---- Mockup 1: Publish confirmation ----
-  const m1body = `
-    ${M.calloutBanner(24, 20, 700, '✅', 'The agent was published — Agent เวอร์ชันล่าสุดพร้อมใช้งานแล้ว', {})}
-    ${M.text(24, 90, 'Published agent status', { fontSize: 13.5, weight: 700, fill: M.COL.navy })}
-    ${M.rrect(24, 100, 700, 50, 8, M.COL.white, { stroke: M.COL.gray200, strokeWidth: 1 })}
-    ${M.text(44, 130, '✓ Published by User · เมื่อสักครู่', { fontSize: 12, fill: M.COL.green, weight: 700 })}
-  `;
-  const mock1 = M.studioChrome({ activeTab: 'Overview', agentName: 'HR Policy Bot', body: m1body, bodyHeight: 180 });
+  // ---- Mockup 1: Outlook draft email test ----
+  const chat1 = M.chatMessages([
+    { from: 'user', text: 'ช่วยร่างอีเมลต้อนรับพนักงานใหม่ชื่อสมชาย ใจดี ให้หน่อย' },
+    { from: 'agent', text: '✅ ร่างอีเมลเรียบร้อยแล้วครับ (บันทึกเป็น Draft ในกล่องขาออกของคุณ)\n\nถึง: somchai.j@xyz-industry.co.th\nหัวข้อ: ยินดีต้อนรับสู่ทีม XYZ Industry\n\n"สวัสดีครับคุณสมชาย ยินดีต้อนรับเข้าร่วมทีม XYZ Industry..."' },
+  ], { width: 660 });
+  const mock1 = M.studioChrome({ activeTab: 'Overview', agentName: 'HR Onboarding Agent', body: chat1.svg, bodyHeight: chat1.endY + 30, showTest: true });
 
-  // ---- Mockup 2: Channels grid ----
-  const grid2 = M.iconGrid([
-    { emoji: '👥', label: 'Microsoft 365 & Teams', color: M.COL.blueLight, active: true, tag: 'แนะนำ' },
-    { emoji: '📂', label: 'SharePoint', color: M.COL.blueLight, active: false },
-    { emoji: '🌐', label: 'Web app', color: M.COL.blueLight, active: false },
-    { emoji: '📱', label: 'Native app', color: M.COL.blueLight, active: false },
-  ], { x: 24, y: 20, cols: 4, tileW: 160, tileH: 90, gap: 14 });
-  const m2body = `${M.text(24, 12, 'Channels', { fontSize: 14, weight: 700, fill: M.COL.navy })}${grid2}`;
-  const mock2 = M.studioChrome({ activeTab: 'Channels', agentName: 'HR Policy Bot', body: m2body, bodyHeight: 150 });
+  // ---- Mockup 2: Teams create meeting test ----
+  const chat2 = M.chatMessages([
+    { from: 'user', text: 'นัดประชุม Orientation ให้สมชายวันจันทร์หน้า 10 โมงเช้าหน่อย' },
+    { from: 'agent', text: '✅ สร้างนัดหมาย Teams Meeting เรียบร้อยแล้วครับ\n\nหัวข้อ: Orientation — สมชาย ใจดี\nวันที่: จันทร์ที่ 25 ส.ค. 2569 เวลา 10:00–11:00 น.\nผู้เข้าร่วม: สมชาย ใจดี, หัวหน้างาน, HR' },
+  ], { width: 660 });
+  const mock2 = M.studioChrome({ activeTab: 'Overview', agentName: 'HR Onboarding Agent', body: chat2.svg, bodyHeight: chat2.endY + 30 });
 
-  // ---- Mockup 3: checkbox panel ----
-  const m3body = `
-    ${M.text(24, 30, 'Microsoft 365 and Microsoft Teams', { fontSize: 14, weight: 700, fill: M.COL.navy })}
-    ${M.rrect(24, 44, 700, 90, 8, M.COL.white, { stroke: M.COL.gray200, strokeWidth: 1 })}
-    ${M.text(40, 66, 'Turn on Microsoft 365', { fontSize: 12.5, weight: 700, fill: M.COL.gray900 })}
-    ${M.checkRow(40, 78, 'Make agent available in Microsoft 365 Copilot', true)}
-    ${M.button(560, 150, 160, 34, 'See agent in Teams', { fill: M.COL.navy, fontSize: 12 })}
-  `;
-  const mock3 = M.studioChrome({ activeTab: 'Channels', agentName: 'HR Policy Bot', body: m3body, bodyHeight: 210 });
+  // ---- Mockup 3: SharePoint create folder test ----
+  const chat3 = M.chatMessages([
+    { from: 'user', text: 'สร้างโฟลเดอร์เอกสารสำหรับพนักงานใหม่ชื่อสมชายให้หน่อย' },
+    { from: 'agent', text: '✅ สร้างโฟลเดอร์เรียบร้อยแล้วครับ\n\n📁 /Onboarding/2569/สมชาย_ใจดี\n(Copy เอกสาร Onboarding Template ไว้ในโฟลเดอร์นี้ให้แล้ว)' },
+  ], { width: 660 });
+  const mock3 = M.studioChrome({ activeTab: 'Overview', agentName: 'HR Onboarding Agent', body: chat3.svg, bodyHeight: chat3.endY + 30 });
 
-  // ---- Mockup 4: Teams add dialog ----
-  const m4body = `
-    ${M.text(340, 130, '🤖', { fontSize: 40, anchor: 'middle' })}
-    ${M.text(340, 172, 'เพิ่ม HR Policy Bot ใน Teams', { fontSize: 14.5, weight: 700, fill: M.COL.navy, anchor: 'middle' })}
-    ${M.text(340, 194, 'Agent นี้จะพร้อมใช้งานในแชทของคุณ', { fontSize: 11.5, fill: M.COL.gray500, anchor: 'middle' })}
-    ${M.button(280, 214, 120, 34, 'Add', { fill: M.COL.blue })}
-  `;
-  const mock4 = M.teamsChrome({ body: m4body, bodyHeight: 280 });
+  // ---- Mockup 4: Capstone Topic canvas — 3 questions + 3 chained actions ----
+  const n4 = M.topicCanvasNodes([
+    { label: 'Add from description: "พนักงานใหม่เริ่มงาน..."', type: 'trigger', x: 40, y: 20 },
+    { label: 'ชื่อพนักงานใหม่คืออะไร?', type: 'question', x: 40, y: 120 },
+    { label: 'วันที่เริ่มงานคือวันไหน?', type: 'question', x: 40, y: 220 },
+    { label: 'แผนกไหน?', type: 'question', x: 40, y: 320 },
+    { label: 'SharePoint: Create new folder', type: 'action', x: 40, y: 420 },
+    { label: 'Outlook: Draft an email message', type: 'action', x: 40, y: 520 },
+    { label: 'Teams: Create a Teams meeting', type: 'action', x: 40, y: 620 },
+  ]);
+  const mock4 = M.studioChrome({ activeTab: 'Topics', agentName: 'HR Onboarding Agent', body: n4, bodyHeight: 720 });
 
-  // ---- Mockup 5: Teams chat test ----
+  // ---- Mockup 5: End-to-end test ----
   const chat5 = M.chatMessages([
-    { from: 'user', text: 'สวัสดีครับ ขอถามเรื่องนโยบายลาพักร้อน' },
-    { from: 'agent', text: 'สวัสดีครับ! พนักงานมีสิทธิ์ลาพักร้อนปีละ 10 วัน สอบถามเพิ่มเติมได้เลยครับ 😊' },
-  ], { width: 640 });
-  const mock5 = M.teamsChrome({ body: chat5.svg, bodyHeight: chat5.endY + 40 });
-
-  // ---- Mockup 6: Sales Engineer department example ----
-  const chat6 = M.chatMessages([
-    { from: 'user', text: 'ยอดขายรถ Forklift ใหม่ของสาขากรุงเทพเดือนมกราคม 2568 เท่าไหร่?' },
-    { from: 'agent', text: 'ยอดขายรถ Forklift ใหม่ สาขากรุงเทพ เดือน ม.ค. 2568 อยู่ที่ 1,397,000 บาท (2 คัน) [อ้างอิง: Sales_Data_Raw.xlsx]' },
-  ], { width: 640 });
-  const mock6 = M.teamsChrome({ body: chat6.svg, bodyHeight: chat6.endY + 40 });
+    { from: 'user', text: 'พนักงานใหม่ชื่อสมชาย ใจดี เริ่มงานวันที่ 1 กันยายน 2569 แผนก Warehouse' },
+    { from: 'agent', text: 'รับทราบครับ กำลังเตรียมการต้อนรับให้คุณสมชาย...\n\n📁 สร้างโฟลเดอร์เอกสารแล้ว: /Onboarding/2569/สมชาย_ใจดี\n📧 ร่างอีเมลต้อนรับแล้ว (รอคุณกดส่ง)\n📅 นัดประชุม Orientation วันที่ 1 ก.ย. 2569 เวลา 09:00 น. แล้ว\n\nเสร็จสิ้นครบทั้ง 3 ขั้นตอนครับ!' },
+  ], { width: 660 });
+  const mock5 = M.studioChrome({ activeTab: 'Overview', agentName: 'HR Onboarding Agent', body: chat5.svg, bodyHeight: chat5.endY + 30 });
 
   const bodyHtml = `
-    <p>Lab สุดท้าย! นำ Agent ที่สร้างมาทั้งวันไป Deploy ให้ทีมงานใช้งานได้จริงผ่าน <strong>Microsoft Teams</strong></p>
+    <p>Agent ที่เรียนมาทั้งวันตอบคำถามจาก Knowledge ได้ดีแล้ว แต่ Agent ที่เก่งจริงต้อง <strong>"ลงมือทำงานแทนคน"</strong> ได้ด้วย — Lab นี้สอนเพิ่ม Actions/Tools ให้ Agent เชื่อมกับ Outlook, Teams และ SharePoint แล้วรวมเป็น Agent เดียวที่ทำงาน Onboarding พนักงานใหม่ให้อัตโนมัติ</p>
 
     ${metaTable([
-      ['Level', '<span class="badge badge-green">100</span>'],
-      ['Persona', 'Maker ที่พร้อมนำ Agent ไปใช้งานจริง'],
-      ['ระยะเวลา', '15 นาที'],
-      ['เป้าหมาย', 'Publish และ Deploy Agent ไปยัง Microsoft Teams ให้ทีมใช้งานได้ทันที'],
+      ['Level', '<span class="badge badge-blue">200</span>'],
+      ['Persona', 'Maker ที่อยากให้ Agent ลงมือทำงานแทน ไม่ใช่แค่ตอบคำถาม'],
+      ['ระยะเวลา', '35 นาที'],
+      ['เป้าหมาย', 'เพิ่ม Actions จาก Outlook/Teams/SharePoint แล้วรวมเป็น Capstone Scenario "HR Onboarding Agent"'],
     ])}
 
-    <h2 id="step1">ขั้นตอนที่ 1–2: Publish และเปิด Channel</h2>
-    ${step(1, 'กด Publish', `
-      <p>กด <strong>Publish</strong> มุมขวาบน → ยืนยัน → รอ Status เป็น Published</p>
-      ${mockup(mock1, 'Agent ถูก Publish สำเร็จ')}
-    `)}
-    ${step(2, 'ไปที่ Channels', `
-      <p>กด <strong>Channels</strong> ในแถบนำทาง → เลือก "Microsoft 365 and Microsoft Teams"</p>
-      ${mockup(mock2, 'ตัวเลือก Channels ที่ Deploy ได้')}
-      ${box('tip', '', '<p>ก่อน Deploy ให้เปิดแท็บใหม่แล้ว Login เข้า Teams (Web) ไว้ล่วงหน้า — ป้องกันไม่ให้ขั้นตอน Login มาขัดจังหวะตอนที่กำลังทดสอบ Agent ใน Teams ช่วงท้าย Lab</p>')}
-      ${box('note', '', '<p>นอกจาก Teams แล้ว Copilot Studio ยังรองรับ Channel อื่นอีกมาก เช่น Web app แบบฝังในเว็บ, Native app (iOS/Android), Email, Facebook, WhatsApp, Line — เลือก Deploy ไปที่ Channel ที่ผู้ใช้งานจริงอยู่แล้ว ไม่ใช่บังคับให้ผู้ใช้มาเรียนรู้เครื่องมือใหม่</p>')}
+    ${box('note', 'Knowledge vs. Actions/Tools ต่างกันอย่างไร', `
+      ${conceptTable(['ความสามารถ', 'ทำอะไร'], [
+        ['📚 Knowledge (เรียนมาทั้งวัน)', 'Agent "อ่าน/ค้นข้อมูล" จากไฟล์ เว็บ หรือ SharePoint มาตอบคำถาม (Retrieval) — ไม่เปลี่ยนแปลงอะไรในระบบอื่น'],
+        ['🔌 Actions/Tools (Lab นี้)', 'Agent "ลงมือทำงานจริง" แทนคน ผ่าน Pre-built Connector สำเร็จรูปหลายร้อยตัวของ Microsoft (Outlook, Teams, SharePoint, Dynamics, ...) แบบ No-Code'],
+      ])}
+      <p style="margin-top:10px;font-size:12.5px;color:${M.COL.gray500}">ต่างจาก Live Data RAG ใน Roadmap Day 2 ตรงที่ Actions ใช้ Connector สำเร็จรูปที่ Microsoft เตรียมไว้ให้แล้ว ไม่ต้องเขียน Custom Connector หรือ MCP Server เอง</p>
     `)}
 
-    <h2 id="step3">ขั้นตอนที่ 3–4: เปิดใช้งานใน Teams</h2>
-    ${step(3, 'ติ๊ก Make available in M365 Copilot', `
-      <p>ในหน้า Channel Panel → ติ๊ก Checkbox นี้ → กด Save จากนั้นกด "See agent in Teams"</p>
-      ${mockup(mock3, 'เปิดใช้งาน Agent ใน Microsoft 365 Copilot')}
+    <h2 id="step1">ขั้นตอนที่ 1: ลองเพิ่ม Action แรก — Outlook</h2>
+    ${step(1, 'เปิดหน้า Add tool และค้นหา Action ของ Outlook', `
+      <p>ไปที่แท็บ <strong>Tools</strong> → กด <strong>+ Add a tool</strong> → เลือก <strong>Office 365 Outlook</strong> → ค้นหาและเลือก <strong>"Draft an email message"</strong> → กด Add</p>
+      ${mockup('<img src="assets/copilot_tool3.png" style="width:100%;display:block" alt="หน้าต่าง Add tool ค้นหา Action ของ Office 365 Outlook">', 'หน้าต่าง Add tool — ค้นหา Action ที่ต้องการจาก Office 365 Outlook')}
+      ${box('tip', '', '<p>ครั้งแรกที่ใช้งาน Action ของ Connector แต่ละตัว ระบบจะขอให้ <strong>Connect</strong> บัญชี Microsoft 365 ก่อน (Authentication แบบ OAuth) — ทำครั้งเดียวต่อ Connector เท่านั้น ครั้งต่อไปใช้ได้เลยไม่ต้อง Connect ซ้ำ</p>')}
     `)}
-    ${step(4, 'เพิ่ม Agent ใน Teams', `
-      <p>Browser จะเปิด Teams Web ให้อัตโนมัติ → กด <strong>Add</strong> เพื่อเพิ่ม Agent เข้าบัญชี Teams ของคุณ</p>
-      ${mockup(mock4, 'หน้าต่างยืนยันเพิ่ม Agent ใน Teams')}
-      ${box('tip', '', '<p>ถ้า Teams ถามว่าจะเปิด Desktop App หรือไม่ ให้เลือก "Use the web app instead" เพื่อความรวดเร็ว</p>')}
-    `)}
-
-    <h2 id="step5">ขั้นตอนที่ 5: ทดสอบใน Teams จริง</h2>
-    ${step(5, 'พิมพ์คำถามทดสอบใน Teams', `
-      <p>ลองพิมพ์คำถามใน Teams Chat กับ Agent เปรียบเทียบ User Experience กับ Test Panel ใน Copilot Studio</p>
-      ${mockup(mock5, 'Agent ตอบคำถามใน Microsoft Teams จริง')}
-      ${mockup(mock6, 'ตัวอย่าง: Sales Data Bot ของทีม Sales Engineer ใน Teams — ตอบยอดขายเจาะจงจุดเดียวได้ถูกต้อง (ลองคำถามรวมยอดข้ามเดือน/สาขาดูด้วย จะเห็นข้อจำกัดของ RAG ตามที่คุยกันใน Lab 5)')}
-      ${promptBox('ตัวอย่างข้อความทดสอบใน Teams — Copy ไปวางถามได้เลย', 'ยอดขายรถ Forklift ใหม่ของสาขากรุงเทพเดือนมกราคม 2568 เท่าไหร่?')}
+    ${step(2, 'ทดสอบสั่งให้ Agent ร่างอีเมล', `
+      <p>ไปที่ Test Pane → พิมพ์สั่งให้ Agent ร่างอีเมลต้อนรับพนักงานใหม่</p>
+      ${mockup(mock1, 'Agent เรียกใช้ Action "Draft an email message" สำเร็จ')}
+      ${box('warn', '', '<p>สังเกตว่า Agent แค่ <strong>"ร่าง (Draft)"</strong> อีเมลไว้ ไม่ได้กดส่งจริงทันที — ตรวจสอบ Advanced settings ของแต่ละ Action ได้ว่ามีตัวเลือก "Require user confirmation before performing this action" หรือไม่ ควรเปิดไว้เสมอสำหรับ Action ที่ส่งผลกระทบจริง เช่น การส่งอีเมลหรือสร้างนัดหมาย</p>')}
     `)}
 
-    ${box('warn', 'ก่อนใช้งานจริงในองค์กร (Production)', `
-      <p>Lab นี้ Deploy แบบง่ายสุดสำหรับการเรียนรู้ ก่อนปล่อยให้ทั้งองค์กรใช้จริง ควรกลับมาตรวจสอบเพิ่มเติม: ตั้งค่า Authentication ให้เหมาะกับความละเอียดอ่อนของข้อมูล, จำกัด Domain ที่อนุญาตให้ฝัง Agent (สำหรับ Web channel), และทดสอบ Agent บนทุก Channel ที่ Deploy จริง เพราะ Feature บาง UI อาจแสดงผลต่างกันระหว่าง Test Pane กับ Teams</p>
+    <h2 id="step3">ขั้นตอนที่ 2: เพิ่ม Action จาก Teams</h2>
+    ${step(3, 'เพิ่ม Action "Create a Teams meeting"', `
+      <p>+ Add a tool → เลือก <strong>Microsoft Teams</strong> → ค้นหาและเลือก <strong>"Create a Teams meeting"</strong> → กด Add แล้วทดสอบสั่งนัดประชุมใน Test Pane</p>
+      ${mockup('<img src="assets/copilot_tool2.png" style="width:100%;display:block" alt="หน้าต่าง Add tool ค้นหา Action ของ Microsoft Teams">', 'หน้าต่าง Add tool — ค้นหา Action ที่ต้องการจาก Microsoft Teams')}
+      ${mockup(mock2, 'Agent เรียกใช้ Action "Create a Teams meeting" สำเร็จ')}
     `)}
 
-    ${box('success', '', '<p>🎉 ยินดีด้วย! Agent ของคุณพร้อมให้ทีมใช้งานจริงผ่าน Microsoft Teams แล้ว — คุณสร้าง RAG Agent ตั้งแต่ต้นจนถึง Production ได้ภายในวันเดียว!</p>')}
+    <h2 id="step4">ขั้นตอนที่ 3: เพิ่ม Action จาก SharePoint</h2>
+    ${step(4, 'เพิ่ม Action "Create new folder"', `
+      <p>+ Add a tool → เลือก <strong>SharePoint</strong> → ค้นหาและเลือก <strong>"Create new folder"</strong> → กด Add แล้วทดสอบสั่งสร้างโฟลเดอร์ใน Test Pane</p>
+      ${mockup('<img src="assets/copilot_tool1.png" style="width:100%;display:block" alt="หน้าต่าง Add tool ค้นหา Action ของ SharePoint">', 'หน้าต่าง Add tool — ค้นหา Action ที่ต้องการจาก SharePoint')}
+      ${mockup(mock3, 'Agent เรียกใช้ Action "Create new folder" สำเร็จ')}
+    `)}
+
+    <h2 id="step5">ขั้นตอนที่ 4–5: รวมเป็น Capstone — "HR Onboarding Agent"</h2>
+    ${step(5, 'สร้าง Topic "Onboarding" ที่เรียก 3 Actions ต่อกัน', `
+      <p>Topics → + Add a topic → <strong>Add from description with Copilot</strong> → อธิบาย Flow ที่ต้องการ ให้ AI สร้าง Question node เก็บข้อมูลพนักงานใหม่ แล้วต่อด้วย Action node ทั้ง 3 ตัวที่เพิ่มไว้ก่อนหน้านี้ตามลำดับ</p>
+      ${mockup(mock4, 'Topic "Onboarding" — เก็บข้อมูลพนักงานใหม่ 3 คำถาม แล้วเรียก 3 Actions ต่อกัน: SharePoint → Outlook → Teams')}
+      ${promptBox('ตัวอย่างคำอธิบาย Topic "Onboarding" — สำหรับ Add from description with Copilot', 'สร้าง Topic ชื่อ Onboarding ที่เก็บข้อมูลพนักงานใหม่ทีละคำถาม: ชื่อพนักงาน, วันที่เริ่มงาน, แผนก จากนั้นเรียกใช้ Action ตามลำดับนี้: (1) SharePoint สร้างโฟลเดอร์เอกสารชื่อพนักงานในไลบรารี Onboarding (2) Outlook ร่างอีเมลต้อนรับส่งถึงพนักงานใหม่ (3) Teams สร้างนัดประชุม Orientation วันแรกที่เริ่มงาน เวลา 09:00 น. เชิญพนักงานใหม่และหัวหน้างาน สุดท้ายสรุปผลทั้ง 3 ขั้นตอนให้ผู้ใช้ทราบ')}
+      ${box('tip', '', '<p>ลำดับ Action สำคัญ — วางโฟลเดอร์ SharePoint ไว้ก่อน เผื่อ Action ถัดไปต้องใช้ Path ของโฟลเดอร์นั้นอ้างอิงต่อ (เช่น แนบลิงก์โฟลเดอร์ในอีเมลต้อนรับ)</p>')}
+    `)}
+    ${step(6, 'ทดสอบ End-to-End ด้วยข้อมูลพนักงานใหม่จริง', `
+      <p>พิมพ์ข้อมูลพนักงานใหม่ครบในข้อความเดียว → Agent ควรเรียกทั้ง 3 Actions ต่อกันแล้วสรุปผลให้ครบ</p>
+      ${mockup(mock5, 'ทดสอบ Flow เต็ม: กรอกข้อมูลพนักงานใหม่ครั้งเดียว Agent จัดการให้ครบทั้ง 3 ระบบ')}
+      ${promptBox('ตัวอย่างข้อความทดสอบ — Copy ไปวางถามได้เลย', 'พนักงานใหม่ชื่อสมชาย ใจดี เริ่มงานวันที่ 1 กันยายน 2569 แผนก Warehouse')}
+    `)}
+
+    ${box('success', '', '<p>🎉 Agent ของคุณตอนนี้ไม่ใช่แค่ตอบคำถามจาก Knowledge แล้ว แต่ลงมือทำงานแทนคนได้จริงผ่าน Outlook, Teams และ SharePoint ในคำสั่งเดียว!</p>')}
 
     <h2 id="mistakes">⚠️ ข้อผิดพลาดที่พบบ่อย</h2>
     <ul>
-      <li>ลืมกด Publish ก่อน → Channel จะยังใช้ Agent เวอร์ชันเก่าอยู่</li>
-      <li>App Policy ขององค์กรปิดอยู่ → ต้องติดต่อ IT Admin ให้เปิด Teams App Policy</li>
-      <li>ทดสอบใน Test Pane ผ่านแล้วไม่ทดสอบซ้ำใน Teams → บาง Feature อาจแสดงผลต่างกัน</li>
+      <li>ลืม Connect บัญชี Microsoft 365 ก่อนทดสอบ Action ครั้งแรกของแต่ละ Connector</li>
+      <li>ปล่อยให้ Agent ส่งอีเมล/สร้างนัดหมายจริงทันทีโดยไม่เปิด "Require user confirmation" → เสี่ยงส่งข้อมูลผิดโดยไม่ตั้งใจ</li>
+      <li>ลำดับ Action ในการ Onboarding ผิด (เช่น ส่งอีเมลก่อนสร้างโฟลเดอร์) → ลิงก์เอกสารในอีเมลใช้งานไม่ได้</li>
+      <li>สิทธิ์ (Permission) ของบัญชีที่ Connect ไม่ครอบคลุมสิทธิ์ที่ Action ต้องใช้ → Action ทำงานไม่สำเร็จ ต้องขอ IT Admin เพิ่มสิทธิ์</li>
     </ul>
 
-    <h2 id="next">🗺️ ก้าวต่อไปหลังจบคอร์ส</h2>
+    <h2 id="challenge">🎯 ลองประยุกต์ใช้กับงานคุณ</h2>
     <ul>
-      <li><strong>Live Data RAG:</strong> เชื่อม Agent กับ Database แบบ Real-time ด้วย MCP Server (Dataverse, ServiceNow)</li>
-      <li><strong>Multi-Agent:</strong> สร้าง Agent หลายตัวที่ทำงานร่วมกัน แบ่งความเชี่ยวชาญตามแผนก</li>
-      <li><strong>Autonomous Agent:</strong> Agent ที่ทำงานอัตโนมัติตามเวลา ไม่ต้องรอคนถาม</li>
+      <li>แผนกคุณมีงานที่ทำซ้ำๆ ทุกวัน/ทุกสัปดาห์อะไรบ้าง ที่ Connector ของ Outlook/Teams/SharePoint ช่วยทำแทนได้?</li>
+      <li>ลองค้นหา Action อื่นในหน้า Add tool ที่ยังไม่ได้ลอง เช่น "Get messages in a channel" (Teams) หรือ "Get file content" (SharePoint)</li>
     </ul>
   `;
 
   const html = pageShell({
     file: 'lab6.html',
-    title: 'Lab 6: Deploy to Teams — RAG Course',
-    eyebrow: 'LAB 6 · ⏱ 15 นาที · Level 100',
-    heroTitle: '🚀 Deploy to Microsoft Teams',
-    heroLead: 'ปล่อย RAG Agent ที่สร้างมาทั้งวันให้ทีมใช้งานจริงผ่าน Microsoft Teams',
-    pills: [['⏱', '15 นาที'], ['🎓', 'Level 100'], ['✅', 'Production Ready']],
+    title: 'Lab 6: Actions & Tools — RAG Course',
+    eyebrow: 'LAB 6 · ⏱ 35 นาที · Level 200',
+    heroTitle: '🔌 Actions & Tools — เชื่อม Outlook, Teams, SharePoint',
+    heroLead: 'สอน Agent ให้ลงมือทำงานแทนคนได้จริง ผ่าน Pre-built Connector แบบ No-Code แล้วรวมเป็น Capstone "HR Onboarding Agent"',
+    pills: [['⏱', '35 นาที'], ['🎓', 'Level 200'], ['🔌', '3 Connectors']],
     tocItems: [
-      { id: 'step1', label: '1–2. Publish + Channel' },
-      { id: 'step3', label: '3–4. เปิดใช้งานใน Teams' },
-      { id: 'step5', label: '5. ทดสอบจริง' },
+      { id: 'step1', label: '1. Action แรก — Outlook' },
+      { id: 'step3', label: '2. Action — Teams' },
+      { id: 'step4', label: '3. Action — SharePoint' },
+      { id: 'step5', label: '4–5. Capstone Onboarding' },
       { id: 'mistakes', label: 'ข้อผิดพลาดที่พบบ่อย' },
-      { id: 'next', label: 'ก้าวต่อไป' },
+      { id: 'challenge', label: 'ลองประยุกต์ใช้' },
     ],
-    prevNext: { prev: { href: 'lab5.html', label: 'Lab 5: Evaluation' }, next: { href: 'index.html', label: 'กลับหน้าแรก 🎉' } },
+    prevNext: { prev: { href: 'lab5.html', label: 'Lab 5: Evaluation' }, next: { href: 'lab7.html', label: 'Lab 7: Deploy to Teams' } },
     bodyHtml,
   });
   writePage('lab6.html', html);

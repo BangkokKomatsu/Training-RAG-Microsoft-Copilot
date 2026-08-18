@@ -32,16 +32,23 @@ function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-// Wrap text into multiple <tspan> lines given a rough char-per-line budget
-function wrapText(text, x, y, maxChars, lineHeight, opts = {}) {
-  const words = String(text).split(' ');
+// Word-wrap a single line (no embedded \n) into a rough char-per-line budget
+function wrapLine(str, maxChars) {
+  const words = String(str).split(' ');
   const lines = [];
   let cur = '';
   words.forEach(w => {
     if ((cur + ' ' + w).trim().length > maxChars) { lines.push(cur.trim()); cur = w; }
     else cur = (cur + ' ' + w).trim();
   });
-  if (cur) lines.push(cur.trim());
+  if (cur || lines.length === 0) lines.push(cur.trim());
+  return lines;
+}
+
+// Wrap text into multiple <tspan> lines given a rough char-per-line budget
+// Respects explicit \n in the input as forced line breaks (e.g. Role/Task/Scope lists)
+function wrapText(text, x, y, maxChars, lineHeight, opts = {}) {
+  const lines = String(text).split('\n').flatMap(l => wrapLine(l, maxChars));
   const { fontSize = 13, fill = COL.gray700, weight = 400, family = 'Segoe UI, Tahoma, sans-serif' } = opts;
   return `<text x="${x}" y="${y}" font-family="${family}" font-size="${fontSize}" font-weight="${weight}" fill="${fill}">` +
     lines.map((l, i) => `<tspan x="${x}" dy="${i === 0 ? 0 : lineHeight}">${esc(l)}</tspan>`).join('') +
@@ -169,13 +176,7 @@ function chatMessages(messages, opts = {}) {
   messages.forEach(m => {
     const isUser = m.from === 'user';
     const maxChars = 62;
-    const lines = [];
-    let cur = '';
-    String(m.text).split(' ').forEach(w => {
-      if ((cur + ' ' + w).trim().length > maxChars) { lines.push(cur.trim()); cur = w; }
-      else cur = (cur + ' ' + w).trim();
-    });
-    if (cur) lines.push(cur.trim());
+    const lines = String(m.text).split('\n').flatMap(l => wrapLine(l, maxChars));
     const bh = lines.length * 18 + 22;
     const bw = Math.min(width - 2*padX, Math.max(...lines.map(l => l.length)) * 7.6 + 30);
     const bx = isUser ? width - padX - bw : padX;
